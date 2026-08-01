@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nicole B. Cabral — Portfolio</title>
+
+<!-- ── SEO / link previews ─────────────────────────────────── -->
+<meta name="description" content="Portfolio of Nicole B. Cabral — certified author, illustrator and designer (NBDB Philippines), biomedical researcher, and content specialist.">
+<meta name="author" content="Nicole B. Cabral">
+<meta name="theme-color" content="#171009">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Nicole B. Cabral — Portfolio">
+<meta property="og:description" content="Certified author, illustrator and designer. Biomedical researcher. Content specialist. Five bodies of work, one shelf.">
+<meta property="og:image" content="assets/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://nicolecabral.com/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%23241810'/><rect x='22' y='18' width='16' height='64' rx='2' fill='%231E5B8F'/><rect x='42' y='24' width='16' height='58' rx='2' fill='%237C5636'/><rect x='62' y='30' width='16' height='52' rx='2' fill='%23A8456B'/></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Nicole B. Cabral",
+  "jobTitle":"Author, Illustrator, Designer and Biomedical Researcher",
+  "email":"nicolebautistacabral@gmail.com",
+  "url":"https://nicolecabral.com/",
+  "sameAs":["https://linkedin.com/in/nicolebautistacabral"],
+  "alumniOf":[
+    {"@type":"CollegeOrUniversity","name":"De La Salle University - Dasmariñas"},
+    {"@type":"CollegeOrUniversity","name":"Universidade do Minho"}
+  ],
+  "knowsLanguage":["English","Filipino"],
+  "knowsAbout":["Biomedical Research","Scientific Writing","Illustration","Graphic Design","Content Strategy","Video Editing"]
+}
+</script>
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --wall:#171009;
+  --wall-2:#241810;
+  --walnut:#3B2A1E;
+  --walnut-dark:#241812;
+  --walnut-light:#5A4030;
+  --parchment:#E8DCC4;
+  --parchment-dim:#C3B394;
+  --ink:#241C12;
+  --gilt:#C9A227;
+  --gilt-soft:rgba(201,162,39,.28);
+  --petal:#B5485C;
+  --petal-2:#D4778A;
+
+  --display:'Cinzel',Georgia,serif;
+  --body:'EB Garamond',Georgia,serif;
+
+  --shelf-h:340px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--wall);
+  color:var(--parchment);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gilt);outline-offset:3px;border-radius:2px}
+
+/* skip link — first stop for keyboard and screen readers */
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:200;
+  padding:12px 18px;background:var(--gilt);color:#1A1206;
+  font-family:var(--display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+}
+.skip:focus{left:8px;top:8px}
+
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ============================================================
+   LIBRARY (HOME)
+   ============================================================ */
+#library{
+  position:relative;
+  height:100%;
+  display:grid;
+  grid-template-columns:30% 70%;
+  background:
+    radial-gradient(120% 90% at 12% 8%, rgba(201,162,39,.12), transparent 55%),
+    radial-gradient(90% 70% at 78% 100%, rgba(0,0,0,.6), transparent 60%),
+    var(--wall);
+}
+/* the shaft of light from the upper-left window — same origin as the petals */
+#library::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(126deg, rgba(255,226,163,.11) 0%, rgba(255,226,163,.04) 22%, transparent 46%);
+}
+/* paper grain over everything, very faint */
+#library::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+}
+
+/* ---- top nav: the plain path, always available ---- */
+.topnav{
+  position:absolute;top:0;right:0;z-index:12;
+  display:flex;align-items:center;gap:2px;
+  padding:16px clamp(16px,3vw,34px);
+  flex-wrap:wrap;justify-content:flex-end;
+}
+.topnav b{
+  font-family:var(--display);font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:rgba(201,162,39,.55);
+  font-weight:400;margin-right:10px;
+}
+.navlink{
+  font-family:var(--display);
+  font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--parchment-dim);
+  padding:7px 11px;border-radius:2px;
+  border-bottom:1px solid transparent;
+  transition:color .25s,border-color .25s,background .25s;
+}
+.navlink:hover,.navlink:focus-visible{color:var(--parchment);border-bottom-color:var(--gilt);background:rgba(201,162,39,.07)}
+
+/* ---- left panel: the lectern ---- */
+.panel{
+  position:relative;
+  z-index:3;
+  padding:clamp(28px,4vw,64px) clamp(24px,3.2vw,52px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:20px;
+  border-right:1px solid rgba(201,162,39,.16);
+  overflow-y:auto;
+}
+.eyebrow{
+  font-family:var(--display);
+  font-size:12px;
+  letter-spacing:.42em;
+  text-transform:uppercase;
+  color:var(--gilt);
+  margin:0;
+}
+.panel h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(30px,3.4vw,50px);
+  line-height:1.05;
+  letter-spacing:.01em;
+  margin:0;
+  color:var(--parchment);
+}
+.rule{
+  width:52px;height:1px;
+  background:linear-gradient(90deg,var(--gilt),transparent);
+}
+.bio{
+  margin:0;
+  max-width:34ch;
+  color:var(--parchment-dim);
+  font-size:16.5px;
+}
+.bio strong{color:var(--parchment);font-weight:600}
+.tagline{font-style:italic;opacity:.78;font-size:15.5px}
+
+.lectern{
+  margin-top:4px;
+  padding-top:20px;
+  border-top:1px solid rgba(201,162,39,.16);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:flex-start;
+}
+.cvwrap{position:relative}
+.cv{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--display);
+  font-size:12px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--gilt);
+  padding:11px 20px;
+  border:1px solid var(--gilt-soft);
+  transition:background .3s,border-color .3s;
+}
+.cv:hover{background:rgba(201,162,39,.1);border-color:var(--gilt)}
+.cv .caret{font-size:9px;opacity:.7;transition:transform .3s}
+.cv[aria-expanded="true"] .caret{transform:rotate(180deg)}
+.cvmenu{
+  position:absolute;left:0;top:calc(100% + 7px);z-index:20;
+  min-width:270px;
+  background:#1E150D;
+  border:1px solid rgba(201,162,39,.3);
+  box-shadow:0 18px 40px rgba(0,0,0,.6);
+  padding:6px;
+  display:none;
+}
+.cvmenu.on{display:block;animation:rise .25s var(--ease)}
+.cvmenu a{
+  display:block;padding:11px 13px;text-decoration:none;
+  border-radius:2px;transition:background .2s;
+}
+.cvmenu a:hover{background:rgba(201,162,39,.1)}
+.cvmenu strong{
+  display:block;font-family:var(--display);font-size:11.5px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gilt);font-weight:600;
+}
+.cvmenu span{display:block;font-size:14px;color:var(--parchment-dim);margin-top:3px;line-height:1.4}
+
+.contact{
+  display:flex;flex-wrap:wrap;gap:5px 16px;
+  font-size:14px;color:rgba(195,179,148,.72);
+  margin:0;
+}
+.contact a{text-decoration:none;border-bottom:1px solid rgba(201,162,39,.3);transition:color .25s,border-color .25s}
+.contact a:hover{color:var(--parchment);border-bottom-color:var(--gilt)}
+.contact .sep{opacity:.35}
+
+/* ---- right: the shelf ---- */
+.stage{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1600px;
+  perspective-origin:46% 50%;
+  padding:0 clamp(20px,4vw,70px);
+  z-index:3;
+}
+.shelf{
+  position:relative;
+  width:100%;
+  max-width:1020px;
+  height:var(--shelf-h);
+  transform-style:preserve-3d;
+  transform:rotateX(4deg) rotateY(-9deg);
+}
+/* back wall of the shelf niche */
+.shelf::before{
+  content:'';
+  position:absolute;
+  left:-4%;right:-4%;
+  top:-42px;bottom:-30px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,.34) 40%, rgba(0,0,0,.8));
+  box-shadow:inset 0 0 90px rgba(0,0,0,.9);
+  transform:translateZ(-140px);
+  border-radius:2px;
+}
+/* the plank */
+.plank{
+  position:absolute;
+  left:-5%;right:-5%;
+  bottom:-26px;
+  height:26px;
+  background:
+    linear-gradient(180deg,#6B4C36,#3B2A1E 60%,#20150E);
+  transform:rotateX(72deg);
+  transform-origin:top center;
+  box-shadow:0 -2px 0 rgba(201,162,39,.14), 0 18px 40px rgba(0,0,0,.7);
+}
+.plank::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.16) 0 2px,transparent 2px 26px);
+  opacity:.5;
+}
+
+.row{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:5px;
+  transform-style:preserve-3d;
+}
+
+/* ---- a book ---- */
+.book{
+  position:relative;
+  flex:0 0 auto;
+  transform-style:preserve-3d;
+  transform-origin:bottom left;
+  transition:transform .55s var(--ease), filter .4s;
+  will-change:transform;
+  padding:0;
+}
+.book .face{position:absolute;inset:0;backface-visibility:hidden}
+.book .spine{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 4px;
+  border-radius:2px 3px 3px 2px;
+  box-shadow:inset -6px 0 12px rgba(0,0,0,.45), inset 3px 0 5px rgba(255,255,255,.08);
+}
+.book .cover{
+  width:190px;
+  left:100%;
+  transform-origin:left center;
+  transform:rotateY(88deg);
+  border-radius:0 3px 3px 0;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.4);
+}
+/* gilt bands on the spine */
+.book .spine::before,.book .spine::after{
+  content:'';position:absolute;left:5px;right:5px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gilt),transparent);
+  opacity:.55;
+}
+.book .spine::before{top:20px}
+.book .spine::after{bottom:20px}
+
+.book .title{
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  font-family:var(--display);
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  text-shadow:0 1px 2px rgba(0,0,0,.55);
+}
+/* count of works, small, under the title on the spine */
+.book .count{
+  position:absolute;bottom:26px;left:0;right:0;
+  text-align:center;font-size:9px;letter-spacing:.1em;
+  color:rgba(255,255,255,.42);
+  font-family:var(--display);
+}
+
+/* interactive books */
+.book.live{cursor:pointer}
+.book.live:hover,.book.live:focus-visible,.book.live.cursor{
+  transform:translateZ(72px) translateY(-16px) rotateY(-27deg);
+  filter:drop-shadow(0 22px 34px rgba(0,0,0,.65)) drop-shadow(0 0 26px rgba(201,162,39,.42));
+  outline:none;
+}
+.book.live:hover .cover,.book.live:focus-visible .cover,.book.live.cursor .cover{transform:rotateY(74deg)}
+
+/* decorative filler spines */
+.book.filler{filter:brightness(.62) saturate(.5);pointer-events:none}
+
+/* books settle onto the shelf on first load */
+@keyframes settle{
+  from{opacity:0;transform:translateY(-26px) rotateZ(-3deg)}
+  to{opacity:1;transform:none}
+}
+.shelf.enter .book{animation:settle .7s var(--ease) backwards}
+
+/* opening animation */
+.book.opening{
+  transform:translateZ(340px) translateY(-30px) rotateY(-52deg) !important;
+  filter:drop-shadow(0 0 60px rgba(201,162,39,.7));
+  transition:transform .72s var(--ease), filter .72s;
+}
+#library.leaving .panel,#library.leaving .topnav,#library.leaving .book:not(.opening),#library.leaving .plank{
+  opacity:0;transition:opacity .45s ease;
+}
+
+/* ---- the hint, shown once ---- */
+.hintbar{
+  position:absolute;left:50%;bottom:clamp(18px,4vh,44px);
+  transform:translateX(-50%);
+  z-index:8;
+  display:flex;align-items:center;gap:10px;
+  padding:9px 17px;
+  background:rgba(30,21,13,.86);
+  border:1px solid rgba(201,162,39,.26);
+  font-size:14px;font-style:italic;color:var(--parchment-dim);
+  white-space:nowrap;
+  animation:hintIn .6s var(--ease) .9s backwards;
+}
+@keyframes hintIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.hintbar.gone{opacity:0;transition:opacity .5s ease;pointer-events:none}
+.hintbar kbd{
+  font-family:var(--display);font-size:10px;font-style:normal;
+  letter-spacing:.1em;padding:2px 6px;
+  border:1px solid rgba(201,162,39,.3);color:var(--gilt);
+}
+
+/* ---- petals & motes ---- */
+#petals{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
+#petals.paused *{animation-play-state:paused !important}
+.petal{
+  position:absolute;top:-8vh;
+  width:13px;height:13px;
+  background:radial-gradient(circle at 32% 28%,var(--petal-2),var(--petal) 70%);
+  border-radius:82% 18% 74% 26% / 68% 74% 26% 32%;
+  opacity:0;
+  animation:drift linear infinite;
+}
+.petal.far{filter:blur(1.4px);opacity:.5}
+@keyframes drift{
+  0%{opacity:0;transform:translate3d(0,0,0) rotate(0deg)}
+  8%{opacity:.75}
+  85%{opacity:.5}
+  100%{opacity:0;transform:translate3d(78vw,116vh,0) rotate(660deg)}
+}
+.mote{
+  position:absolute;
+  width:3px;height:3px;border-radius:50%;
+  background:rgba(255,232,180,.85);
+  box-shadow:0 0 5px rgba(255,226,163,.7);
+  opacity:0;
+  animation:float linear infinite;
+}
+@keyframes float{
+  0%{opacity:0;transform:translate3d(0,0,0)}
+  15%{opacity:.5}
+  70%{opacity:.32}
+  100%{opacity:0;transform:translate3d(16vw,-30vh,0)}
+}
+
+/* ============================================================
+   CHAPTER (CATEGORY PAGE)
+   ============================================================ */
+#chapter{
+  position:fixed;inset:0;z-index:60;
+  display:none;
+  flex-direction:column;
+  background:var(--pg-bg);
+  color:var(--pg-ink);
+  font-family:var(--body);
+  overflow-y:auto;
+}
+#chapter.on{display:flex;animation:rise .55s var(--ease)}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* spine strip — lateral nav, always visible */
+.strip{
+  position:sticky;top:0;z-index:5;
+  display:flex;align-items:center;gap:6px;
+  padding:11px clamp(16px,3vw,40px);
+  background:var(--pg-bar);
+  border-bottom:1px solid var(--pg-line);
+  flex-wrap:wrap;
+  backdrop-filter:blur(6px);
+}
+.strip .back{
+  font-family:var(--display);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 14px;border:1px solid var(--pg-line);
+  margin-right:auto;
+  transition:background .25s;
+}
+.strip .back:hover{background:var(--pg-line)}
+.chip{
+  font-family:var(--display);
+  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:8px 12px;border-radius:2px;
+  border-left:3px solid var(--chip);
+  background:var(--pg-bar-2);
+  opacity:.62;transition:opacity .25s,transform .25s;
+  text-decoration:none;
+}
+.chip:hover{opacity:1;transform:translateY(-2px)}
+.chip[aria-current="page"]{opacity:1;font-weight:700;background:var(--pg-line)}
+
+.chapter-inner{
+  width:100%;max-width:1080px;
+  margin:0 auto;
+  padding:clamp(30px,5vw,64px) clamp(20px,4vw,44px) 40px;
+}
+.chapter-inner h2{
+  font-family:var(--display);
+  font-size:clamp(28px,4vw,46px);
+  font-weight:700;line-height:1.1;
+  margin:0 0 14px;
+  color:var(--pg-accent);
+}
+.chapter-bio{
+  max-width:60ch;margin:0 0 8px;
+  font-size:17px;color:var(--pg-ink);
+}
+.chapter-bio strong{font-weight:600}
+/* the standing bio — who I am, repeated on every category page */
+.whoami{
+  max-width:60ch;margin:14px 0 0;
+  padding:13px 0 0;border-top:1px solid var(--pg-line);
+  font-size:14.5px;color:var(--pg-muted);font-style:italic;
+}
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0 34px}
+.more,.getcv{
+  display:inline-block;
+  font-family:var(--display);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:10px 15px;
+  text-decoration:none;
+  transition:background .25s,color .25s;
+}
+.more{color:#fff;background:var(--pg-accent)}
+.more:hover{filter:brightness(1.12)}
+.getcv{color:var(--pg-accent);border:1px solid var(--pg-line)}
+.getcv:hover{background:var(--pg-line)}
+
+/* featured piece — the first thing anyone sees */
+.featured{
+  position:relative;
+  border:1px solid var(--pg-line);
+  border-top:3px solid var(--pg-accent);
+  background:var(--pg-card);
+  padding:26px 28px;
+  margin-bottom:34px;
+  border-radius:2px;
+}
+.featured .badge{
+  position:absolute;top:-1px;right:18px;
+  font-family:var(--display);font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:#fff;background:var(--pg-accent);
+  padding:5px 10px;
+}
+.featured .yr{
+  font-family:var(--display);font-size:11px;letter-spacing:.2em;
+  color:var(--pg-accent);display:block;margin-bottom:9px;
+}
+.featured h3{margin:0 0 10px;font-size:clamp(20px,2.6vw,27px);font-weight:600;line-height:1.25}
+.featured p{margin:0;font-size:16.5px;color:var(--pg-muted);max-width:66ch;line-height:1.6}
+
+/* tabs */
+.tabs{
+  display:flex;flex-wrap:wrap;gap:4px;
+  border-bottom:1px solid var(--pg-line);
+  margin-bottom:26px;
+}
+.tab{
+  font-family:var(--display);
+  font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+  padding:11px 15px;
+  border-bottom:2px solid transparent;
+  color:var(--pg-muted);
+  transition:color .25s,border-color .25s;
+  white-space:nowrap;
+}
+.tab:hover{color:var(--pg-ink)}
+.tab[aria-selected="true"]{color:var(--pg-accent);border-bottom-color:var(--pg-accent);font-weight:700}
+.tab .n{font-size:9.5px;opacity:.6;margin-left:5px;vertical-align:top}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:16px}
+.card{
+  background:var(--pg-card);
+  border:1px solid var(--pg-line);
+  border-left:3px solid var(--pg-accent);
+  border-radius:2px;
+  padding:18px 20px;
+  transition:transform .3s var(--ease),box-shadow .3s;
+  animation:cardIn .45s var(--ease) backwards;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(0,0,0,.12)}
+.card.big{grid-column:span 2}
+@media(max-width:640px){.card.big{grid-column:span 1}}
+.card .yr{
+  font-family:var(--display);font-size:10.5px;letter-spacing:.2em;
+  color:var(--pg-accent);display:block;margin-bottom:7px;
+}
+.card h3{margin:0 0 7px;font-size:17.5px;font-weight:600;line-height:1.3}
+.card p{margin:0;font-size:15px;color:var(--pg-muted);line-height:1.55}
+.card .flag{
+  display:inline-block;margin-top:11px;
+  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:3px 8px;border:1px dashed var(--pg-muted);opacity:.75;
+}
+.card .go{
+  display:inline-block;margin-top:12px;
+  font-family:var(--display);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--pg-accent);
+  text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;
+}
+
+/* website cards */
+.sites{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.site{
+  border:1px solid var(--pg-line);background:var(--pg-card);
+  border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;
+  display:block;transition:transform .3s var(--ease),box-shadow .3s;
+  animation:cardIn .45s var(--ease) backwards;
+}
+.site:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.14)}
+.pin{
+  aspect-ratio:16/9;position:relative;overflow:hidden;
+  background:
+    linear-gradient(135deg,var(--pg-bar-2),var(--pg-line)),
+    var(--pg-bar);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--display);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--pg-muted);
+  border-bottom:1px solid var(--pg-line);
+}
+.pin img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.site-meta{padding:15px 17px}
+.site-meta h3{margin:0 0 5px;font-size:16.5px;font-weight:600}
+.site-meta dl{margin:9px 0 0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:13.5px}
+.site-meta dt{font-family:var(--display);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--pg-accent)}
+.site-meta dd{margin:0;color:var(--pg-muted)}
+.live-dot{color:#2E7D52;font-weight:600}
+
+/* chapter footer — contact, so nobody has to go back to find it */
+.chapter-foot{
+  border-top:1px solid var(--pg-line);
+  margin-top:52px;padding:26px 0 60px;
+  display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;
+  font-size:14.5px;color:var(--pg-muted);
+}
+.chapter-foot a{color:var(--pg-accent);text-decoration:none;border-bottom:1px solid currentColor}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:900px){
+  body{overflow-y:auto}
+  #library{grid-template-columns:1fr;height:auto;min-height:100%}
+  .topnav{position:static;justify-content:flex-start;padding:14px 22px 0}
+  .topnav b{width:100%;margin:0 0 6px}
+  .panel{border-right:0;border-bottom:1px solid rgba(201,162,39,.16);padding:26px 24px 34px}
+  .stage{perspective:none;padding:26px 20px 50px;display:block}
+  .shelf{height:auto;transform:none}
+  .shelf::before,.plank{display:none}
+  .row{position:static;display:flex;flex-direction:column;gap:9px}
+  .book{width:100% !important;height:auto !important;transform:none !important}
+  .book .face{position:static}
+  .book .cover{display:none}
+  .book .spine{padding:19px 20px;justify-content:space-between;border-radius:2px}
+  .book .title{writing-mode:horizontal-tb;transform:none;font-size:13px}
+  .book .count{position:static;text-align:right;font-size:10px}
+  .book.filler{display:none}
+  .book.live:hover .spine{filter:brightness(1.14)}
+  .hintbar{display:none}
+  .cvmenu{position:static;min-width:0;width:100%}
+}
+
+/* ============================================================
+   PRINT — a clean document, not a screenshot of a dark room
+   ============================================================ */
+@media print{
+  body{overflow:visible;background:#fff;color:#000;font-size:11pt}
+  #library,#petals,.strip,.actions,.tabs{display:none !important}
+  #chapter{position:static;display:block !important;background:#fff;color:#000;overflow:visible}
+  .chapter-inner{max-width:100%;padding:0}
+  .chapter-inner h2{color:#000;font-size:22pt}
+  .featured,.card,.site{break-inside:avoid;border:1px solid #bbb;box-shadow:none;animation:none;page-break-inside:avoid}
+  .grid,.sites{display:block}
+  .card,.site{margin-bottom:10pt}
+  .card:hover,.site:hover{transform:none}
+  .print-all{display:block !important}
+}
+.print-all{display:none}
+.print-all h4{
+  font-family:var(--display);font-size:13pt;margin:16pt 0 6pt;
+  border-bottom:1px solid #999;padding-bottom:3pt;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  #petals{display:none}
+  .book.live:hover,.book.live:focus-visible,.book.live.cursor{transform:none;filter:brightness(1.2)}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#row">Skip to the shelf</a>
+
+<!-- ============ HOME ============ -->
+<main id="library">
+
+  <nav class="topnav" aria-label="Sections">
+    <b>Browse</b>
+    <a class="navlink" href="#/medical">Medical</a>
+    <a class="navlink" href="#/writer">Writer</a>
+    <a class="navlink" href="#/artist">Artist</a>
+    <a class="navlink" href="#/storyteller">Storyteller</a>
+    <a class="navlink" href="#/web">Websites</a>
+  </nav>
+
+  <section class="panel">
+    <p class="eyebrow">Portfolio</p>
+    <h1>Nicole B.<br>Cabral</h1>
+    <div class="rule"></div>
+    <p class="bio">
+      <strong>Certified author, illustrator and designer</strong> under the National Book
+      Development Board of the Philippines. Biomedical researcher — BSc in Medical Biology,
+      MSc in Biomedicine in progress at Universidade do Minho. Content specialist for brands
+      across healthcare, travel and finance.
+    </p>
+    <p class="bio tagline">Five books on the shelf. Pick one.</p>
+
+    <div class="lectern">
+      <div class="cvwrap">
+        <button class="cv" id="cvBtn" aria-expanded="false" aria-haspopup="true">
+          Download CV <span class="caret">▼</span>
+        </button>
+        <div class="cvmenu" id="cvMenu" role="menu" aria-labelledby="cvBtn">
+          <a href="assets/cv/nicole-cabral-research-cv.pdf" download role="menuitem">
+            <strong>Research CV</strong>
+            <span>For supervisors, laboratories and doctoral programmes.</span>
+          </a>
+          <a href="assets/cv/nicole-cabral-creative-cv.pdf" download role="menuitem">
+            <strong>Creative CV</strong>
+            <span>For agencies, publishers and clients.</span>
+          </a>
+          <a href="assets/cv/nicole-cabral-cv.pdf" download role="menuitem">
+            <strong>Full CV</strong>
+            <span>Everything, in one document.</span>
+          </a>
+        </div>
+      </div>
+      <p class="contact">
+        <a href="mailto:nicolebautistacabral@gmail.com">nicolebautistacabral@gmail.com</a>
+        <span class="sep">·</span>
+        <a href="https://linkedin.com/in/nicolebautistacabral" target="_blank" rel="noopener">LinkedIn</a>
+        <span class="sep">·</span>
+        <span>Braga, Portugal &amp; Taguig, Philippines</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="stage">
+    <div class="shelf" id="shelf">
+      <div class="plank"></div>
+      <div class="row" id="row" role="group" aria-label="Bookshelf — five categories of work"></div>
+    </div>
+    <div class="hintbar" id="hint">
+      Hover a book to explore — or use <kbd>← →</kbd> and <kbd>Enter</kbd>
+    </div>
+  </section>
+</main>
+
+<div id="petals" aria-hidden="true"></div>
+
+<!-- ============ CATEGORY PAGE ============ -->
+<section id="chapter" aria-label="Category" tabindex="-1">
+  <nav class="strip" id="strip" aria-label="Categories"></nav>
+  <div class="chapter-inner">
+    <h2 id="chTitle"></h2>
+    <p class="chapter-bio" id="chBio"></p>
+    <p class="whoami" id="chWho"></p>
+    <div class="actions">
+      <a class="more" id="moreBtn" href="#/">← I do more than this — back to the library</a>
+      <a class="getcv" id="chCv" href="#" download>Download the relevant CV</a>
+    </div>
+    <div id="featured"></div>
+    <div class="tabs" id="tabs" role="tablist" aria-label="Sub-sections"></div>
+    <div id="panel" role="tabpanel" tabindex="0"></div>
+    <div class="print-all" id="printAll"></div>
+    <footer class="chapter-foot">
+      <span>Nicole B. Cabral</span>
+      <a href="mailto:nicolebautistacabral@gmail.com">nicolebautistacabral@gmail.com</a>
+      <a href="https://linkedin.com/in/nicolebautistacabral" target="_blank" rel="noopener">LinkedIn</a>
+      <span>Braga, Portugal &amp; Taguig, Philippines</span>
+    </footer>
+  </div>
+</section>
+
+<div class="sr" id="live" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   CONTENT — edit this object only. The UI reads from it.
+   Items seeded from the CVs; swap in real files/links as you go.
+
+   Item fields:  y year · t title · d description
+                 big  → card spans two columns
+                 flag → small dashed note (rights, confidentiality, status)
+                 url  → adds a "View" link on the card
+   ============================================================ */
+const ME = {
+  name:'Nicole B. Cabral',
+  email:'nicolebautistacabral@gmail.com',
+  linkedin:'https://linkedin.com/in/nicolebautistacabral',
+  who:'Certified author, illustrator and designer (NBDB Philippines). Biomedical researcher — BSc Medical Biology, MSc Biomedicine in progress at Universidade do Minho. Content specialist across healthcare, travel and finance.'
+};
+
+const CV = {
+  research:'assets/cv/nicole-cabral-research-cv.pdf',
+  creative:'assets/cv/nicole-cabral-creative-cv.pdf',
+  full:'assets/cv/nicole-cabral-cv.pdf'
+};
+
+const BOOKS = [
+  {
+    id:'medical', title:'Medical', w:62, h:322, cv:'research',
+    spine:'linear-gradient(90deg,#123A5E,#1E5B8F 42%,#0E2C48)',
+    cover:'linear-gradient(135deg,#F4F8FC,#DCE9F5)',
+    theme:{bg:'#F3F7FB',bar:'#E4EDF6',bar2:'#D5E4F1',card:'#FFFFFF',line:'#C6DAEB',ink:'#152C40',muted:'#5C7590',accent:'#1E5B8F'},
+    bio:'Biomedical researcher trained in wet-lab technique and scientific writing. BSc in Medical Biology (De La Salle University-Dasmariñas), MSc in Biomedicine in progress at Universidade do Minho, with a dissertation in neuroscience.',
+    featured:{
+      y:'2024 · Bachelor thesis',
+      t:'Clerodendrum quadriloculare extracts on blood glucose and ALT levels',
+      d:'Ethanolic leaf and stem extracts of Bagawak Morado significantly reduced fasting blood glucose in alloxan-induced diabetic Rattus norvegicus compared with untreated and metformin-treated groups. ALT assay showed no hepatotoxicity, indicating the extracts are safe. Full laboratory execution and manuscript, from protocol through statistical analysis.'
+    },
+    tabs:[
+      {name:'Research Papers', items:[
+        {y:'2026',t:'Attention dysregulation and default mode network connectivity during doomscrolling',d:'Masters dissertation proposal and review paper on Gen Z social media users. Universidade do Minho.',flag:'Abstract only until published',big:true},
+        {y:'2024',t:'Recombinant human wild-type G6PD and G6PD Viangchan',d:'Production and differential enzyme activity across variants.'},
+        {y:'2024',t:'Autoreactive CD8+ T cell exhaustion in slow Type 1 Diabetes',d:'Critique of primary immunology literature.'},
+        {y:'2024',t:'Gene regulation under lactose and tryptophan',d:'Operon-level transcriptional control.'},
+        {y:'2021',t:'Microfragmentation for coral rehabilitation, Bolinao reef',d:'Methodological approach to reef restoration.'},
+        {y:'2021',t:'Bioremediation using endophytic fungi from Blumea balsamifera',d:'Heavy metal removal from Pasig River water samples.'}
+      ]},
+      {name:'Presentations', items:[
+        {y:'2024',t:'Diagnostic features of medically important protozoans',d:'Parasitology deck on identification of clinically relevant species.'},
+        {y:'2021',t:'SIGN ME UP! — sign language detection app',d:'Top 10 national finalist, The Next Bright Idea competition, Enderun Colleges.',flag:'Also in Writer'},
+        {y:'2021',t:'Cigarette smoke filtration prototype',d:'Design and presentation of a smoke purification prototype.'}
+      ]},
+      {name:'Laboratory', items:[
+        {y:'2024',t:'Human and molecular genetics',d:'Karyotyping, DNA extraction and analysis, PCR, agarose gel electrophoresis, ELISA, Mendelian genetics exercises.',big:true},
+        {y:'2023',t:'General and medical microbiology, parasitology',d:'Aseptic technique, bacterial culture, incubation, Gram staining, microscopy of human parasites.'},
+        {y:'2023',t:'Evolutionary biology and comparative anatomy',d:'Hands-on dissection of cats and frogs, external anatomical study of sharks, comparative analysis of frog, turtle, chicken and cat skeletons. MOTS Animal Laboratory.'},
+        {y:'2023',t:'Pharmacology',d:'Drug dosage calculation, prescription analysis, pharmacodynamics.'},
+        {y:'2024',t:'Hospital rotations — St. Luke’s Medical Center, Global City',d:'Chemistry, serology, microscopy, microbiology, phlebotomy, pathology and hematology sections under standard operating procedures.',flag:'Skills only — no patient data'}
+      ]},
+      {name:'Certifications', items:[
+        {y:'2026',t:'Fundamental Neuroscience of Neuroimaging',d:'Johns Hopkins University. Neuroscience through MRI applications.'},
+        {y:'2025',t:'Medical Virtual Assistant Trainee',d:'ProVa. US healthcare systems, HIPAA, EMR/EHR, coding and scribing basics.'},
+        {y:'2026',t:'Peer review training',d:'Universidade do Minho. Proofreading and reviewing life sciences manuscripts.'}
+      ]}
+    ]
+  },
+  {
+    id:'writer', title:'Writer & Author', w:74, h:340, cv:'creative',
+    spine:'linear-gradient(90deg,#4A3120,#7C5636 44%,#38230F)',
+    cover:'linear-gradient(135deg,#F2E3D0,#DCC3A6)',
+    theme:{bg:'#F5EADC',bar:'#EADAC6',bar2:'#DFC9AF',card:'#FDF7EE',line:'#D5BC9E',ink:'#3A2716',muted:'#7A6046',accent:'#7C5636'},
+    bio:'Four published books, a national authorship certification, and commercial copy for startups and agencies. I write across registers — peer-reviewed, literary, and brand.',
+    featured:{
+      y:'2025 · Arbitrail',
+      t:'Built a startup BPO’s entire written voice from nothing',
+      d:'Joined a company with no brand tone and left it with one. Developed the voice, then wrote everything it touched: onboarding handbook, service catalog, website copy, slide decks, one-pagers, video scripts, and the materials for their stand at Business Show Asia 2025 in Singapore. Ran B2B and B2C content across healthcare, travel and finance while the company repositioned into general outsourcing — refining service descriptions directly with the Manager, COO and CEO.'
+    },
+    tabs:[
+      {name:'Books & Literary', items:[
+        {y:'2021',t:'Four published titles',d:'Ukiyoto Publishing (Canada) and KM and H Black Paper Forest (Philippines). Essays, poetry, short stories and prose.',big:true},
+        {y:'—',t:'Selected poetry and essays',d:'Read here as web text, not screenshots — writing should be readable, not photographed.'}
+      ]},
+      {name:'Scientific Writing', items:[
+        {y:'2024',t:'Thesis and coursework papers',d:'Seven pieces across genetics, immunology, environmental biology and parasitology.',flag:'Lives in Medical →'},
+        {y:'2026',t:'Peer review',d:'Trained in reviewing life sciences manuscripts — proofreading, comments and suggestions.'},
+        {y:'—',t:'Citation systems',d:'AMA, CSE and APA. Mendeley and EndNote Basic. PubMed MeSH search.'}
+      ]},
+      {name:'Brand & Corporate', items:[
+        {y:'2025',t:'Arbitrail — brand tone and service catalog',d:'Built the voice for a startup BPO from scratch, working with the Manager, COO and CEO.',big:true},
+        {y:'2025',t:'Arbitrail — onboarding handbook',d:'Full internal handbook for new staff.',flag:'Confidential — described, not shown'},
+        {y:'2025',t:'Arbitrail — website copy',d:'Information architecture and copy through a company repositioning.'},
+        {y:'2025',t:'Zencreatif — Ten Twenty Five Cafe',d:'Food and beverage promotional copy.'},
+        {y:'2025',t:'Zencreatif — JNC Corporation',d:'E-commerce copy across clothing, luxury goods and confectionery.'}
+      ]},
+      {name:'Social & Content', items:[
+        {y:'2025',t:'B2B and B2C social content',d:'Microblogs, carousels and static posts across healthcare, travel and finance.'},
+        {y:'2025',t:'Short-form internal interviews',d:'Interviewed employees across the company and cut the results for brand channels.'},
+        {y:'2024',t:'Small business content',d:'Laundry service and roasted chicken menus across Facebook, Instagram and TikTok.'}
+      ]},
+      {name:'Print & Promotional', items:[
+        {y:'2025',t:'Business Show Asia 2025, Singapore',d:'Copy and event materials for an international trade show stand.',big:true},
+        {y:'2025',t:'Flyers, posters and one-pagers',d:'Print collateral for client-facing and internal use.'}
+      ]},
+      {name:'Decks & Scripts', items:[
+        {y:'2025',t:'Arbitrail slide decks and video scripts',d:'Client-facing and internal presentation collateral, plus scripts for video.'},
+        {y:'2021',t:'SIGN ME UP!',d:'Accessibility technology proposal — top 10 nationally.'}
+      ]},
+      {name:'Certifications', items:[
+        {y:'2021',t:'Certified Author, Illustrator and Designer',d:'National Book Development Board of the Philippines.'}
+      ]}
+    ]
+  },
+  {
+    id:'artist', title:'Artist', w:66, h:308, cv:'creative',
+    spine:'linear-gradient(90deg,#5B2E4A,#A8456B 38%,#C8763F 72%,#4A6E6E)',
+    cover:'linear-gradient(135deg,#FBF4E9,#F0DCC8)',
+    theme:{bg:'#FAF4EA',bar:'#F1E5D5',bar2:'#E7D6C0',card:'#FFFCF7',line:'#DEC9B1',ink:'#3A2A2E',muted:'#7C6660',accent:'#A8456B'},
+    bio:'Certified illustrator and designer. Two published book covers, a signature illustration style, and design work for small businesses and book campaigns.',
+    featured:{
+      y:'2021 · Published',
+      t:'Book cover design for Ukiyoto Publishing',
+      d:'Full cover layout and illustration for a published title — the work behind the National Book Development Board certification. Drop the cover image here at 1200px wide and let it carry the section.',
+      flag:'Add artwork — this is the strongest thing you have'
+    },
+    tabs:[
+      {name:'Book Cover Design', items:[
+        {y:'2021',t:'Ukiyoto Publishing cover',d:'Full cover layout and illustration for a published title.',flag:'Rights check pending',big:true},
+        {y:'2021',t:'KM and H Black Paper Forest cover',d:'Second published cover design.',flag:'Rights check pending'}
+      ]},
+      {name:'Digital Illustration', items:[
+        {y:'—',t:'Illustration selects',d:'Procreate and IbisPaint. Eight to twelve strongest pieces, not everything — a portfolio is an edit, not an archive.',big:true}
+      ]},
+      {name:'Signature Style', items:[
+        {y:'—',t:'Name the style here',d:'"Niche style" tells a viewer nothing. Give it a name, then show four pieces that prove the name is real.',flag:'Needs a name'}
+      ]},
+      {name:'Graphic Design', items:[
+        {y:'2022',t:'Book campaign graphics',d:'Promotional materials and excerpt cards for Facebook and Instagram.'},
+        {y:'2024',t:'Laundry service branding',d:'Service graphics across three platforms.'},
+        {y:'2024',t:'Roasted chicken menu design',d:'Food menu and content design.'},
+        {y:'—',t:'Tools',d:'Adobe Acrobat, Canva, Procreate, IbisPaint, CapCut, Filmora.'}
+      ]},
+      {name:'Certifications', items:[
+        {y:'2021',t:'Certified Illustrator and Designer',d:'National Book Development Board of the Philippines.'}
+      ]}
+    ]
+  },
+  {
+    id:'storyteller', title:'Storyteller & Editor', w:58, h:294, cv:'creative',
+    spine:'linear-gradient(90deg,#6B3A42,#A65D6B 44%,#4E2A30)',
+    cover:'linear-gradient(135deg,#F9EBEE,#EBD3D8)',
+    theme:{bg:'#F9EFF1',bar:'#F0DDE1',bar2:'#E6CBD1',card:'#FFFAFB',line:'#DEC0C6',ink:'#3D262A',muted:'#7B5C62',accent:'#A65D6B'},
+    bio:'I edit video the way I write — for pacing. Storytelling reels, business short-form, and stage performance across 2021 to 2025.',
+    featured:{
+      y:'2021–2025',
+      t:'Spoken word, on stage and on camera',
+      d:'Open mic performance at CAPO MNL and gallery events, and creative storytelling video built around written excerpts. The through-line across every section of this portfolio is the same one: take something written and find the pace that makes people stay for it.',
+      flag:'Embed one reel here — this section needs to be seen, not read'
+    },
+    tabs:[
+      {name:'Storytelling Reels', items:[
+        {y:'2023',t:'Creative storytelling videos',d:'Original video built around written excerpts and book content, for Facebook and Instagram.',big:true},
+        {y:'2021–2025',t:'Open mic performance',d:'CAPO MNL and gallery events. Spoken word and stage work.'}
+      ]},
+      {name:'Video Editing', items:[
+        {y:'2025',t:'Short-form employee interviews',d:'Scripted, shot and cut for internal and brand channels.',flag:'Consent needed on camera'},
+        {y:'2024',t:'Small business short-form',d:'TikTok content for laundry and food businesses, end to end.'},
+        {y:'—',t:'Tools',d:'CapCut and Filmora.'}
+      ]}
+    ]
+  },
+  {
+    id:'web', title:'Website Builder', w:50, h:276, cv:'full',
+    spine:'linear-gradient(90deg,#2E2E2C,#4A4A46 45%,#232321)',
+    cover:'linear-gradient(135deg,#F0F0EE,#DDDDD9)',
+    theme:{bg:'#F2F2F0',bar:'#E6E6E3',bar2:'#DADAD6',card:'#FFFFFF',line:'#CBCBC6',ink:'#262624',muted:'#6C6C68',accent:'#4A4A46'},
+    bio:'Sites I have built, with the role and the stack stated plainly. Clicking a card opens the live site in a new tab.',
+    featured:{
+      y:'—',
+      t:'This portfolio',
+      d:'Hand-built in HTML, CSS and vanilla JavaScript. No framework, no build step, no dependencies beyond two webfonts. The shelf is CSS 3D transforms rather than WebGL, which is why it loads in well under a second on a phone.'
+    },
+    tabs:[
+      {name:'Websites Built', sites:[
+        {t:'Site name',role:'Design and build',stack:'HTML, CSS, JS',status:'Live',url:'#',img:''},
+        {t:'Site name',role:'Copy and layout',stack:'Framer',status:'Live',url:'#',img:''},
+        {t:'Site name',role:'Full build',stack:'WordPress',status:'Archived',url:'#',img:''}
+      ]}
+    ]
+  }
+];
+
+/* Filler spines — the rest of the shelf. They exist so the five real books
+   read as a selection out of a library, not as the whole library. Widths and
+   heights are irregular on purpose; a perfectly even row looks like a barcode.
+   PATTERN below sets how many fillers sit before each real book. */
+const FILLER = [
+  {w:26,h:300,c:'linear-gradient(90deg,#2B1D14,#42301F,#241810)'},
+  {w:34,h:318,c:'linear-gradient(90deg,#3A2A1C,#4F3A26,#2A1D12)'},
+  {w:22,h:286,c:'linear-gradient(90deg,#241A12,#382719,#1E150E)'},
+  {w:30,h:330,c:'linear-gradient(90deg,#332318,#4A3524,#231810)'},
+  {w:24,h:296,c:'linear-gradient(90deg,#2E2016,#3F2D1E,#20160F)'},
+  {w:38,h:312,c:'linear-gradient(90deg,#3D2C1D,#553D28,#2C1E13)'},
+  {w:20,h:280,c:'linear-gradient(90deg,#221810,#332417,#1C130C)'},
+  {w:44,h:324,c:'linear-gradient(90deg,#42301F,#5C4229,#2E2115)'},
+  {w:28,h:292,c:'linear-gradient(90deg,#2A1E15,#3C2B1D,#221811)'},
+  {w:19,h:306,c:'linear-gradient(90deg,#1F160F,#2E2116,#1A120C)'},
+  {w:36,h:334,c:'linear-gradient(90deg,#372718,#4E3823,#281C11)'},
+  {w:23,h:288,c:'linear-gradient(90deg,#261B12,#372718,#1D1410)'},
+  {w:41,h:316,c:'linear-gradient(90deg,#3F2E1E,#57402A,#2B1F14)'},
+  {w:25,h:274,c:'linear-gradient(90deg,#231910,#342518,#1B1209)'},
+  {w:32,h:322,c:'linear-gradient(90deg,#30231A,#453222,#251A12)'},
+  {w:21,h:298,c:'linear-gradient(90deg,#1D150E,#2C2015,#181008)'}
+];
+/* fillers before each of the five books, then a tail of leftovers */
+const PATTERN = [2,2,1,2,1];
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const slug = s => s.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const isNarrow = () => window.matchMedia('(max-width:900px)').matches;
+const calm = () => window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+const countWorks = bk => bk.tabs.reduce((n,t)=>n+((t.items||t.sites||[]).length),0);
+
+/* ============================================================
+   BUILD THE SHELF
+   ============================================================ */
+const row = $('#row');
+const lib = $('#library');
+const shelf = $('#shelf');
+
+function fillerEl(f){
+  const b=document.createElement('div');
+  b.className='book filler';
+  b.setAttribute('aria-hidden','true');
+  b.style.width=f.w+'px'; b.style.height=f.h+'px';
+  b.innerHTML=`<div class="face spine" style="background:${f.c}"></div>`;
+  return b;
+}
+function bookEl(bk){
+  const b=document.createElement('a');
+  b.className='book live';
+  b.href='#/'+bk.id;
+  b.style.width=bk.w+'px'; b.style.height=bk.h+'px';
+  b.style.textDecoration='none';
+  b.setAttribute('aria-label',bk.title+' — '+countWorks(bk)+' works');
+  b.dataset.id=bk.id;
+  b.innerHTML=`
+    <div class="face spine" style="background:${bk.spine}">
+      <span class="title">${esc(bk.title)}</span>
+      <span class="count">${countWorks(bk)}</span>
+    </div>
+    <div class="face cover" style="background:${bk.cover};height:${bk.h}px"></div>`;
+  b.addEventListener('click',e=>{
+    /* let modifier-clicks open a new tab like any normal link */
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0) return;
+    e.preventDefault();
+    openBook(bk.id,b);
+  });
+  return b;
+}
+
+/* interleave fillers and real books per PATTERN, leftovers close the row */
+let fi=0;
+BOOKS.forEach((bk,i)=>{
+  for(let n=0;n<(PATTERN[i]||1)&&fi<FILLER.length;n++) row.appendChild(fillerEl(FILLER[fi++]));
+  row.appendChild(bookEl(bk));
+});
+while(fi<FILLER.length) row.appendChild(fillerEl(FILLER[fi++]));
+
+/* stagger the settle-in */
+if(!calm()){
+  shelf.classList.add('enter');
+  [...row.children].forEach((b,i)=>b.style.animationDelay=(i*55)+'ms');
+}
+
+/* ---- keyboard: arrow through the shelf ---- */
+const liveBooks = () => [...row.querySelectorAll('.book.live')];
+let cursor = -1;
+function moveCursor(d){
+  const bs=liveBooks();
+  cursor = cursor<0 ? (d>0?0:bs.length-1) : (cursor+d+bs.length)%bs.length;
+  bs.forEach(b=>b.classList.remove('cursor'));
+  bs[cursor].classList.add('cursor');
+  bs[cursor].focus();
+  dismissHint();
+}
+document.addEventListener('keydown',e=>{
+  if($('#chapter').classList.contains('on')) return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();moveCursor(1)}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();moveCursor(-1)}
+});
+row.addEventListener('focusout',()=>{
+  setTimeout(()=>{ if(!row.contains(document.activeElement)){ liveBooks().forEach(b=>b.classList.remove('cursor')); cursor=-1; } },0);
+});
+row.addEventListener('pointerenter',dismissHint);
+
+/* ---- the hint, once per visitor ---- */
+const hint=$('#hint');
+function dismissHint(){
+  if(!hint||hint.classList.contains('gone')) return;
+  hint.classList.add('gone');
+  try{ localStorage.setItem('nbc-hint','1'); }catch(_){}
+}
+try{ if(localStorage.getItem('nbc-hint')) hint.remove(); }catch(_){}
+setTimeout(dismissHint,9000);
+
+/* ============================================================
+   PETALS & DUST — upper left, and paused when nobody is looking
+   ============================================================ */
+const petalBox=$('#petals');
+if(!calm()){
+  for(let i=0;i<13;i++){
+    const p=document.createElement('div');
+    const far=Math.random()<.35;
+    p.className='petal'+(far?' far':'');
+    const dur=15+Math.random()*13;
+    p.style.left=(-4+Math.random()*22)+'vw';
+    p.style.animationDuration=dur+'s';
+    p.style.animationDelay=(-Math.random()*dur)+'s';
+    p.style.transform='scale('+(.55+Math.random()*.75)+')';
+    petalBox.appendChild(p);
+  }
+  /* dust motes rising through the light shaft */
+  for(let i=0;i<14;i++){
+    const m=document.createElement('div');
+    m.className='mote';
+    const dur=18+Math.random()*16;
+    m.style.left=(2+Math.random()*38)+'vw';
+    m.style.top=(20+Math.random()*70)+'vh';
+    m.style.animationDuration=dur+'s';
+    m.style.animationDelay=(-Math.random()*dur)+'s';
+    petalBox.appendChild(m);
+  }
+  /* stop burning battery in a background tab */
+  document.addEventListener('visibilitychange',()=>{
+    petalBox.classList.toggle('paused',document.hidden);
+  });
+}
+
+/* ============================================================
+   CHAPTER PAGES
+   ============================================================ */
+const ch=$('#chapter');
+const strip=$('#strip');
+const tabsEl=$('#tabs');
+const panelEl=$('#panel');
+const featEl=$('#featured');
+const liveRegion=$('#live');
+let current=null, currentTab=0;
+
+function openBook(id,el){
+  const bk=BOOKS.find(b=>b.id===id);
+  if(!bk) return;
+  if(el && !isNarrow() && !calm()){
+    el.classList.add('opening');
+    lib.classList.add('leaving');
+    setTimeout(()=>{
+      el.classList.remove('opening');
+      lib.classList.remove('leaving');
+      go(bk.id,0);
+    },560);
+  } else {
+    go(bk.id,0);
+  }
+}
+
+/* ---- routing: every view has a URL ---- */
+function go(id,tabIndex){
+  const bk=BOOKS.find(b=>b.id===id);
+  const t=bk?bk.tabs[tabIndex]:null;
+  location.hash = '#/'+id+(t&&tabIndex>0?'/'+slug(t.name):'');
+}
+
+function route(){
+  const parts=(location.hash||'').replace(/^#\/?/,'').split('/').filter(Boolean);
+  const bk=BOOKS.find(b=>b.id===parts[0]);
+  if(!bk){ closeChapter(); return; }
+  let ti=0;
+  if(parts[1]){
+    const found=bk.tabs.findIndex(t=>slug(t.name)===parts[1]);
+    if(found>=0) ti=found;
+  }
+  paint(bk,ti);
+}
+window.addEventListener('hashchange',route);
+
+function paint(bk,tabIndex){
+  const first = current!==bk;
+  current=bk; currentTab=tabIndex;
+  const t=bk.theme;
+  ch.style.setProperty('--pg-bg',t.bg);
+  ch.style.setProperty('--pg-bar',t.bar);
+  ch.style.setProperty('--pg-bar-2',t.bar2);
+  ch.style.setProperty('--pg-card',t.card);
+  ch.style.setProperty('--pg-line',t.line);
+  ch.style.setProperty('--pg-ink',t.ink);
+  ch.style.setProperty('--pg-muted',t.muted);
+  ch.style.setProperty('--pg-accent',t.accent);
+  document.querySelector('meta[name="theme-color"]').setAttribute('content',t.accent);
+
+  $('#chTitle').textContent=bk.title;
+  $('#chBio').textContent=bk.bio;
+  $('#chWho').textContent=ME.who;
+  document.title=bk.title+' — '+ME.name;
+
+  const cvLink=$('#chCv');
+  cvLink.href=CV[bk.cv]||CV.full;
+  cvLink.textContent='Download '+(bk.cv==='research'?'research':bk.cv==='creative'?'creative':'full')+' CV';
+
+  /* lateral nav — real links, so they work with middle-click and back button */
+  strip.innerHTML='<a class="back" href="#/">← Return to the library</a>'+
+    BOOKS.map(b=>`<a class="chip" href="#/${b.id}" style="--chip:${b.theme.accent}" ${b.id===bk.id?'aria-current="page"':''}>${esc(b.title)}</a>`).join('');
+
+  /* featured piece */
+  featEl.innerHTML = bk.featured ? `
+    <section class="featured">
+      <span class="badge">Featured</span>
+      <span class="yr">${esc(bk.featured.y)}</span>
+      <h3>${esc(bk.featured.t)}</h3>
+      <p>${esc(bk.featured.d)}</p>
+      ${bk.featured.flag?`<span class="flag" style="display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px dashed ${t.muted};opacity:.75">${esc(bk.featured.flag)}</span>`:''}
+    </section>` : '';
+
+  /* tabs */
+  tabsEl.innerHTML=bk.tabs.map((tb,i)=>{
+    const n=(tb.items||tb.sites||[]).length;
+    return `<button class="tab" role="tab" id="tab-${i}" aria-selected="${i===tabIndex}" aria-controls="panel" tabindex="${i===tabIndex?0:-1}" data-i="${i}">${esc(tb.name)}<span class="n">${n}</span></button>`;
+  }).join('');
+  tabsEl.querySelectorAll('.tab').forEach(btn=>{
+    btn.onclick=()=>go(bk.id,+btn.dataset.i);
+  });
+  panelEl.setAttribute('aria-labelledby','tab-'+tabIndex);
+
+  renderTab(bk,tabIndex);
+  buildPrint(bk);
+
+  if(!ch.classList.contains('on')){
+    ch.classList.add('on');
+    ch.focus();
+  }
+  if(first) ch.scrollTop=0;
+  liveRegion.textContent=bk.title+', '+bk.tabs[tabIndex].name+' — '+(bk.tabs[tabIndex].items||bk.tabs[tabIndex].sites||[]).length+' entries';
+}
+
+/* tablist keyboard pattern */
+tabsEl.addEventListener('keydown',e=>{
+  const tabs=[...tabsEl.querySelectorAll('.tab')];
+  const i=tabs.indexOf(document.activeElement);
+  if(i<0) return;
+  let n=null;
+  if(e.key==='ArrowRight') n=(i+1)%tabs.length;
+  if(e.key==='ArrowLeft') n=(i-1+tabs.length)%tabs.length;
+  if(e.key==='Home') n=0;
+  if(e.key==='End') n=tabs.length-1;
+  if(n===null) return;
+  e.preventDefault();
+  tabs[n].focus(); tabs[n].click();
+});
+
+function cardHTML(it,i){
+  return `
+    <article class="card${it.big?' big':''}" style="animation-delay:${Math.min(i*40,320)}ms">
+      <span class="yr">${esc(it.y)}</span>
+      <h3>${esc(it.t)}</h3>
+      <p>${esc(it.d)}</p>
+      ${it.flag?`<span class="flag">${esc(it.flag)}</span>`:''}
+      ${it.url?`<a class="go" href="${esc(it.url)}" target="_blank" rel="noopener">View →</a>`:''}
+    </article>`;
+}
+
+function renderTab(bk,i){
+  const tb=bk.tabs[i];
+  if(tb.sites){
+    panelEl.innerHTML='<div class="sites">'+tb.sites.map((s,n)=>`
+      <a class="site" href="${esc(s.url)}" target="_blank" rel="noopener" style="animation-delay:${n*50}ms">
+        <div class="pin">${s.img?`<img src="${esc(s.img)}" alt="Screenshot of ${esc(s.t)}" loading="lazy">`:'Screenshot — 16:9'}</div>
+        <div class="site-meta">
+          <h3>${esc(s.t)}</h3>
+          <dl>
+            <dt>Role</dt><dd>${esc(s.role)}</dd>
+            <dt>Stack</dt><dd>${esc(s.stack)}</dd>
+            <dt>Status</dt><dd>${s.status==='Live'?'<span class="live-dot">● Live</span>':esc(s.status)}</dd>
+          </dl>
+        </div>
+      </a>`).join('')+'</div>';
+    return;
+  }
+  panelEl.innerHTML='<div class="grid">'+tb.items.map(cardHTML).join('')+'</div>';
+}
+
+/* every tab flattened into the printed page */
+function buildPrint(bk){
+  $('#printAll').innerHTML = bk.tabs.map(tb=>{
+    const rows=(tb.items||[]).map(it=>`<p><strong>${esc(it.y)} — ${esc(it.t)}</strong><br>${esc(it.d)}</p>`).join('')
+      || (tb.sites||[]).map(s=>`<p><strong>${esc(s.t)}</strong> — ${esc(s.role)}, ${esc(s.stack)} (${esc(s.status)})<br>${esc(s.url)}</p>`).join('');
+    return `<h4>${esc(tb.name)}</h4>${rows}`;
+  }).join('');
+}
+
+function closeChapter(){
+  if(!ch.classList.contains('on')) return;
+  ch.classList.remove('on');
+  document.title='Nicole B. Cabral — Portfolio';
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#171009');
+  const back=current&&document.querySelector('.book.live[data-id="'+current.id+'"]');
+  if(back) back.focus();
+  current=null;
+}
+
+$('#moreBtn').addEventListener('click',e=>{ e.preventDefault(); history.pushState(null,'','#/'); route(); });
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&ch.classList.contains('on')){ history.pushState(null,'','#/'); route(); }
+});
+
+/* ---- CV menu ---- */
+const cvBtn=$('#cvBtn'), cvMenu=$('#cvMenu');
+cvBtn.addEventListener('click',e=>{
+  e.stopPropagation();
+  const open=cvMenu.classList.toggle('on');
+  cvBtn.setAttribute('aria-expanded',String(open));
+});
+document.addEventListener('click',e=>{
+  if(!cvMenu.contains(e.target)&&e.target!==cvBtn){
+    cvMenu.classList.remove('on'); cvBtn.setAttribute('aria-expanded','false');
+  }
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&cvMenu.classList.contains('on')){
+    cvMenu.classList.remove('on'); cvBtn.setAttribute('aria-expanded','false'); cvBtn.focus();
+  }
+});
+
+/* ---- go ---- */
+route();
+</script>
+</body>
+</html>
