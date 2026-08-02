@@ -45,13 +45,10 @@
    ============================================================ */
 :root{
   --wall:#171009;
-  --wall-2:#241810;
   --walnut:#3B2A1E;
-  --walnut-dark:#241812;
   --walnut-light:#5A4030;
   --parchment:#E8DCC4;
   --parchment-dim:#C3B394;
-  --ink:#241C12;
   --gilt:#C9A227;
   --gilt-soft:rgba(201,162,39,.28);
   --petal:#B5485C;
@@ -80,41 +77,42 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--gilt);outline-offset:3px;border-radius:2px}
 
-/* skip link — first stop for keyboard and screen readers */
 .skip{
   position:absolute;left:-9999px;top:0;z-index:200;
   padding:12px 18px;background:var(--gilt);color:#1A1206;
   font-family:var(--display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
 }
 .skip:focus{left:8px;top:8px}
-
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 /* ============================================================
-   LIBRARY (HOME)
+   THE HALL — medieval stone wall
    ============================================================ */
 #library{
   position:relative;
   height:100%;
   display:grid;
   grid-template-columns:30% 70%;
-  background:
-    radial-gradient(120% 90% at 12% 8%, rgba(201,162,39,.12), transparent 55%),
-    radial-gradient(90% 70% at 78% 100%, rgba(0,0,0,.6), transparent 60%),
-    var(--wall);
+  background-color:#141009;
 }
-/* the shaft of light from the upper-left window — same origin as the petals */
+/* running-bond masonry */
 #library::before{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:1;
-  background:linear-gradient(126deg, rgba(255,226,163,.11) 0%, rgba(255,226,163,.04) 22%, transparent 46%);
+  content:'';position:absolute;inset:0;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='180'%3E%3Crect width='260' height='180' fill='%231a1309'/%3E%3Cg%3E%3Crect x='0' y='2' width='126' height='54' rx='3' fill='%2333291e'/%3E%3Crect x='130' y='2' width='126' height='54' rx='3' fill='%232d241a'/%3E%3Crect x='-62' y='62' width='126' height='54' rx='3' fill='%23382d21'/%3E%3Crect x='68' y='62' width='126' height='54' rx='3' fill='%23302619'/%3E%3Crect x='198' y='62' width='126' height='54' rx='3' fill='%2335291d'/%3E%3Crect x='0' y='122' width='126' height='54' rx='3' fill='%232b2218'/%3E%3Crect x='130' y='122' width='126' height='54' rx='3' fill='%23372c20'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:260px 180px;
+  opacity:.9;
 }
-/* paper grain over everything, very faint */
+/* torchlight from the upper left + deep vignette + grain */
 #library::after{
-  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;opacity:.5;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:
+    linear-gradient(126deg, rgba(255,214,140,.13) 0%, rgba(255,214,140,.05) 22%, transparent 48%),
+    radial-gradient(120% 90% at 12% 6%, rgba(255,196,96,.13), transparent 52%),
+    radial-gradient(130% 110% at 60% 55%, transparent 30%, rgba(0,0,0,.62) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
 }
 
-/* ---- top nav: the plain path, always available ---- */
+/* ---- top nav ---- */
 .topnav{
   position:absolute;top:0;right:0;z-index:12;
   display:flex;align-items:center;gap:2px;
@@ -133,146 +131,124 @@ a{color:inherit}
   padding:7px 11px;border-radius:2px;
   border-bottom:1px solid transparent;
   transition:color .25s,border-color .25s,background .25s;
+  text-decoration:none;
 }
 .navlink:hover,.navlink:focus-visible{color:var(--parchment);border-bottom-color:var(--gilt);background:rgba(201,162,39,.07)}
 
 /* ---- left panel: the lectern ---- */
 .panel{
   position:relative;
-  z-index:3;
-  padding:clamp(28px,4vw,64px) clamp(24px,3.2vw,52px);
+  z-index:4;
+  padding:clamp(26px,3.6vw,58px) clamp(24px,3.2vw,52px);
   display:flex;
   flex-direction:column;
   justify-content:center;
-  gap:20px;
+  gap:18px;
   border-right:1px solid rgba(201,162,39,.16);
   overflow-y:auto;
+  background:linear-gradient(100deg, rgba(12,8,4,.62), rgba(12,8,4,.30));
 }
 .eyebrow{
   font-family:var(--display);
-  font-size:12px;
-  letter-spacing:.42em;
-  text-transform:uppercase;
-  color:var(--gilt);
-  margin:0;
+  font-size:12px;letter-spacing:.42em;text-transform:uppercase;
+  color:var(--gilt);margin:0;
 }
 .panel h1{
   font-family:var(--display);
   font-weight:700;
-  font-size:clamp(30px,3.4vw,50px);
-  line-height:1.05;
-  letter-spacing:.01em;
-  margin:0;
-  color:var(--parchment);
+  font-size:clamp(29px,3.2vw,47px);
+  line-height:1.05;letter-spacing:.01em;
+  margin:0;color:var(--parchment);
 }
-.rule{
-  width:52px;height:1px;
-  background:linear-gradient(90deg,var(--gilt),transparent);
+.rule{width:52px;height:1px;background:linear-gradient(90deg,var(--gilt),transparent)}
+
+/* ---- the portrait, in an arched reliquary frame ---- */
+.portrait{
+  position:relative;
+  width:clamp(118px,9.5vw,152px);
+  aspect-ratio:5/6;
+  flex:0 0 auto;
+  border-radius:50% 50% 5px 5px / 40% 40% 4px 4px;
+  overflow:hidden;
+  border:1px solid rgba(201,162,39,.5);
+  box-shadow:
+    0 0 0 5px rgba(20,14,8,.9),
+    0 0 0 6px rgba(201,162,39,.22),
+    0 16px 34px rgba(0,0,0,.6),
+    inset 0 0 26px rgba(0,0,0,.4);
+  background:linear-gradient(160deg,#2A2018,#171009);
 }
-.bio{
-  margin:0;
-  max-width:34ch;
-  color:var(--parchment-dim);
-  font-size:16.5px;
+.portrait img{
+  width:100%;height:100%;object-fit:cover;object-position:50% 22%;
+  display:block;filter:saturate(.94) contrast(1.02);
+  font-size:0;color:transparent;   /* never show raw alt text if the file is missing */
 }
+/* warm light falling across the portrait, matching the hall */
+.portrait::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(126deg, rgba(255,214,140,.16), transparent 55%),
+             radial-gradient(120% 100% at 50% 108%, rgba(0,0,0,.45), transparent 60%);
+}
+.portrait .monogram{
+  position:absolute;inset:0;display:none;
+  align-items:center;justify-content:center;
+  font-family:var(--display);font-size:26px;letter-spacing:.12em;
+  color:rgba(201,162,39,.55);
+}
+.portrait.empty .monogram{display:flex}
+
+.bio{margin:0;max-width:34ch;color:var(--parchment-dim);font-size:16.5px}
 .bio strong{color:var(--parchment);font-weight:600}
 .tagline{font-style:italic;opacity:.78;font-size:15.5px}
 
-.lectern{
-  margin-top:4px;
-  padding-top:20px;
-  border-top:1px solid rgba(201,162,39,.16);
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  align-items:flex-start;
-}
-.cvwrap{position:relative}
-.cv{
-  display:inline-flex;align-items:center;gap:9px;
-  font-family:var(--display);
-  font-size:12px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:var(--gilt);
-  padding:11px 20px;
-  border:1px solid var(--gilt-soft);
-  transition:background .3s,border-color .3s;
-}
-.cv:hover{background:rgba(201,162,39,.1);border-color:var(--gilt)}
-.cv .caret{font-size:9px;opacity:.7;transition:transform .3s}
-.cv[aria-expanded="true"] .caret{transform:rotate(180deg)}
-.cvmenu{
-  position:absolute;left:0;top:calc(100% + 7px);z-index:20;
-  min-width:270px;
-  background:#1E150D;
-  border:1px solid rgba(201,162,39,.3);
-  box-shadow:0 18px 40px rgba(0,0,0,.6);
-  padding:6px;
-  display:none;
-}
-.cvmenu.on{display:block;animation:rise .25s var(--ease)}
-.cvmenu a{
-  display:block;padding:11px 13px;text-decoration:none;
-  border-radius:2px;transition:background .2s;
-}
-.cvmenu a:hover{background:rgba(201,162,39,.1)}
-.cvmenu strong{
-  display:block;font-family:var(--display);font-size:11.5px;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--gilt);font-weight:600;
-}
-.cvmenu span{display:block;font-size:14px;color:var(--parchment-dim);margin-top:3px;line-height:1.4}
-
 .contact{
-  display:flex;flex-wrap:wrap;gap:5px 16px;
+  display:flex;flex-wrap:wrap;gap:4px 15px;
   font-size:14px;color:rgba(195,179,148,.72);
-  margin:0;
+  margin:2px 0 0;padding-top:16px;
+  border-top:1px solid rgba(201,162,39,.16);
 }
 .contact a{text-decoration:none;border-bottom:1px solid rgba(201,162,39,.3);transition:color .25s,border-color .25s}
 .contact a:hover{color:var(--parchment);border-bottom-color:var(--gilt)}
 .contact .sep{opacity:.35}
 
-/* ---- right: the shelf ---- */
+/* ---- right: the alcove and the shelf ---- */
 .stage{
   position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  perspective:1600px;
-  perspective-origin:46% 50%;
+  display:flex;align-items:center;justify-content:center;
+  perspective:1600px;perspective-origin:46% 50%;
   padding:0 clamp(20px,4vw,70px);
   z-index:3;
 }
-.shelf{
+/* the niche: stone arch + the shelf set into it */
+.niche{
   position:relative;
-  width:100%;
-  max-width:1020px;
-  height:var(--shelf-h);
+  width:100%;max-width:1140px;
+  display:flex;justify-content:center;
+}
+.alcove{
+  position:absolute;
+  left:0;right:0;top:-186px;bottom:-46px;
+  z-index:0;pointer-events:none;
+}
+.alcove svg{width:100%;height:100%;display:block}
+
+.shelf{
+  position:relative;z-index:2;
+  width:100%;max-width:1020px;height:var(--shelf-h);
   transform-style:preserve-3d;
   transform:rotateX(4deg) rotateY(-9deg);
 }
-/* back wall of the shelf niche */
+/* soft depth behind the books; the alcove SVG supplies the recess itself */
 .shelf::before{
-  content:'';
-  position:absolute;
-  left:-4%;right:-4%;
-  top:-42px;bottom:-30px;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,.34) 40%, rgba(0,0,0,.8));
-  box-shadow:inset 0 0 90px rgba(0,0,0,.9);
-  transform:translateZ(-140px);
-  border-radius:2px;
+  content:'';position:absolute;
+  left:1%;right:1%;top:-30px;bottom:0;
+  background:radial-gradient(120% 100% at 50% 40%, rgba(0,0,0,.35), rgba(0,0,0,.85));
+  transform:translateZ(-120px);
 }
-/* the plank */
 .plank{
-  position:absolute;
-  left:-5%;right:-5%;
-  bottom:-26px;
-  height:26px;
-  background:
-    linear-gradient(180deg,#6B4C36,#3B2A1E 60%,#20150E);
-  transform:rotateX(72deg);
-  transform-origin:top center;
+  position:absolute;left:-5%;right:-5%;bottom:-26px;height:26px;
+  background:linear-gradient(180deg,#6B4C36,#3B2A1E 60%,#20150E);
+  transform:rotateX(72deg);transform-origin:top center;
   box-shadow:0 -2px 0 rgba(201,162,39,.14), 0 18px 40px rgba(0,0,0,.7);
 }
 .plank::after{
@@ -282,43 +258,30 @@ a{color:inherit}
 }
 
 .row{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  gap:5px;
-  transform-style:preserve-3d;
+  position:absolute;inset:0;
+  display:flex;align-items:flex-end;justify-content:center;
+  gap:5px;transform-style:preserve-3d;
 }
 
 /* ---- a book ---- */
 .book{
-  position:relative;
-  flex:0 0 auto;
-  transform-style:preserve-3d;
-  transform-origin:bottom left;
+  position:relative;flex:0 0 auto;
+  transform-style:preserve-3d;transform-origin:bottom left;
   transition:transform .55s var(--ease), filter .4s;
-  will-change:transform;
-  padding:0;
+  will-change:transform;padding:0;
 }
 .book .face{position:absolute;inset:0;backface-visibility:hidden}
 .book .spine{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:16px 4px;
-  border-radius:2px 3px 3px 2px;
+  display:flex;align-items:center;justify-content:center;
+  padding:16px 4px;border-radius:2px 3px 3px 2px;
   box-shadow:inset -6px 0 12px rgba(0,0,0,.45), inset 3px 0 5px rgba(255,255,255,.08);
 }
 .book .cover{
-  width:190px;
-  left:100%;
-  transform-origin:left center;
-  transform:rotateY(88deg);
+  width:190px;left:100%;
+  transform-origin:left center;transform:rotateY(88deg);
   border-radius:0 3px 3px 0;
   box-shadow:inset 0 0 60px rgba(0,0,0,.4);
 }
-/* gilt bands on the spine */
 .book .spine::before,.book .spine::after{
   content:'';position:absolute;left:5px;right:5px;height:1px;
   background:linear-gradient(90deg,transparent,var(--gilt),transparent);
@@ -326,28 +289,17 @@ a{color:inherit}
 }
 .book .spine::before{top:20px}
 .book .spine::after{bottom:20px}
-
 .book .title{
-  writing-mode:vertical-rl;
-  text-orientation:mixed;
-  transform:rotate(180deg);
-  font-family:var(--display);
-  font-weight:600;
-  font-size:14px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  white-space:nowrap;
+  writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);
+  font-family:var(--display);font-weight:600;font-size:14px;
+  letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;
   text-shadow:0 1px 2px rgba(0,0,0,.55);
 }
-/* count of works, small, under the title on the spine */
 .book .count{
-  position:absolute;bottom:26px;left:0;right:0;
-  text-align:center;font-size:9px;letter-spacing:.1em;
-  color:rgba(255,255,255,.42);
+  position:absolute;bottom:26px;left:0;right:0;text-align:center;
+  font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.42);
   font-family:var(--display);
 }
-
-/* interactive books */
 .book.live{cursor:pointer}
 .book.live:hover,.book.live:focus-visible,.book.live.cursor{
   transform:translateZ(72px) translateY(-16px) rotateY(-27deg);
@@ -355,35 +307,42 @@ a{color:inherit}
   outline:none;
 }
 .book.live:hover .cover,.book.live:focus-visible .cover,.book.live.cursor .cover{transform:rotateY(74deg)}
-
-/* decorative filler spines */
 .book.filler{filter:brightness(.62) saturate(.5);pointer-events:none}
 
-/* books settle onto the shelf on first load */
-@keyframes settle{
-  from{opacity:0;transform:translateY(-26px) rotateZ(-3deg)}
-  to{opacity:1;transform:none}
-}
-.shelf.enter .book{animation:settle .7s var(--ease) backwards}
+@keyframes settle{from{opacity:0;transform:translateY(-26px) rotateZ(-3deg)}to{opacity:1;transform:none}}
+.shelf.enter .book,.shelf.enter .nook{animation:settle .7s var(--ease) backwards}
 
-/* opening animation */
 .book.opening{
   transform:translateZ(340px) translateY(-30px) rotateY(-52deg) !important;
   filter:drop-shadow(0 0 60px rgba(201,162,39,.7));
   transition:transform .72s var(--ease), filter .72s;
 }
-#library.leaving .panel,#library.leaving .topnav,#library.leaving .book:not(.opening),#library.leaving .plank{
+#library.leaving .panel,#library.leaving .topnav,#library.leaving .book:not(.opening),#library.leaving .plank,#library.leaving .nook{
   opacity:0;transition:opacity .45s ease;
 }
 
-/* ---- the hint, shown once ---- */
+/* ---- the book nook: a lit diorama at the end of the row ---- */
+.nook{
+  position:relative;flex:0 0 auto;
+  width:122px;height:244px;
+  transform-style:preserve-3d;
+  filter:drop-shadow(0 0 26px rgba(224,163,70,.30));
+}
+.nook svg{width:100%;height:100%;display:block}
+@keyframes lampflicker{
+  0%,100%{opacity:.92} 18%{opacity:1} 34%{opacity:.78}
+  52%{opacity:.97} 68%{opacity:.83} 84%{opacity:1}
+}
+.nook .flame{animation:lampflicker 5.5s ease-in-out infinite;transform-origin:center}
+.nook .spill{animation:lampflicker 5.5s ease-in-out infinite .3s}
+
+/* ---- the hint ---- */
 .hintbar{
-  position:absolute;left:50%;bottom:clamp(18px,4vh,44px);
-  transform:translateX(-50%);
-  z-index:8;
+  position:absolute;left:50%;bottom:clamp(14px,3vh,34px);
+  transform:translateX(-50%);z-index:8;
   display:flex;align-items:center;gap:10px;
   padding:9px 17px;
-  background:rgba(30,21,13,.86);
+  background:rgba(24,17,10,.9);
   border:1px solid rgba(201,162,39,.26);
   font-size:14px;font-style:italic;color:var(--parchment-dim);
   white-space:nowrap;
@@ -401,155 +360,99 @@ a{color:inherit}
 #petals{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
 #petals.paused *{animation-play-state:paused !important}
 .petal{
-  position:absolute;top:-8vh;
-  width:13px;height:13px;
+  position:absolute;top:-8vh;width:13px;height:13px;
   background:radial-gradient(circle at 32% 28%,var(--petal-2),var(--petal) 70%);
   border-radius:82% 18% 74% 26% / 68% 74% 26% 32%;
-  opacity:0;
-  animation:drift linear infinite;
+  opacity:0;animation:drift linear infinite;
 }
 .petal.far{filter:blur(1.4px);opacity:.5}
 @keyframes drift{
   0%{opacity:0;transform:translate3d(0,0,0) rotate(0deg)}
-  8%{opacity:.75}
-  85%{opacity:.5}
+  8%{opacity:.75} 85%{opacity:.5}
   100%{opacity:0;transform:translate3d(78vw,116vh,0) rotate(660deg)}
 }
 .mote{
-  position:absolute;
-  width:3px;height:3px;border-radius:50%;
-  background:rgba(255,232,180,.85);
-  box-shadow:0 0 5px rgba(255,226,163,.7);
-  opacity:0;
-  animation:float linear infinite;
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:rgba(255,232,180,.85);box-shadow:0 0 5px rgba(255,226,163,.7);
+  opacity:0;animation:float linear infinite;
 }
 @keyframes float{
-  0%{opacity:0;transform:translate3d(0,0,0)}
-  15%{opacity:.5}
-  70%{opacity:.32}
-  100%{opacity:0;transform:translate3d(16vw,-30vh,0)}
+  0%{opacity:0;transform:translate3d(0,0,0)} 15%{opacity:.5}
+  70%{opacity:.32} 100%{opacity:0;transform:translate3d(16vw,-30vh,0)}
 }
 
 /* ============================================================
    CHAPTER (CATEGORY PAGE)
    ============================================================ */
 #chapter{
-  position:fixed;inset:0;z-index:60;
-  display:none;
-  flex-direction:column;
-  background:var(--pg-bg);
-  color:var(--pg-ink);
-  font-family:var(--body);
+  position:fixed;inset:0;z-index:60;display:none;flex-direction:column;
+  background:var(--pg-bg);color:var(--pg-ink);font-family:var(--body);
   overflow-y:auto;
 }
 #chapter.on{display:flex;animation:rise .55s var(--ease)}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 
-/* spine strip — lateral nav, always visible */
 .strip{
   position:sticky;top:0;z-index:5;
   display:flex;align-items:center;gap:6px;
   padding:11px clamp(16px,3vw,40px);
-  background:var(--pg-bar);
-  border-bottom:1px solid var(--pg-line);
-  flex-wrap:wrap;
-  backdrop-filter:blur(6px);
+  background:var(--pg-bar);border-bottom:1px solid var(--pg-line);
+  flex-wrap:wrap;backdrop-filter:blur(6px);
 }
 .strip .back{
-  font-family:var(--display);
-  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  padding:8px 14px;border:1px solid var(--pg-line);
-  margin-right:auto;
-  transition:background .25s;
+  font-family:var(--display);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  padding:8px 14px;border:1px solid var(--pg-line);margin-right:auto;
+  transition:background .25s;text-decoration:none;
 }
 .strip .back:hover{background:var(--pg-line)}
 .chip{
-  font-family:var(--display);
-  font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
-  padding:8px 12px;border-radius:2px;
-  border-left:3px solid var(--chip);
-  background:var(--pg-bar-2);
-  opacity:.62;transition:opacity .25s,transform .25s;
-  text-decoration:none;
+  font-family:var(--display);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:8px 12px;border-radius:2px;border-left:3px solid var(--chip);
+  background:var(--pg-bar-2);opacity:.62;
+  transition:opacity .25s,transform .25s;text-decoration:none;
 }
 .chip:hover{opacity:1;transform:translateY(-2px)}
 .chip[aria-current="page"]{opacity:1;font-weight:700;background:var(--pg-line)}
 
-.chapter-inner{
-  width:100%;max-width:1080px;
-  margin:0 auto;
-  padding:clamp(30px,5vw,64px) clamp(20px,4vw,44px) 40px;
-}
+.chapter-inner{width:100%;max-width:1080px;margin:0 auto;padding:clamp(30px,5vw,64px) clamp(20px,4vw,44px) 40px}
 .chapter-inner h2{
-  font-family:var(--display);
-  font-size:clamp(28px,4vw,46px);
-  font-weight:700;line-height:1.1;
-  margin:0 0 14px;
-  color:var(--pg-accent);
+  font-family:var(--display);font-size:clamp(28px,4vw,46px);
+  font-weight:700;line-height:1.1;margin:0 0 14px;color:var(--pg-accent);
 }
-.chapter-bio{
-  max-width:60ch;margin:0 0 8px;
-  font-size:17px;color:var(--pg-ink);
-}
-.chapter-bio strong{font-weight:600}
-/* the standing bio — who I am, repeated on every category page */
+.chapter-bio{max-width:60ch;margin:0 0 8px;font-size:17px;color:var(--pg-ink)}
 .whoami{
-  max-width:60ch;margin:14px 0 0;
-  padding:13px 0 0;border-top:1px solid var(--pg-line);
+  max-width:60ch;margin:14px 0 0;padding:13px 0 0;
+  border-top:1px solid var(--pg-line);
   font-size:14.5px;color:var(--pg-muted);font-style:italic;
 }
-
 .actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:20px 0 34px}
-.more,.getcv{
-  display:inline-block;
-  font-family:var(--display);font-size:11px;
-  letter-spacing:.16em;text-transform:uppercase;
-  padding:10px 15px;
-  text-decoration:none;
-  transition:background .25s,color .25s;
+.more{
+  display:inline-block;font-family:var(--display);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;padding:10px 15px;
+  text-decoration:none;color:#fff;background:var(--pg-accent);
+  transition:filter .25s;
 }
-.more{color:#fff;background:var(--pg-accent)}
 .more:hover{filter:brightness(1.12)}
-.getcv{color:var(--pg-accent);border:1px solid var(--pg-line)}
-.getcv:hover{background:var(--pg-line)}
 
-/* featured piece — the first thing anyone sees */
 .featured{
-  position:relative;
-  border:1px solid var(--pg-line);
-  border-top:3px solid var(--pg-accent);
-  background:var(--pg-card);
-  padding:26px 28px;
-  margin-bottom:34px;
-  border-radius:2px;
+  position:relative;border:1px solid var(--pg-line);
+  border-top:3px solid var(--pg-accent);background:var(--pg-card);
+  padding:26px 28px;margin-bottom:34px;border-radius:2px;
 }
 .featured .badge{
   position:absolute;top:-1px;right:18px;
   font-family:var(--display);font-size:9.5px;letter-spacing:.2em;
-  text-transform:uppercase;color:#fff;background:var(--pg-accent);
-  padding:5px 10px;
+  text-transform:uppercase;color:#fff;background:var(--pg-accent);padding:5px 10px;
 }
-.featured .yr{
-  font-family:var(--display);font-size:11px;letter-spacing:.2em;
-  color:var(--pg-accent);display:block;margin-bottom:9px;
-}
+.featured .yr{font-family:var(--display);font-size:11px;letter-spacing:.2em;color:var(--pg-accent);display:block;margin-bottom:9px}
 .featured h3{margin:0 0 10px;font-size:clamp(20px,2.6vw,27px);font-weight:600;line-height:1.25}
 .featured p{margin:0;font-size:16.5px;color:var(--pg-muted);max-width:66ch;line-height:1.6}
 
-/* tabs */
-.tabs{
-  display:flex;flex-wrap:wrap;gap:4px;
-  border-bottom:1px solid var(--pg-line);
-  margin-bottom:26px;
-}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--pg-line);margin-bottom:26px}
 .tab{
-  font-family:var(--display);
-  font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
-  padding:11px 15px;
-  border-bottom:2px solid transparent;
-  color:var(--pg-muted);
-  transition:color .25s,border-color .25s;
-  white-space:nowrap;
+  font-family:var(--display);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+  padding:11px 15px;border-bottom:2px solid transparent;color:var(--pg-muted);
+  transition:color .25s,border-color .25s;white-space:nowrap;
 }
 .tab:hover{color:var(--pg-ink)}
 .tab[aria-selected="true"]{color:var(--pg-accent);border-bottom-color:var(--pg-accent);font-weight:700}
@@ -558,54 +461,65 @@ a{color:inherit}
 /* cards */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(272px,1fr));gap:16px}
 .card{
-  background:var(--pg-card);
-  border:1px solid var(--pg-line);
-  border-left:3px solid var(--pg-accent);
-  border-radius:2px;
+  position:relative;
+  background:var(--pg-card);border:1px solid var(--pg-line);
+  border-left:3px solid var(--pg-accent);border-radius:2px;
   padding:18px 20px;
-  transition:transform .3s var(--ease),box-shadow .3s;
+  transition:transform .3s var(--ease),box-shadow .3s,border-color .3s;
   animation:cardIn .45s var(--ease) backwards;
 }
 @keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(0,0,0,.12)}
 .card.big{grid-column:span 2}
 @media(max-width:640px){.card.big{grid-column:span 1}}
-.card .yr{
-  font-family:var(--display);font-size:10.5px;letter-spacing:.2em;
-  color:var(--pg-accent);display:block;margin-bottom:7px;
-}
+.card .yr{font-family:var(--display);font-size:10.5px;letter-spacing:.2em;color:var(--pg-accent);display:block;margin-bottom:7px}
 .card h3{margin:0 0 7px;font-size:17.5px;font-weight:600;line-height:1.3}
 .card p{margin:0;font-size:15px;color:var(--pg-muted);line-height:1.55}
 .card .flag{
-  display:inline-block;margin-top:11px;
-  font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-  padding:3px 8px;border:1px dashed var(--pg-muted);opacity:.75;
+  display:inline-block;margin-top:11px;font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 8px;border:1px dashed var(--pg-muted);opacity:.75;
 }
-.card .go{
-  display:inline-block;margin-top:12px;
-  font-family:var(--display);font-size:10.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--pg-accent);
-  text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;
+
+/* a card that opens a full paper */
+a.card{display:block;text-decoration:none;color:inherit}
+a.card::after{
+  content:'';position:absolute;inset:0;
+  border:1px solid transparent;border-radius:2px;
+  transition:border-color .3s;pointer-events:none;
+}
+a.card:hover,a.card:focus-visible{
+  border-left-width:6px;
+  box-shadow:0 16px 34px rgba(0,0,0,.16);
+}
+a.card:hover::after{border-color:var(--pg-accent)}
+.card .read{
+  display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+  font-family:var(--display);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--pg-accent);font-weight:600;
+}
+.card .read .arrow{transition:transform .3s var(--ease)}
+a.card:hover .read .arrow{transform:translateX(5px)}
+.card .pages{
+  position:absolute;top:16px;right:18px;
+  font-family:var(--display);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--pg-muted);opacity:.7;
 }
 
 /* website cards */
 .sites{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
 .site{
-  border:1px solid var(--pg-line);background:var(--pg-card);
-  border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;
-  display:block;transition:transform .3s var(--ease),box-shadow .3s;
+  border:1px solid var(--pg-line);background:var(--pg-card);border-radius:2px;
+  overflow:hidden;text-decoration:none;color:inherit;display:block;
+  transition:transform .3s var(--ease),box-shadow .3s;
   animation:cardIn .45s var(--ease) backwards;
 }
 .site:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.14)}
 .pin{
   aspect-ratio:16/9;position:relative;overflow:hidden;
-  background:
-    linear-gradient(135deg,var(--pg-bar-2),var(--pg-line)),
-    var(--pg-bar);
+  background:linear-gradient(135deg,var(--pg-bar-2),var(--pg-line)),var(--pg-bar);
   display:flex;align-items:center;justify-content:center;
   font-family:var(--display);font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--pg-muted);
-  border-bottom:1px solid var(--pg-line);
+  text-transform:uppercase;color:var(--pg-muted);border-bottom:1px solid var(--pg-line);
 }
 .pin img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
 .site-meta{padding:15px 17px}
@@ -615,14 +529,172 @@ a{color:inherit}
 .site-meta dd{margin:0;color:var(--pg-muted)}
 .live-dot{color:#2E7D52;font-weight:600}
 
-/* chapter footer — contact, so nobody has to go back to find it */
 .chapter-foot{
-  border-top:1px solid var(--pg-line);
-  margin-top:52px;padding:26px 0 60px;
+  border-top:1px solid var(--pg-line);margin-top:52px;padding:26px 0 60px;
   display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;
   font-size:14.5px;color:var(--pg-muted);
 }
 .chapter-foot a{color:var(--pg-accent);text-decoration:none;border-bottom:1px solid currentColor}
+
+/* ============================================================
+   PAPER — the reading room
+   ============================================================ */
+#paper{
+  position:fixed;inset:0;z-index:80;display:none;
+  background:#F7F2E6;color:#20180F;
+  font-family:var(--body);overflow-y:auto;
+  --pp-accent:#1E5B8F;--pp-line:#DED2B8;--pp-muted:#6B6152;
+}
+#paper.on{display:block;animation:rise .5s var(--ease)}
+.pbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;gap:14px;
+  padding:10px clamp(14px,3vw,32px);
+  background:rgba(247,242,230,.94);
+  border-bottom:1px solid var(--pp-line);
+  backdrop-filter:blur(8px);
+}
+.pbar .back{
+  font-family:var(--display);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 13px;border:1px solid var(--pp-line);text-decoration:none;
+  color:var(--pp-accent);white-space:nowrap;transition:background .25s;
+}
+.pbar .back:hover{background:#EDE4D0}
+.pbar .now{
+  font-size:14px;color:var(--pp-muted);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;
+}
+.pbar .pct{font-family:var(--display);font-size:10.5px;letter-spacing:.14em;color:var(--pp-muted);white-space:nowrap}
+.pprog{position:absolute;left:0;bottom:-1px;height:2px;background:var(--pp-accent);width:0;transition:width .12s linear}
+
+.paper-wrap{
+  display:grid;grid-template-columns:1fr;
+  max-width:1180px;margin:0 auto;
+  padding:clamp(26px,4vw,54px) clamp(18px,4vw,40px) 90px;
+  gap:44px;
+}
+@media(min-width:1100px){ .paper-wrap{grid-template-columns:210px 1fr} }
+
+/* table of contents */
+.ptoc{display:none}
+@media(min-width:1100px){
+  .ptoc{
+    display:block;position:sticky;top:78px;align-self:start;
+    max-height:calc(100vh - 120px);overflow-y:auto;
+    font-size:14px;padding-right:8px;
+  }
+}
+.ptoc b{
+  display:block;font-family:var(--display);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--pp-muted);margin-bottom:12px;font-weight:400;
+}
+.ptoc a{
+  display:block;padding:6px 0 6px 12px;text-decoration:none;
+  color:var(--pp-muted);border-left:2px solid var(--pp-line);
+  line-height:1.35;transition:color .2s,border-color .2s;
+}
+.ptoc a:hover{color:#20180F}
+.ptoc a.here{color:var(--pp-accent);border-left-color:var(--pp-accent);font-weight:600}
+
+article.paper{min-width:0}
+.paper .kicker{
+  font-family:var(--display);font-size:10.5px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--pp-accent);margin:0 0 14px;
+}
+.paper h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(24px,3.3vw,38px);line-height:1.2;
+  margin:0 0 16px;max-width:26ch;
+}
+.paper .byline{font-size:17px;margin:0 0 4px;font-weight:600}
+.paper .meta{
+  margin:18px 0 0;padding:16px 0 0;border-top:1px solid var(--pp-line);
+  display:grid;grid-template-columns:auto 1fr;gap:5px 18px;
+  font-size:14.5px;color:var(--pp-muted);max-width:70ch;
+}
+.paper .meta dt{font-family:var(--display);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding-top:3px}
+.paper .meta dd{margin:0}
+.paper .readtime{
+  display:inline-block;margin-top:16px;font-family:var(--display);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--pp-muted);border:1px solid var(--pp-line);padding:5px 10px;
+}
+.abstract{
+  margin:30px 0 0;padding:24px 26px;
+  background:#EFE7D3;border-left:3px solid var(--pp-accent);border-radius:2px;
+}
+.abstract b{
+  display:block;font-family:var(--display);font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--pp-accent);margin-bottom:10px;font-weight:600;
+}
+.abstract p{margin:0;font-size:16.5px;line-height:1.72;text-align:justify;hyphens:auto}
+.keywords{margin:16px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.keywords span{
+  font-size:12.5px;padding:4px 10px;border:1px solid var(--pp-line);
+  border-radius:2px;color:var(--pp-muted);background:#F2EADA;
+}
+
+.paper h2{
+  font-family:var(--display);font-size:clamp(19px,2.2vw,25px);font-weight:600;
+  margin:52px 0 16px;padding-bottom:9px;border-bottom:1px solid var(--pp-line);
+  scroll-margin-top:76px;
+}
+.paper h3{font-family:var(--display);font-size:16.5px;font-weight:600;margin:32px 0 10px;color:var(--pp-accent)}
+.paper p{font-size:17.5px;line-height:1.78;margin:0 0 18px;max-width:70ch;text-align:justify;hyphens:auto}
+.paper ul,.paper ol{max-width:70ch;font-size:17.5px;line-height:1.72;padding-left:22px;margin:0 0 18px}
+.paper li{margin-bottom:9px}
+.paper .aside{
+  max-width:70ch;margin:0 0 20px;padding:13px 17px;
+  background:#EFE7D3;border-left:2px solid var(--pp-accent);
+  font-size:15.5px;color:var(--pp-muted);
+}
+.paper dl.abbr{
+  max-width:70ch;display:grid;grid-template-columns:auto 1fr;
+  gap:6px 20px;font-size:15.5px;margin:0 0 18px;
+}
+.paper dl.abbr dt{font-weight:600;font-family:var(--display);font-size:13.5px}
+.paper dl.abbr dd{margin:0;color:var(--pp-muted)}
+
+figure.pfig{margin:34px 0;padding:0}
+figure.pfig img{
+  width:100%;height:auto;display:block;border:1px solid var(--pp-line);
+  border-radius:2px;background:#fff;
+}
+figure.pfig figcaption{
+  margin-top:11px;font-size:14.5px;line-height:1.6;
+  color:var(--pp-muted);max-width:78ch;
+}
+.pfig .zoom{
+  display:inline-block;margin-top:7px;font-family:var(--display);
+  font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--pp-accent);text-decoration:none;border-bottom:1px solid currentColor;
+}
+
+.ptable{margin:32px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ptable table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+.ptable th,.ptable td{border:1px solid var(--pp-line);padding:8px 11px;text-align:left}
+.ptable th{background:#EFE7D3;font-family:var(--display);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.ptable tr:nth-child(even) td{background:#FBF7ED}
+.ptable caption{caption-side:bottom;margin-top:11px;font-size:14px;color:var(--pp-muted);text-align:left;line-height:1.6}
+
+ol.refs{max-width:78ch;font-size:15px;line-height:1.62;padding-left:26px;margin:0}
+ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
+
+.poster-view{margin:30px 0 10px}
+.poster-view img{width:100%;height:auto;display:block;border:1px solid var(--pp-line);border-radius:2px;background:#fff;box-shadow:0 14px 40px rgba(0,0,0,.12)}
+.poster-view .zoom{
+  display:inline-block;margin-top:12px;font-family:var(--display);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--pp-accent);border:1px solid var(--pp-line);padding:8px 13px;text-decoration:none;
+}
+.poster-view .zoom:hover{background:#EDE4D0}
+
+.paper-foot{
+  margin-top:60px;padding-top:26px;border-top:1px solid var(--pp-line);
+  display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
+  font-size:14.5px;color:var(--pp-muted);
+}
+.paper-foot a{color:var(--pp-accent);text-decoration:none;border-bottom:1px solid currentColor}
 
 /* ============================================================
    RESPONSIVE
@@ -632,8 +704,9 @@ a{color:inherit}
   #library{grid-template-columns:1fr;height:auto;min-height:100%}
   .topnav{position:static;justify-content:flex-start;padding:14px 22px 0}
   .topnav b{width:100%;margin:0 0 6px}
-  .panel{border-right:0;border-bottom:1px solid rgba(201,162,39,.16);padding:26px 24px 34px}
+  .panel{border-right:0;border-bottom:1px solid rgba(201,162,39,.16);padding:24px 24px 30px}
   .stage{perspective:none;padding:26px 20px 50px;display:block}
+  .alcove{display:none}
   .shelf{height:auto;transform:none}
   .shelf::before,.plank{display:none}
   .row{position:static;display:flex;flex-direction:column;gap:9px}
@@ -645,30 +718,31 @@ a{color:inherit}
   .book .count{position:static;text-align:right;font-size:10px}
   .book.filler{display:none}
   .book.live:hover .spine{filter:brightness(1.14)}
+  .nook{width:100% !important;height:120px !important;margin-top:6px;order:9}
   .hintbar{display:none}
-  .cvmenu{position:static;min-width:0;width:100%}
+  .paper p,.paper ul,.paper ol{text-align:left}
 }
 
 /* ============================================================
-   PRINT — a clean document, not a screenshot of a dark room
+   PRINT
    ============================================================ */
 @media print{
   body{overflow:visible;background:#fff;color:#000;font-size:11pt}
-  #library,#petals,.strip,.actions,.tabs{display:none !important}
+  #library,#petals,.strip,.actions,.tabs,.pbar,.ptoc{display:none !important}
   #chapter{position:static;display:block !important;background:#fff;color:#000;overflow:visible}
-  .chapter-inner{max-width:100%;padding:0}
+  #paper{position:static;background:#fff;overflow:visible}
+  #paper:not(.on){display:none !important}
+  .chapter-inner,.paper-wrap{max-width:100%;padding:0;display:block}
   .chapter-inner h2{color:#000;font-size:22pt}
-  .featured,.card,.site{break-inside:avoid;border:1px solid #bbb;box-shadow:none;animation:none;page-break-inside:avoid}
+  .featured,.card,.site,figure.pfig,.ptable{break-inside:avoid;page-break-inside:avoid;box-shadow:none;animation:none}
+  .card,.site{border:1px solid #bbb;margin-bottom:10pt}
   .grid,.sites{display:block}
-  .card,.site{margin-bottom:10pt}
   .card:hover,.site:hover{transform:none}
+  .paper h2{page-break-after:avoid}
   .print-all{display:block !important}
 }
 .print-all{display:none}
-.print-all h4{
-  font-family:var(--display);font-size:13pt;margin:16pt 0 6pt;
-  border-bottom:1px solid #999;padding-bottom:3pt;
-}
+.print-all h4{font-family:var(--display);font-size:13pt;margin:16pt 0 6pt;border-bottom:1px solid #999;padding-bottom:3pt}
 
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
@@ -697,6 +771,12 @@ a{color:inherit}
     <p class="eyebrow">Portfolio</p>
     <h1>Nicole B.<br>Cabral</h1>
     <div class="rule"></div>
+
+    <div class="portrait" id="portrait">
+      <img src="assets/nicole.jpg" alt="Portrait of Nicole B. Cabral" id="portraitImg">
+      <span class="monogram">NBC</span>
+    </div>
+
     <p class="bio">
       <strong>Certified author, illustrator and designer</strong> under the National Book
       Development Board of the Philippines. Biomedical researcher — BSc in Medical Biology,
@@ -705,41 +785,52 @@ a{color:inherit}
     </p>
     <p class="bio tagline">Five books on the shelf. Pick one.</p>
 
-    <div class="lectern">
-      <div class="cvwrap">
-        <button class="cv" id="cvBtn" aria-expanded="false" aria-haspopup="true">
-          Download CV <span class="caret">▼</span>
-        </button>
-        <div class="cvmenu" id="cvMenu" role="menu" aria-labelledby="cvBtn">
-          <a href="assets/cv/nicole-cabral-research-cv.pdf" download role="menuitem">
-            <strong>Research CV</strong>
-            <span>For supervisors, laboratories and doctoral programmes.</span>
-          </a>
-          <a href="assets/cv/nicole-cabral-creative-cv.pdf" download role="menuitem">
-            <strong>Creative CV</strong>
-            <span>For agencies, publishers and clients.</span>
-          </a>
-          <a href="assets/cv/nicole-cabral-cv.pdf" download role="menuitem">
-            <strong>Full CV</strong>
-            <span>Everything, in one document.</span>
-          </a>
-        </div>
-      </div>
-      <p class="contact">
-        <a href="mailto:nicolebautistacabral@gmail.com">nicolebautistacabral@gmail.com</a>
-        <span class="sep">·</span>
-        <a href="https://linkedin.com/in/nicolebautistacabral" target="_blank" rel="noopener">LinkedIn</a>
-        <span class="sep">·</span>
-        <span>Braga, Portugal &amp; Taguig, Philippines</span>
-      </p>
-    </div>
+    <p class="contact">
+      <a href="mailto:nicolebautistacabral@gmail.com">nicolebautistacabral@gmail.com</a>
+      <span class="sep">·</span>
+      <a href="https://linkedin.com/in/nicolebautistacabral" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="sep">·</span>
+      <span>Braga, Portugal &amp; Taguig, Philippines</span>
+    </p>
   </section>
 
   <section class="stage">
-    <div class="shelf" id="shelf">
-      <div class="plank"></div>
-      <div class="row" id="row" role="group" aria-label="Bookshelf — five categories of work"></div>
+    <div class="niche">
+      <!-- the stone arch the shelf is set into -->
+      <div class="alcove" aria-hidden="true">
+        <svg viewBox="0 0 1140 570" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="stoneBand" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#6A5540"/>
+              <stop offset=".45" stop-color="#43341F"/>
+              <stop offset="1" stop-color="#241A11"/>
+            </linearGradient>
+          </defs>
+          <!-- the recess behind the shelf -->
+          <path d="M64,570 L64,262 C64,168 238,92 500,58 L570,46 L640,58 C902,92 1076,168 1076,262 L1076,570 Z"
+                fill="#0B0703"/>
+          <!-- voussoir band -->
+          <path d="M64,570 L64,262 C64,168 238,92 500,58 L570,46 L640,58 C902,92 1076,168 1076,262 L1076,570"
+                fill="none" stroke="url(#stoneBand)" stroke-width="34" vector-effect="non-scaling-stroke"/>
+          <!-- joints between the stones -->
+          <path d="M64,570 L64,262 C64,168 238,92 500,58 L570,46 L640,58 C902,92 1076,168 1076,262 L1076,570"
+                fill="none" stroke="#150E07" stroke-width="34" stroke-dasharray="2 46"
+                vector-effect="non-scaling-stroke" opacity=".9"/>
+          <!-- keystone -->
+          <path d="M551,30 L589,30 L596,74 L544,74 Z" fill="#5A4630" stroke="#150E07" stroke-width="1.5"
+                vector-effect="non-scaling-stroke"/>
+          <!-- inner shadow lip -->
+          <path d="M82,570 L82,272 C82,186 250,114 506,80 L570,68 L634,80 C890,114 1058,186 1058,272 L1058,570"
+                fill="none" stroke="rgba(0,0,0,.5)" stroke-width="8" vector-effect="non-scaling-stroke"/>
+        </svg>
+      </div>
+
+      <div class="shelf" id="shelf">
+        <div class="plank"></div>
+        <div class="row" id="row" role="group" aria-label="Bookshelf — five categories of work"></div>
+      </div>
     </div>
+
     <div class="hintbar" id="hint">
       Hover a book to explore — or use <kbd>← →</kbd> and <kbd>Enter</kbd>
     </div>
@@ -757,7 +848,6 @@ a{color:inherit}
     <p class="whoami" id="chWho"></p>
     <div class="actions">
       <a class="more" id="moreBtn" href="#/">← I do more than this — back to the library</a>
-      <a class="getcv" id="chCv" href="#" download>Download the relevant CV</a>
     </div>
     <div id="featured"></div>
     <div class="tabs" id="tabs" role="tablist" aria-label="Sub-sections"></div>
@@ -772,17 +862,32 @@ a{color:inherit}
   </div>
 </section>
 
+<!-- ============ PAPER ============ -->
+<section id="paper" aria-label="Paper" tabindex="-1">
+  <div class="pbar">
+    <a class="back" id="pBack" href="#/medical">← Back</a>
+    <span class="now" id="pNow"></span>
+    <span class="pct" id="pPct">0%</span>
+    <span class="pprog" id="pProg"></span>
+  </div>
+  <div class="paper-wrap">
+    <nav class="ptoc" id="pToc" aria-label="Contents"></nav>
+    <article class="paper" id="pBody"></article>
+  </div>
+</section>
+
 <div class="sr" id="live" aria-live="polite"></div>
 
+<script src="papers.js"></script>
 <script>
 /* ============================================================
    CONTENT — edit this object only. The UI reads from it.
-   Items seeded from the CVs; swap in real files/links as you go.
 
    Item fields:  y year · t title · d description
-                 big  → card spans two columns
-                 flag → small dashed note (rights, confidentiality, status)
-                 url  → adds a "View" link on the card
+                 big   → card spans two columns
+                 flag  → small dashed note (rights, confidentiality, status)
+                 url   → adds a "View" link on the card
+                 paper → id in papers.js; makes the whole card open that paper
    ============================================================ */
 const ME = {
   name:'Nicole B. Cabral',
@@ -791,54 +896,51 @@ const ME = {
   who:'Certified author, illustrator and designer (NBDB Philippines). Biomedical researcher — BSc Medical Biology, MSc Biomedicine in progress at Universidade do Minho. Content specialist across healthcare, travel and finance.'
 };
 
-const CV = {
-  research:'assets/cv/nicole-cabral-research-cv.pdf',
-  creative:'assets/cv/nicole-cabral-creative-cv.pdf',
-  full:'assets/cv/nicole-cabral-cv.pdf'
-};
-
 const BOOKS = [
   {
-    id:'medical', title:'Medical', w:62, h:322, cv:'research',
+    id:'medical', title:'Medical', w:62, h:322,
     spine:'linear-gradient(90deg,#123A5E,#1E5B8F 42%,#0E2C48)',
     cover:'linear-gradient(135deg,#F4F8FC,#DCE9F5)',
     theme:{bg:'#F3F7FB',bar:'#E4EDF6',bar2:'#D5E4F1',card:'#FFFFFF',line:'#C6DAEB',ink:'#152C40',muted:'#5C7590',accent:'#1E5B8F'},
-    bio:'Biomedical researcher trained in wet-lab technique and scientific writing. BSc in Medical Biology (De La Salle University-Dasmariñas), MSc in Biomedicine in progress at Universidade do Minho, with a dissertation in neuroscience.',
+    bio:'Biomedical researcher trained in wet-lab technique and scientific writing. BSc in Medical Biology (De La Salle University-Dasmariñas), MSc in Biomedicine in progress at Universidade do Minho, with a dissertation in genetics.',
     featured:{
-      y:'2024 · Bachelor thesis',
-      t:'Clerodendrum quadriloculare extracts on blood glucose and ALT levels',
-      d:'Ethanolic leaf and stem extracts of Bagawak Morado significantly reduced fasting blood glucose in alloxan-induced diabetic Rattus norvegicus compared with untreated and metformin-treated groups. ALT assay showed no hepatotoxicity, indicating the extracts are safe. Full laboratory execution and manuscript, from protocol through statistical analysis.'
+      y:'2026 · Laboratory Rotation Report',
+      t:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain',
+      d:'Characterised the 50-kHz calls emitted by spared-nerve-injury, SHAM and naive Wistar-Han rats across a three-chamber social paradigm. Trained two custom DeepSqueak detector networks, benchmarked them against the built-in detector on precision, recall and F1, and found that call structure shifts with immediate social context — and that the pain-related differences are male-specific. Universidade do Minho, under Juliana Fiúza-Fernandes and Hugo Leite-Almeida.'
     },
     tabs:[
       {name:'Research Papers', items:[
-        {y:'2026',t:'Attention dysregulation and default mode network connectivity during doomscrolling',d:'Masters dissertation proposal and review paper on Gen Z social media users. Universidade do Minho.',flag:'Abstract only until published',big:true},
-        {y:'2024',t:'Recombinant human wild-type G6PD and G6PD Viangchan',d:'Production and differential enzyme activity across variants.'},
+        {y:'2026',t:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain during 3-Chamber Social Paradigm',d:'Laboratory rotation report, Master in Biomedicine. USVs recorded across sociability and social-preference sessions in SNI, SHAM and naive rats, detected with a custom-trained DeepSqueak network and compared by three-way ANOVA.',paper:'usv',big:true},
+        {y:'2026',t:'Attention Dysregulation on Default Mode Network Functional Connectivity during Doomscrolling among Gen Z Social Media Users',d:'Review paper and outline proposal on short-form video consumption, default mode network connectivity and alerting efficiency.',paper:'attention',big:true},
+        {y:'2024',t:'Clerodendrum quadriloculare extracts on blood glucose and ALT',d:'Bachelor thesis. Ethanolic leaf and stem extracts lowered fasting glucose in alloxan-induced diabetic rats, with ALT showing no hepatotoxicity.'},
         {y:'2024',t:'Autoreactive CD8+ T cell exhaustion in slow Type 1 Diabetes',d:'Critique of primary immunology literature.'},
-        {y:'2024',t:'Gene regulation under lactose and tryptophan',d:'Operon-level transcriptional control.'},
         {y:'2021',t:'Microfragmentation for coral rehabilitation, Bolinao reef',d:'Methodological approach to reef restoration.'},
         {y:'2021',t:'Bioremediation using endophytic fungi from Blumea balsamifera',d:'Heavy metal removal from Pasig River water samples.'}
       ]},
       {name:'Presentations', items:[
-        {y:'2024',t:'Diagnostic features of medically important protozoans',d:'Parasitology deck on identification of clinically relevant species.'},
+        {y:'2026',t:'Evaluation of Antimalarial Activity in Plasmodium falciparum',d:'Poster presentation. In vitro maintenance of chloroquine-sensitive 3D7 and chloroquine-resistant Dd2 strains, parasitemia assessment by Giemsa, and chloroquine IC50 susceptibility assays showing a ~28–33× resistance index. ICVS, Universidade do Minho.',paper:'antimalarial',big:true},
+        {y:'2024',t:'Recombinant human wild-type G6PD and G6PD Viangchan',d:'Production and differential enzyme activity across variants.'},
         {y:'2021',t:'SIGN ME UP! — sign language detection app',d:'Top 10 national finalist, The Next Bright Idea competition, Enderun Colleges.',flag:'Also in Writer'},
         {y:'2021',t:'Cigarette smoke filtration prototype',d:'Design and presentation of a smoke purification prototype.'}
       ]},
       {name:'Laboratory', items:[
-        {y:'2024',t:'Human and molecular genetics',d:'Karyotyping, DNA extraction and analysis, PCR, agarose gel electrophoresis, ELISA, Mendelian genetics exercises.',big:true},
+        {y:'2024',t:'Genetics',d:'Covered the basics of DNA extraction; knowledge of PCR but not in practical terms; agarose gel electrophoresis as a simple practical to understand how it works; and knowledge only of ELISA.',big:true},
         {y:'2023',t:'General and medical microbiology, parasitology',d:'Aseptic technique, bacterial culture, incubation, Gram staining, microscopy of human parasites.'},
-        {y:'2023',t:'Evolutionary biology and comparative anatomy',d:'Hands-on dissection of cats and frogs, external anatomical study of sharks, comparative analysis of frog, turtle, chicken and cat skeletons. MOTS Animal Laboratory.'},
+        {y:'2023',t:'Evolutionary biology and comparative anatomy',d:'Hands-on dissection of cats and frogs, external anatomical study of sharks, and comparative analysis of frog, turtle, chicken and cat skeletons. MOTS Animal Laboratory.'},
         {y:'2023',t:'Pharmacology',d:'Drug dosage calculation, prescription analysis, pharmacodynamics.'},
-        {y:'2024',t:'Hospital rotations — St. Luke’s Medical Center, Global City',d:'Chemistry, serology, microscopy, microbiology, phlebotomy, pathology and hematology sections under standard operating procedures.',flag:'Skills only — no patient data'}
+        {y:'2024',t:'Hospital rotations — St. Luke’s Medical Center, Global City',d:'Observed workflow and provided limited assistance across the Chemistry, Serology, Microscopy, Microbiology, Phlebotomy, Pathology and Hematology sections, under standard operating procedures and hospital guidelines.',flag:'Skills only — no patient data'}
       ]},
       {name:'Certifications', items:[
         {y:'2026',t:'Fundamental Neuroscience of Neuroimaging',d:'Johns Hopkins University. Neuroscience through MRI applications.'},
-        {y:'2025',t:'Medical Virtual Assistant Trainee',d:'ProVa. US healthcare systems, HIPAA, EMR/EHR, coding and scribing basics.'},
-        {y:'2026',t:'Peer review training',d:'Universidade do Minho. Proofreading and reviewing life sciences manuscripts.'}
+        {y:'2026',t:'Bioethics and Scientific Integrity Training',d:'Universidade do Minho, ICVS, 2026.'},
+        {y:'2026',t:'FELASA Course Completion',d:'Certified European training programme on animal science — Universidade do Minho, Life and Health Sciences Research Institute.'},
+        {y:'2026',t:'Laboratory Safety Training',d:'Mandatory Practices in Laboratory Safety — Universidade do Minho, Life and Health Sciences Research Institute, 2026.'},
+        {y:'2025',t:'Medical Virtual Assistant Trainee',d:'ProVa. US healthcare systems, HIPAA, EMR/EHR, coding and scribing basics.'}
       ]}
     ]
   },
   {
-    id:'writer', title:'Writer & Author', w:74, h:340, cv:'creative',
+    id:'writer', title:'Writer & Author', w:74, h:340,
     spine:'linear-gradient(90deg,#4A3120,#7C5636 44%,#38230F)',
     cover:'linear-gradient(135deg,#F2E3D0,#DCC3A6)',
     theme:{bg:'#F5EADC',bar:'#EADAC6',bar2:'#DFC9AF',card:'#FDF7EE',line:'#D5BC9E',ink:'#3A2716',muted:'#7A6046',accent:'#7C5636'},
@@ -854,8 +956,8 @@ const BOOKS = [
         {y:'—',t:'Selected poetry and essays',d:'Read here as web text, not screenshots — writing should be readable, not photographed.'}
       ]},
       {name:'Scientific Writing', items:[
-        {y:'2024',t:'Thesis and coursework papers',d:'Seven pieces across genetics, immunology, environmental biology and parasitology.',flag:'Lives in Medical →'},
-        {y:'2026',t:'Peer review',d:'Trained in reviewing life sciences manuscripts — proofreading, comments and suggestions.'},
+        {y:'2026',t:'Laboratory rotation report',d:'Full scientific report on ultrasonic vocalizations in a chronic neuropathic pain model.',flag:'Read it in Medical →'},
+        {y:'2024',t:'Thesis and coursework papers',d:'Papers across genetics, immunology, environmental biology and parasitology.',flag:'Lives in Medical →'},
         {y:'—',t:'Citation systems',d:'AMA, CSE and APA. Mendeley and EndNote Basic. PubMed MeSH search.'}
       ]},
       {name:'Brand & Corporate', items:[
@@ -884,7 +986,7 @@ const BOOKS = [
     ]
   },
   {
-    id:'artist', title:'Artist', w:66, h:308, cv:'creative',
+    id:'artist', title:'Artist', w:66, h:308,
     spine:'linear-gradient(90deg,#5B2E4A,#A8456B 38%,#C8763F 72%,#4A6E6E)',
     cover:'linear-gradient(135deg,#FBF4E9,#F0DCC8)',
     theme:{bg:'#FAF4EA',bar:'#F1E5D5',bar2:'#E7D6C0',card:'#FFFCF7',line:'#DEC9B1',ink:'#3A2A2E',muted:'#7C6660',accent:'#A8456B'},
@@ -918,7 +1020,7 @@ const BOOKS = [
     ]
   },
   {
-    id:'storyteller', title:'Storyteller & Editor', w:58, h:294, cv:'creative',
+    id:'storyteller', title:'Storyteller & Editor', w:58, h:294,
     spine:'linear-gradient(90deg,#6B3A42,#A65D6B 44%,#4E2A30)',
     cover:'linear-gradient(135deg,#F9EBEE,#EBD3D8)',
     theme:{bg:'#F9EFF1',bar:'#F0DDE1',bar2:'#E6CBD1',card:'#FFFAFB',line:'#DEC0C6',ink:'#3D262A',muted:'#7B5C62',accent:'#A65D6B'},
@@ -942,7 +1044,7 @@ const BOOKS = [
     ]
   },
   {
-    id:'web', title:'Website Builder', w:50, h:276, cv:'full',
+    id:'web', title:'Website Builder', w:50, h:276,
     spine:'linear-gradient(90deg,#2E2E2C,#4A4A46 45%,#232321)',
     cover:'linear-gradient(135deg,#F0F0EE,#DDDDD9)',
     theme:{bg:'#F2F2F0',bar:'#E6E6E3',bar2:'#DADAD6',card:'#FFFFFF',line:'#CBCBC6',ink:'#262624',muted:'#6C6C68',accent:'#4A4A46'},
@@ -950,7 +1052,7 @@ const BOOKS = [
     featured:{
       y:'—',
       t:'This portfolio',
-      d:'Hand-built in HTML, CSS and vanilla JavaScript. No framework, no build step, no dependencies beyond two webfonts. The shelf is CSS 3D transforms rather than WebGL, which is why it loads in well under a second on a phone.'
+      d:'Hand-built in HTML, CSS and vanilla JavaScript. No framework, no build step, no dependencies beyond two webfonts. The shelf, the stone arch and the lit book nook are CSS and inline SVG rather than WebGL, which is why the whole hall loads in well under a second on a phone.'
     },
     tabs:[
       {name:'Websites Built', sites:[
@@ -963,9 +1065,7 @@ const BOOKS = [
 ];
 
 /* Filler spines — the rest of the shelf. They exist so the five real books
-   read as a selection out of a library, not as the whole library. Widths and
-   heights are irregular on purpose; a perfectly even row looks like a barcode.
-   PATTERN below sets how many fillers sit before each real book. */
+   read as a selection out of a library, not as the whole library. */
 const FILLER = [
   {w:26,h:300,c:'linear-gradient(90deg,#2B1D14,#42301F,#241810)'},
   {w:34,h:318,c:'linear-gradient(90deg,#3A2A1C,#4F3A26,#2A1D12)'},
@@ -980,12 +1080,9 @@ const FILLER = [
   {w:36,h:334,c:'linear-gradient(90deg,#372718,#4E3823,#281C11)'},
   {w:23,h:288,c:'linear-gradient(90deg,#261B12,#372718,#1D1410)'},
   {w:41,h:316,c:'linear-gradient(90deg,#3F2E1E,#57402A,#2B1F14)'},
-  {w:25,h:274,c:'linear-gradient(90deg,#231910,#342518,#1B1209)'},
-  {w:32,h:322,c:'linear-gradient(90deg,#30231A,#453222,#251A12)'},
-  {w:21,h:298,c:'linear-gradient(90deg,#1D150E,#2C2015,#181008)'}
+  {w:25,h:274,c:'linear-gradient(90deg,#231910,#342518,#1B1209)'}
 ];
-/* fillers before each of the five books, then a tail of leftovers */
-const PATTERN = [2,2,1,2,1];
+const PATTERN = [2,2,1,2,1];   /* fillers before each of the five books */
 
 /* ============================================================
    HELPERS
@@ -998,11 +1095,9 @@ const calm = () => window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 const countWorks = bk => bk.tabs.reduce((n,t)=>n+((t.items||t.sites||[]).length),0);
 
 /* ============================================================
-   BUILD THE SHELF
+   THE SHELF
    ============================================================ */
-const row = $('#row');
-const lib = $('#library');
-const shelf = $('#shelf');
+const row = $('#row'), lib = $('#library'), shelf = $('#shelf');
 
 function fillerEl(f){
   const b=document.createElement('div');
@@ -1016,8 +1111,7 @@ function bookEl(bk){
   const b=document.createElement('a');
   b.className='book live';
   b.href='#/'+bk.id;
-  b.style.width=bk.w+'px'; b.style.height=bk.h+'px';
-  b.style.textDecoration='none';
+  b.style.width=bk.w+'px'; b.style.height=bk.h+'px'; b.style.textDecoration='none';
   b.setAttribute('aria-label',bk.title+' — '+countWorks(bk)+' works');
   b.dataset.id=bk.id;
   b.innerHTML=`
@@ -1027,7 +1121,6 @@ function bookEl(bk){
     </div>
     <div class="face cover" style="background:${bk.cover};height:${bk.h}px"></div>`;
   b.addEventListener('click',e=>{
-    /* let modifier-clicks open a new tab like any normal link */
     if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0) return;
     e.preventDefault();
     openBook(bk.id,b);
@@ -1035,19 +1128,90 @@ function bookEl(bk){
   return b;
 }
 
-/* interleave fillers and real books per PATTERN, leftovers close the row */
+/* the book nook — a lit medieval diorama standing at the end of the row */
+function nookEl(){
+  const d=document.createElement('div');
+  d.className='nook';
+  d.setAttribute('aria-hidden','true');
+  d.innerHTML=`
+  <svg viewBox="0 0 122 244" preserveAspectRatio="xMidYMax meet">
+    <defs>
+      <linearGradient id="nkWood" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#6B4C36"/><stop offset=".45" stop-color="#3B2A1E"/><stop offset="1" stop-color="#20150E"/>
+      </linearGradient>
+      <radialGradient id="nkGlow" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#FFE0A0" stop-opacity=".95"/>
+        <stop offset=".4" stop-color="#E8A94A" stop-opacity=".5"/>
+        <stop offset="1" stop-color="#E8A94A" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="nkSpill" cx=".5" cy="0" r="1">
+        <stop offset="0" stop-color="#FFD48A" stop-opacity=".5"/>
+        <stop offset="1" stop-color="#FFD48A" stop-opacity="0"/>
+      </radialGradient>
+      <clipPath id="nkClip"><rect x="11" y="11" width="100" height="222" rx="2"/></clipPath>
+    </defs>
+
+    <!-- outer case -->
+    <rect x="0" y="0" width="122" height="244" rx="3" fill="url(#nkWood)"/>
+    <rect x="9" y="9" width="104" height="226" rx="2" fill="#0B0704"/>
+
+    <g clip-path="url(#nkClip)">
+      <!-- receding stone arches: the alley -->
+      <path d="M14,233 L14,122 Q14,62 61,44 Q108,62 108,122 L108,233 Z" fill="#2A1F16"/>
+      <path d="M24,233 L24,130 Q24,78 61,62 Q98,78 98,130 L98,233 Z" fill="#1C140D"/>
+      <path d="M34,233 L34,140 Q34,96 61,82 Q88,96 88,140 L88,233 Z" fill="#2E2318"/>
+      <path d="M43,233 L43,150 Q43,114 61,102 Q79,114 79,150 L79,233 Z" fill="#150F09"/>
+
+      <!-- the light at the end of the alley -->
+      <ellipse class="spill" cx="61" cy="176" rx="40" ry="52" fill="url(#nkGlow)"/>
+      <path class="spill" d="M47,150 L75,150 L92,233 L30,233 Z" fill="url(#nkSpill)" opacity=".55"/>
+
+      <!-- cobbled floor -->
+      <g fill="#3A2C1E" opacity=".85">
+        <ellipse cx="40" cy="230" rx="11" ry="4"/><ellipse cx="61" cy="232" rx="12" ry="4"/><ellipse cx="83" cy="230" rx="11" ry="4"/>
+        <ellipse cx="49" cy="221" rx="9" ry="3.4"/><ellipse cx="72" cy="221" rx="9" ry="3.4"/>
+        <ellipse cx="61" cy="213" rx="8" ry="3"/>
+      </g>
+
+      <!-- a little door and window in the alley wall -->
+      <path d="M28,206 L28,176 Q28,166 36,166 Q44,166 44,176 L44,206 Z" fill="#0A0704" opacity=".9"/>
+      <rect x="82" y="168" width="12" height="14" rx="1.5" fill="#FFD98A" opacity=".55"/>
+
+      <!-- the lantern -->
+      <line x1="61" y1="46" x2="61" y2="70" stroke="#6B4C36" stroke-width="1.4"/>
+      <path d="M54,70 L68,70 L70,86 L52,86 Z" fill="#4A3524" stroke="#20150E" stroke-width="1"/>
+      <path class="flame" d="M56,72 L66,72 L67.5,84 L54.5,84 Z" fill="#FFD067"/>
+      <circle class="flame" cx="61" cy="78" r="12" fill="url(#nkGlow)"/>
+    </g>
+
+    <!-- gilt inner lip -->
+    <rect x="9.5" y="9.5" width="103" height="225" rx="2" fill="none" stroke="rgba(201,162,39,.30)" stroke-width="1"/>
+    <!-- shelf title plate -->
+    <rect x="30" y="236" width="62" height="6" rx="1" fill="#2A1D12"/>
+  </svg>`;
+  return d;
+}
+
+/* interleave fillers and real books, then the nook, then the last spines */
 let fi=0;
 BOOKS.forEach((bk,i)=>{
   for(let n=0;n<(PATTERN[i]||1)&&fi<FILLER.length;n++) row.appendChild(fillerEl(FILLER[fi++]));
   row.appendChild(bookEl(bk));
 });
+row.appendChild(nookEl());
 while(fi<FILLER.length) row.appendChild(fillerEl(FILLER[fi++]));
 
-/* stagger the settle-in */
 if(!calm()){
   shelf.classList.add('enter');
   [...row.children].forEach((b,i)=>b.style.animationDelay=(i*55)+'ms');
 }
+
+/* portrait: fall back to a monogram if the photo isn't in place yet */
+const pImg=$('#portraitImg');
+function portraitFallback(){ $('#portrait').classList.add('empty'); if(pImg.parentNode) pImg.remove(); }
+pImg.addEventListener('error',portraitFallback);
+/* the error may already have fired before this script ran */
+if(pImg.complete && pImg.naturalWidth===0) portraitFallback();
 
 /* ---- keyboard: arrow through the shelf ---- */
 const liveBooks = () => [...row.querySelectorAll('.book.live')];
@@ -1061,7 +1225,7 @@ function moveCursor(d){
   dismissHint();
 }
 document.addEventListener('keydown',e=>{
-  if($('#chapter').classList.contains('on')) return;
+  if($('#chapter').classList.contains('on')||$('#paper').classList.contains('on')) return;
   if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();moveCursor(1)}
   if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();moveCursor(-1)}
 });
@@ -1070,7 +1234,6 @@ row.addEventListener('focusout',()=>{
 });
 row.addEventListener('pointerenter',dismissHint);
 
-/* ---- the hint, once per visitor ---- */
 const hint=$('#hint');
 function dismissHint(){
   if(!hint||hint.classList.contains('gone')) return;
@@ -1081,7 +1244,7 @@ try{ if(localStorage.getItem('nbc-hint')) hint.remove(); }catch(_){}
 setTimeout(dismissHint,9000);
 
 /* ============================================================
-   PETALS & DUST — upper left, and paused when nobody is looking
+   PETALS & DUST
    ============================================================ */
 const petalBox=$('#petals');
 if(!calm()){
@@ -1096,7 +1259,6 @@ if(!calm()){
     p.style.transform='scale('+(.55+Math.random()*.75)+')';
     petalBox.appendChild(p);
   }
-  /* dust motes rising through the light shaft */
   for(let i=0;i<14;i++){
     const m=document.createElement('div');
     m.className='mote';
@@ -1107,22 +1269,15 @@ if(!calm()){
     m.style.animationDelay=(-Math.random()*dur)+'s';
     petalBox.appendChild(m);
   }
-  /* stop burning battery in a background tab */
-  document.addEventListener('visibilitychange',()=>{
-    petalBox.classList.toggle('paused',document.hidden);
-  });
+  document.addEventListener('visibilitychange',()=>petalBox.classList.toggle('paused',document.hidden));
 }
 
 /* ============================================================
-   CHAPTER PAGES
+   ROUTER
    ============================================================ */
-const ch=$('#chapter');
-const strip=$('#strip');
-const tabsEl=$('#tabs');
-const panelEl=$('#panel');
-const featEl=$('#featured');
-const liveRegion=$('#live');
-let current=null, currentTab=0;
+const ch=$('#chapter'), strip=$('#strip'), tabsEl=$('#tabs'), panelEl=$('#panel'),
+      featEl=$('#featured'), liveRegion=$('#live'), paperEl=$('#paper');
+let current=null;
 
 function openBook(id,el){
   const bk=BOOKS.find(b=>b.id===id);
@@ -1131,16 +1286,12 @@ function openBook(id,el){
     el.classList.add('opening');
     lib.classList.add('leaving');
     setTimeout(()=>{
-      el.classList.remove('opening');
-      lib.classList.remove('leaving');
+      el.classList.remove('opening'); lib.classList.remove('leaving');
       go(bk.id,0);
     },560);
-  } else {
-    go(bk.id,0);
-  }
+  } else go(bk.id,0);
 }
 
-/* ---- routing: every view has a URL ---- */
 function go(id,tabIndex){
   const bk=BOOKS.find(b=>b.id===id);
   const t=bk?bk.tabs[tabIndex]:null;
@@ -1149,6 +1300,14 @@ function go(id,tabIndex){
 
 function route(){
   const parts=(location.hash||'').replace(/^#\/?/,'').split('/').filter(Boolean);
+
+  if(parts[0]==='paper' && parts[1] && PAPERS[parts[1]]){
+    closeChapter(true);
+    paintPaper(parts[1]);
+    return;
+  }
+  closePaper();
+
   const bk=BOOKS.find(b=>b.id===parts[0]);
   if(!bk){ closeChapter(); return; }
   let ti=0;
@@ -1160,9 +1319,12 @@ function route(){
 }
 window.addEventListener('hashchange',route);
 
+/* ============================================================
+   CATEGORY PAGE
+   ============================================================ */
 function paint(bk,tabIndex){
   const first = current!==bk;
-  current=bk; currentTab=tabIndex;
+  current=bk;
   const t=bk.theme;
   ch.style.setProperty('--pg-bg',t.bg);
   ch.style.setProperty('--pg-bar',t.bar);
@@ -1179,15 +1341,9 @@ function paint(bk,tabIndex){
   $('#chWho').textContent=ME.who;
   document.title=bk.title+' — '+ME.name;
 
-  const cvLink=$('#chCv');
-  cvLink.href=CV[bk.cv]||CV.full;
-  cvLink.textContent='Download '+(bk.cv==='research'?'research':bk.cv==='creative'?'creative':'full')+' CV';
-
-  /* lateral nav — real links, so they work with middle-click and back button */
   strip.innerHTML='<a class="back" href="#/">← Return to the library</a>'+
     BOOKS.map(b=>`<a class="chip" href="#/${b.id}" style="--chip:${b.theme.accent}" ${b.id===bk.id?'aria-current="page"':''}>${esc(b.title)}</a>`).join('');
 
-  /* featured piece */
   featEl.innerHTML = bk.featured ? `
     <section class="featured">
       <span class="badge">Featured</span>
@@ -1197,28 +1353,21 @@ function paint(bk,tabIndex){
       ${bk.featured.flag?`<span class="flag" style="display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px dashed ${t.muted};opacity:.75">${esc(bk.featured.flag)}</span>`:''}
     </section>` : '';
 
-  /* tabs */
   tabsEl.innerHTML=bk.tabs.map((tb,i)=>{
     const n=(tb.items||tb.sites||[]).length;
     return `<button class="tab" role="tab" id="tab-${i}" aria-selected="${i===tabIndex}" aria-controls="panel" tabindex="${i===tabIndex?0:-1}" data-i="${i}">${esc(tb.name)}<span class="n">${n}</span></button>`;
   }).join('');
-  tabsEl.querySelectorAll('.tab').forEach(btn=>{
-    btn.onclick=()=>go(bk.id,+btn.dataset.i);
-  });
+  tabsEl.querySelectorAll('.tab').forEach(btn=>{ btn.onclick=()=>go(bk.id,+btn.dataset.i); });
   panelEl.setAttribute('aria-labelledby','tab-'+tabIndex);
 
   renderTab(bk,tabIndex);
   buildPrint(bk);
 
-  if(!ch.classList.contains('on')){
-    ch.classList.add('on');
-    ch.focus();
-  }
+  if(!ch.classList.contains('on')){ ch.classList.add('on'); ch.focus(); }
   if(first) ch.scrollTop=0;
   liveRegion.textContent=bk.title+', '+bk.tabs[tabIndex].name+' — '+(bk.tabs[tabIndex].items||bk.tabs[tabIndex].sites||[]).length+' entries';
 }
 
-/* tablist keyboard pattern */
 tabsEl.addEventListener('keydown',e=>{
   const tabs=[...tabsEl.querySelectorAll('.tab')];
   const i=tabs.indexOf(document.activeElement);
@@ -1229,19 +1378,37 @@ tabsEl.addEventListener('keydown',e=>{
   if(e.key==='Home') n=0;
   if(e.key==='End') n=tabs.length-1;
   if(n===null) return;
-  e.preventDefault();
-  tabs[n].focus(); tabs[n].click();
+  e.preventDefault(); tabs[n].focus(); tabs[n].click();
 });
 
+function wordCount(p){
+  let n=(p.abstract||'').split(/\s+/).length;
+  (p.blocks||[]).forEach(b=>{
+    if(b.p) n+=b.p.split(/\s+/).length;
+    if(b.list) b.list.forEach(x=>n+=x.split(/\s+/).length);
+    if(b.ol) b.ol.forEach(x=>n+=x.split(/\s+/).length);
+  });
+  return n;
+}
+
 function cardHTML(it,i){
-  return `
-    <article class="card${it.big?' big':''}" style="animation-delay:${Math.min(i*40,320)}ms">
-      <span class="yr">${esc(it.y)}</span>
-      <h3>${esc(it.t)}</h3>
-      <p>${esc(it.d)}</p>
-      ${it.flag?`<span class="flag">${esc(it.flag)}</span>`:''}
-      ${it.url?`<a class="go" href="${esc(it.url)}" target="_blank" rel="noopener">View →</a>`:''}
-    </article>`;
+  const inner=`
+    <span class="yr">${esc(it.y)}</span>
+    <h3>${esc(it.t)}</h3>
+    <p>${esc(it.d)}</p>
+    ${it.flag?`<span class="flag">${esc(it.flag)}</span>`:''}`;
+  if(it.paper && PAPERS[it.paper]){
+    const p=PAPERS[it.paper];
+    const mins=Math.max(1,Math.round(wordCount(p)/220));
+    const kind=p.poster?'View the poster':'Read the full paper';
+    return `<a class="card${it.big?' big':''}" href="#/paper/${it.paper}" style="animation-delay:${Math.min(i*40,320)}ms">
+      <span class="pages">${mins} min</span>${inner}
+      <span class="read">${kind} <span class="arrow">→</span></span>
+    </a>`;
+  }
+  return `<article class="card${it.big?' big':''}" style="animation-delay:${Math.min(i*40,320)}ms">
+    ${inner}${it.url?`<a class="read" href="${esc(it.url)}" target="_blank" rel="noopener">View <span class="arrow">→</span></a>`:''}
+  </article>`;
 }
 
 function renderTab(bk,i){
@@ -1264,7 +1431,6 @@ function renderTab(bk,i){
   panelEl.innerHTML='<div class="grid">'+tb.items.map(cardHTML).join('')+'</div>';
 }
 
-/* every tab flattened into the printed page */
 function buildPrint(bk){
   $('#printAll').innerHTML = bk.tabs.map(tb=>{
     const rows=(tb.items||[]).map(it=>`<p><strong>${esc(it.y)} — ${esc(it.t)}</strong><br>${esc(it.d)}</p>`).join('')
@@ -1273,38 +1439,134 @@ function buildPrint(bk){
   }).join('');
 }
 
-function closeChapter(){
+function closeChapter(keepCurrent){
   if(!ch.classList.contains('on')) return;
   ch.classList.remove('on');
-  document.title='Nicole B. Cabral — Portfolio';
-  document.querySelector('meta[name="theme-color"]').setAttribute('content','#171009');
-  const back=current&&document.querySelector('.book.live[data-id="'+current.id+'"]');
-  if(back) back.focus();
-  current=null;
+  if(!keepCurrent){
+    document.title='Nicole B. Cabral — Portfolio';
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#171009');
+    const back=current&&document.querySelector('.book.live[data-id="'+current.id+'"]');
+    if(back) back.focus();
+    current=null;
+  }
 }
 
 $('#moreBtn').addEventListener('click',e=>{ e.preventDefault(); history.pushState(null,'','#/'); route(); });
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'&&ch.classList.contains('on')){ history.pushState(null,'','#/'); route(); }
+  if(e.key!=='Escape') return;
+  if(paperEl.classList.contains('on')){ history.back(); return; }
+  if(ch.classList.contains('on')){ history.pushState(null,'','#/'); route(); }
 });
 
-/* ---- CV menu ---- */
-const cvBtn=$('#cvBtn'), cvMenu=$('#cvMenu');
-cvBtn.addEventListener('click',e=>{
-  e.stopPropagation();
-  const open=cvMenu.classList.toggle('on');
-  cvBtn.setAttribute('aria-expanded',String(open));
-});
-document.addEventListener('click',e=>{
-  if(!cvMenu.contains(e.target)&&e.target!==cvBtn){
-    cvMenu.classList.remove('on'); cvBtn.setAttribute('aria-expanded','false');
+/* ============================================================
+   PAPER VIEW
+   ============================================================ */
+const pBody=$('#pBody'), pToc=$('#pToc'), pBack=$('#pBack'), pNow=$('#pNow'),
+      pProg=$('#pProg'), pPct=$('#pPct');
+
+function blockHTML(b,heads){
+  if(b.h){ const id='s-'+slug(b.h); heads.push({id,label:b.h}); return `<h2 id="${id}">${esc(b.h)}</h2>`; }
+  if(b.h3) return `<h3>${esc(b.h3)}</h3>`;
+  if(b.p) return `<p>${b.p}</p>`;
+  if(b.note) return `<p class="aside">${b.note}</p>`;
+  if(b.list) return '<ul>'+b.list.map(x=>`<li>${x}</li>`).join('')+'</ul>';
+  if(b.ol) return '<ol>'+b.ol.map(x=>`<li>${x}</li>`).join('')+'</ol>';
+  if(b.defs) return '<dl class="abbr">'+b.defs.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')+'</dl>';
+  if(b.fig) return `<figure class="pfig">
+      <img src="${esc(b.fig)}" alt="${esc(b.cap||'Figure')}" loading="lazy">
+      <figcaption>${b.cap||''}<br><a class="zoom" href="${esc(b.fig)}" target="_blank" rel="noopener">Open full size ↗</a></figcaption>
+    </figure>`;
+  if(b.table){
+    const t=b.table;
+    return `<div class="ptable"><table>
+      <caption>${t.cap||''}</caption>
+      <thead><tr>${t.head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead>
+      <tbody>${t.rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody>
+    </table></div>`;
   }
-});
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'&&cvMenu.classList.contains('on')){
-    cvMenu.classList.remove('on'); cvBtn.setAttribute('aria-expanded','false'); cvBtn.focus();
-  }
-});
+  if(b.refs) return '<ol class="refs">'+b.refs.map(r=>`<li>${esc(r)}</li>`).join('')+'</ol>';
+  return '';
+}
+
+function paintPaper(id){
+  const p=PAPERS[id];
+  const bk=BOOKS.find(b=>b.id===p.cat);
+  const accent=bk?bk.theme.accent:'#1E5B8F';
+  paperEl.style.setProperty('--pp-accent',accent);
+
+  const tabIdx=bk?bk.tabs.findIndex(t=>t.name===p.tab):-1;
+  pBack.href = bk ? ('#/'+bk.id+(tabIdx>0?'/'+slug(p.tab):'')) : '#/';
+  pBack.textContent = '← '+(p.tab||'Back');
+  pNow.textContent = p.title;
+  document.title = p.title+' — '+ME.name;
+  document.querySelector('meta[name="theme-color"]').setAttribute('content',accent);
+
+  const heads=[];
+  const body=(p.blocks||[]).map(b=>blockHTML(b,heads)).join('');
+  const mins=Math.max(1,Math.round(wordCount(p)/220));
+
+  pBody.innerHTML=`
+    <p class="kicker">${esc(p.kicker||'')}</p>
+    <h1>${esc(p.title)}</h1>
+    <p class="byline">${esc(p.author||'')}</p>
+    ${p.meta?`<dl class="meta">${p.meta.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`:''}
+    <span class="readtime">${mins} min read</span>
+    ${p.poster?`<div class="poster-view">
+        <img src="${esc(p.poster.img)}" alt="${esc(p.poster.alt||p.title)}">
+        <a class="zoom" href="${esc(p.poster.img)}" target="_blank" rel="noopener">Open the poster full size ↗</a>
+      </div>`:''}
+    ${p.abstract?`<div class="abstract"><b>Abstract</b><p>${p.abstract}</p></div>`:''}
+    ${p.keywords?`<div class="keywords">${p.keywords.map(k=>`<span>${esc(k)}</span>`).join('')}</div>`:''}
+    ${body}
+    <footer class="paper-foot">
+      <span>${esc(ME.name)}</span>
+      <a href="mailto:${ME.email}">${ME.email}</a>
+      <a href="${pBack.getAttribute('href')}">← Back to ${esc(p.tab||'the library')}</a>
+      <a href="#/">Return to the library</a>
+    </footer>`;
+
+  pToc.innerHTML = heads.length
+    ? '<b>Contents</b>'+heads.map(h=>`<a href="#${h.id}" data-t="${h.id}">${esc(h.label)}</a>`).join('')
+    : '';
+
+  paperEl.classList.add('on');
+  paperEl.scrollTop=0;
+  paperEl.focus();
+  indexHeads(heads);
+  updateProgress();
+  liveRegion.textContent='Opened paper: '+p.title;
+}
+
+/* which section am I in? the last heading that has passed the top of the view */
+let headEls=[], tocLinks=[];
+function indexHeads(heads){
+  headEls=heads.map(h=>document.getElementById(h.id)).filter(Boolean);
+  tocLinks=[...pToc.querySelectorAll('a')];
+}
+function markSection(){
+  if(!headEls.length) return;
+  const line=paperEl.scrollTop+90;
+  let active=headEls[0].id;
+  for(const el of headEls){ if(el.offsetTop<=line) active=el.id; else break; }
+  tocLinks.forEach(l=>l.classList.toggle('here', l.dataset.t===active));
+}
+
+function updateProgress(){
+  const max=paperEl.scrollHeight-paperEl.clientHeight;
+  const pct=max>0?Math.min(100,Math.round(paperEl.scrollTop/max*100)):0;
+  pProg.style.width=pct+'%';
+  pPct.textContent=pct+'%';
+  markSection();
+}
+paperEl.addEventListener('scroll',updateProgress,{passive:true});
+/* figures load late and shift offsets — recheck once they settle */
+window.addEventListener('load',()=>{ if(paperEl.classList.contains('on')) updateProgress(); });
+
+function closePaper(){
+  if(!paperEl.classList.contains('on')) return;
+  paperEl.classList.remove('on');
+  headEls=[]; tocLinks=[];
+}
 
 /* ---- go ---- */
 route();

@@ -3,8 +3,11 @@
 An interactive library. Five books on a shelf, one per body of work: **Medical**,
 **Writer & Author**, **Artist**, **Storyteller & Editor**, **Website Builder**.
 
-Single file, no build step, no dependencies beyond two Google webfonts.
+Two files, no build step, no dependencies beyond two Google webfonts.
 Open `index.html` in a browser and it runs.
+
+- `index.html` — the hall, the shelf, the category pages, the paper reader
+- `papers.js` — the full text of each research paper and poster
 
 ---
 
@@ -46,6 +49,27 @@ The Website Builder book uses `sites` instead of `items`:
 Leave `img` empty and the card shows a 16:9 placeholder. `status:'Live'` renders
 a green dot; anything else prints as plain text.
 
+### Papers that open as their own page
+
+Add `paper:'<id>'` to any item and the whole card becomes clickable, opening
+that paper at its own URL (`#/paper/<id>`) as a full reading page — never as a
+download. The `<id>` must match a key in `papers.js`.
+
+```js
+{ y:'2026', t:'Paper title', d:'One-line summary.', paper:'usv', big:true }
+```
+
+Inside `papers.js`, a paper is a title block plus an array of content blocks:
+`{h:'Heading'}`, `{h3:'Sub-heading'}`, `{p:'Paragraph'}`, `{list:[…]}`,
+`{ol:[…]}`, `{defs:[[term,meaning],…]}`, `{fig:'path', cap:'caption'}`,
+`{table:{cap,head,rows}}`, `{note:'aside'}` and `{refs:[…]}`. The reader builds
+the contents sidebar, the reading-time estimate and the progress bar from that
+structure automatically. Every word in those blocks is the author's own and is
+reproduced exactly as written.
+
+Set `poster:{img:'…', alt:'…'}` instead of an abstract for poster presentations —
+the image is shown large at the top, with the transcribed text below it.
+
 ### The featured block
 
 Each book has a `featured` object — one hero piece shown above the tabs, before
@@ -61,25 +85,37 @@ that don't exist yet:
 
 ```
 assets/
-  cv/
-    nicole-cabral-research-cv.pdf     ← for supervisors, labs, doctoral programmes
-    nicole-cabral-creative-cv.pdf     ← for agencies, publishers, clients
-    nicole-cabral-cv.pdf              ← everything, one document
-  sites/                              ← 16:9 screenshots for the website cards
-  og-cover.jpg                        ← 1200×630, shown when the link is shared
+  nicole.jpg          ← the portrait under your name (portrait crop, ≥600px wide)
+  sites/              ← 16:9 screenshots for the website cards
+  og-cover.jpg        ← 1200×630, shown when the link is shared
 ```
 
-The Download CV button on the homepage offers all three. Each category page
-offers whichever one fits it — Medical serves the research CV, Artist and Writer
-serve the creative one.
+Until `assets/nicole.jpg` exists the portrait frame shows an `NBC` monogram
+instead — nothing breaks, it just waits for the file.
+
+Already in place:
+
+```
+assets/papers/
+  antimalarial-poster.jpg         the poster, rendered from the PDF
+  usv-fig1.jpg … usv-fig9.jpg     the nine figures from the rotation report
+```
+
+There is no Download CV button. The work itself is the portfolio; add one back
+in the left panel if you later want the PDFs offered alongside it.
 
 ---
 
 ## What's built in
 
-**Navigation.** Every view has its own URL — `#/medical`, `#/writer/brand-and-corporate`.
-The browser back button works, links are shareable, and a category page can be
-sent to someone directly.
+**Navigation.** Every view has its own URL — `#/medical`,
+`#/writer/brand-and-corporate`, `#/paper/usv`. The browser back button works,
+links are shareable, and a single paper can be sent to a supervisor directly.
+
+**The hall.** A stone masonry wall in running bond, a voussoired arch with a
+keystone framing the shelf, torchlight falling from the upper left, and a lit
+book nook standing at the end of the row — all CSS and inline SVG, no images,
+no WebGL.
 
 **Three ways in.** The 3D shelf, the plain text menu at the top right, and
 arrow keys plus Enter. The shelf is a front door, not a maze — anyone who
@@ -92,8 +128,12 @@ link knows immediately there are four more.
 **Motion that behaves.** Petals and dust pause in a background tab and disappear
 entirely under `prefers-reduced-motion`.
 
+**The reading room.** Papers open as typeset web pages: a contents sidebar that
+tracks your position, a reading-progress bar, figures with their captions, real
+HTML tables, and a numbered reference list.
+
 **Print.** Ctrl+P on a category page produces a clean document with every tab
-flattened into it, not a screenshot of a dark room.
+flattened into it, not a screenshot of a dark room. Papers print as papers.
 
 **Accessibility.** Skip link, keyboard navigation through the shelf, the ARIA
 tablist pattern with arrow keys, live-region announcements, focus returned to
@@ -116,3 +156,7 @@ directory is the root. Push to deploy.
 - Name the signature illustration style
 - Real screenshots and URLs for the website cards
 - Confirm reprint rights on the two published book covers
+- Drop `assets/nicole.jpg` in place of the monogram
+- Remaining research papers: the *Clerodendrum* thesis, the CD8+ T cell critique,
+  the coral rehabilitation and bioremediation papers — add each to `papers.js`
+  and set `paper:'<id>'` on its card
