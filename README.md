@@ -85,21 +85,24 @@ that don't exist yet:
 
 ```
 assets/
-  nicole.jpg          ← the portrait under your name (portrait crop, ≥600px wide)
   sites/              ← 16:9 screenshots for the website cards
   og-cover.jpg        ← 1200×630, shown when the link is shared
 ```
 
-Until `assets/nicole.jpg` exists the portrait frame shows an `NBC` monogram
-instead — nothing breaks, it just waits for the file.
-
 Already in place:
 
 ```
-assets/papers/
-  antimalarial-poster.jpg         the poster, rendered from the PDF
-  usv-fig1.jpg … usv-fig9.jpg     the nine figures from the rotation report
+assets/
+  nicole.jpg                      the portrait, cropped 5:6 to the arched frame
+  papers/
+    antimalarial-poster.jpg       the poster, rendered from the PDF
+    usv-fig1.jpg … usv-fig9.jpg   the nine figures from the rotation report
 ```
+
+If `assets/nicole.jpg` is ever missing the frame falls back to an `NBC`
+monogram rather than a broken image. The warm overlay that blends the studio
+green into the hall lives in `.portrait::after` — lower those opacities to
+leave the photo as shot.
 
 There is no Download CV button. The work itself is the portfolio; add one back
 in the left panel if you later want the PDFs offered alongside it.
@@ -156,7 +159,6 @@ directory is the root. Push to deploy.
 - Name the signature illustration style
 - Real screenshots and URLs for the website cards
 - Confirm reprint rights on the two published book covers
-- Drop `assets/nicole.jpg` in place of the monogram
 - Remaining research papers: the *Clerodendrum* thesis, the CD8+ T cell critique,
   the coral rehabilitation and bioremediation papers — add each to `papers.js`
   and set `paper:'<id>'` on its card

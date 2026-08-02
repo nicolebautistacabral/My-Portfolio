@@ -180,14 +180,17 @@ a{color:inherit}
 }
 .portrait img{
   width:100%;height:100%;object-fit:cover;object-position:50% 22%;
-  display:block;filter:saturate(.94) contrast(1.02);
+  display:block;filter:saturate(.9) contrast(1.03);
   font-size:0;color:transparent;   /* never show raw alt text if the file is missing */
 }
-/* warm light falling across the portrait, matching the hall */
+/* warm light falling across the portrait, matching the hall.
+   Dial the opacities down if you want the studio green left as shot. */
 .portrait::after{
   content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(126deg, rgba(255,214,140,.16), transparent 55%),
-             radial-gradient(120% 100% at 50% 108%, rgba(0,0,0,.45), transparent 60%);
+  background:
+    linear-gradient(126deg, rgba(255,214,140,.20), rgba(255,214,140,.05) 45%, transparent 62%),
+    radial-gradient(80% 70% at 50% 34%, transparent 42%, rgba(28,18,9,.5) 100%),
+    radial-gradient(120% 100% at 50% 108%, rgba(0,0,0,.42), transparent 58%);
 }
 .portrait .monogram{
   position:absolute;inset:0;display:none;
