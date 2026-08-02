@@ -450,6 +450,16 @@ a{color:inherit}
 .featured .yr{font-family:var(--display);font-size:11px;letter-spacing:.2em;color:var(--pg-accent);display:block;margin-bottom:9px}
 .featured h3{margin:0 0 10px;font-size:clamp(20px,2.6vw,27px);font-weight:600;line-height:1.25}
 .featured p{margin:0;font-size:16.5px;color:var(--pg-muted);max-width:66ch;line-height:1.6}
+/* a featured image fills the box edge to edge, below the title */
+.featured .shot{
+  display:block;margin:18px -28px -26px;
+  border-top:1px solid var(--pg-line);background:var(--pg-bar);
+}
+.featured .shot img{width:100%;height:auto;display:block}
+.featured .shot .cap{
+  display:block;padding:10px 28px 12px;font-size:13.5px;color:var(--pg-muted);line-height:1.5;
+}
+@media(max-width:640px){.featured .shot{margin:16px -20px -18px}.featured .shot .cap{padding:9px 20px 10px}}
 
 .tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--pg-line);margin-bottom:26px}
 .tab{
@@ -907,30 +917,37 @@ const BOOKS = [
     theme:{bg:'#F3F7FB',bar:'#E4EDF6',bar2:'#D5E4F1',card:'#FFFFFF',line:'#C6DAEB',ink:'#152C40',muted:'#5C7590',accent:'#1E5B8F'},
     bio:'Biomedical researcher trained in wet-lab technique and scientific writing. BSc in Medical Biology (De La Salle University-Dasmariñas), MSc in Biomedicine in progress at Universidade do Minho, with a dissertation in genetics.',
     featured:{
-      y:'2026 · Laboratory Rotation Report',
+      y:'2026 · Laboratory Rotation Report · Universidade do Minho',
       t:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain',
-      d:'Characterised the 50-kHz calls emitted by spared-nerve-injury, SHAM and naive Wistar-Han rats across a three-chamber social paradigm. Trained two custom DeepSqueak detector networks, benchmarked them against the built-in detector on precision, recall and F1, and found that call structure shifts with immediate social context — and that the pain-related differences are male-specific. Universidade do Minho, under Juliana Fiúza-Fernandes and Hugo Leite-Almeida.'
+      img:'assets/papers/usv-deepsqueak.jpg',
+      alt:'DeepSqueak spectrogram detections across the raw audio, the built-in Rat Detector, and the two custom-trained networks',
+      cap:'DeepSqueak detections across four audio candidates — raw audio, the built-in Rat Detector YOLO R1, and the two custom-trained networks RD-V1 and RD-V2.'
     },
     tabs:[
       {name:'Research Papers', items:[
         {y:'2026',t:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain during 3-Chamber Social Paradigm',d:'Laboratory rotation report, Master in Biomedicine. USVs recorded across sociability and social-preference sessions in SNI, SHAM and naive rats, detected with a custom-trained DeepSqueak network and compared by three-way ANOVA.',paper:'usv',big:true},
         {y:'2026',t:'Attention Dysregulation on Default Mode Network Functional Connectivity during Doomscrolling among Gen Z Social Media Users',d:'Review paper and outline proposal on short-form video consumption, default mode network connectivity and alerting efficiency.',paper:'attention',big:true},
-        {y:'2024',t:'Clerodendrum quadriloculare extracts on blood glucose and ALT',d:'Bachelor thesis. Ethanolic leaf and stem extracts lowered fasting glucose in alloxan-induced diabetic rats, with ALT showing no hepatotoxicity.'},
-        {y:'2024',t:'Autoreactive CD8+ T cell exhaustion in slow Type 1 Diabetes',d:'Critique of primary immunology literature.'},
-        {y:'2021',t:'Microfragmentation for coral rehabilitation, Bolinao reef',d:'Methodological approach to reef restoration.'},
-        {y:'2021',t:'Bioremediation using endophytic fungi from Blumea balsamifera',d:'Heavy metal removal from Pasig River water samples.'}
+        {y:'2024',t:'Effects of Clerodendrum quadriloculare Ethanolic Leaf and Stem Extracts on Blood Glucose and ALT Levels',d:'Bachelor thesis, published as a journal article. Ethanolic leaf and stem extracts of Bagawak Morado lowered fasting glucose in alloxan-induced diabetic Sprague Dawley rats, outperforming metformin, with ALT showing no hepatotoxicity.',paper:'clerodendrum',big:true},
+        {y:'2023',t:'A Critique Paper on Autoreactive CD8+ T Cell Exhaustion Distinguishes Subjects with Slow Type 1 Diabetes Progression',d:'Section-by-section critique of a Journal of Clinical Investigation paper, scored against a structured rubric across abstract, introduction, literature, methodology, results, discussion and conclusion.',paper:'cd8',big:true},
+        {y:'2021',t:'The Implementation of Microfragmentation as a Methodological Approach for Coral Rehabilitation in Bolinao Coral Reef System',d:'Methodological proposal for restoring the Bolinao-Anda reef complex — donor site selection, species identification, fragmentation and nursery transfer.',paper:'coral',big:true},
+        {y:'2021',t:'Bioremediation of Heavy Metal Polluted Water Samples from Pasig River Using Endophytic Fungi Isolated from Blumea balsamifera (L.)',d:'Practical research on mycoremediation — isolating endophytic fungi from Sambong leaves and screening their biosorption capacity against Langmuir and Freundlich isotherm models.',paper:'bioremediation',big:true},
+        {y:'2021',t:'SIGN ME UP! — sign language detection app',d:'Top 10 national finalist, The Next Bright Idea competition, Enderun Colleges.',flag:'Paper to be added'},
+        {y:'2021',t:'Cigarette smoke filtration prototype',d:'Design and testing of a smoke purification prototype.',flag:'Paper to be added'}
       ]},
       {name:'Presentations', items:[
         {y:'2026',t:'Evaluation of Antimalarial Activity in Plasmodium falciparum',d:'Poster presentation. In vitro maintenance of chloroquine-sensitive 3D7 and chloroquine-resistant Dd2 strains, parasitemia assessment by Giemsa, and chloroquine IC50 susceptibility assays showing a ~28–33× resistance index. ICVS, Universidade do Minho.',paper:'antimalarial',big:true},
-        {y:'2024',t:'Recombinant human wild-type G6PD and G6PD Viangchan',d:'Production and differential enzyme activity across variants.'},
-        {y:'2021',t:'SIGN ME UP! — sign language detection app',d:'Top 10 national finalist, The Next Bright Idea competition, Enderun Colleges.',flag:'Also in Writer'},
-        {y:'2021',t:'Cigarette smoke filtration prototype',d:'Design and presentation of a smoke purification prototype.'}
+        {y:'2026',t:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain',d:'Presented alongside the written report — the DeepSqueak pipeline, network training and validation, and the USV parameters across the three-chamber paradigm.',paper:'usv',big:true},
+        {y:'2024',t:'Recombinant human wild-type G6PD and G6PD Viangchan',d:'Production and differential enzyme activity across variants.',url:'https://canva.link/yhgbfaxyq0649jg'}
       ]},
       {name:'Laboratory', items:[
-        {y:'2024',t:'Genetics',d:'Covered the basics of DNA extraction; knowledge of PCR but not in practical terms; agarose gel electrophoresis as a simple practical to understand how it works; and knowledge only of ELISA.',big:true},
+        {y:'2026',t:'Genetics',d:'Applied genetics rather than theory alone — worked through case study briefs that take a clinical or population scenario and require the underlying inheritance, variant interpretation and consequence to be reasoned out and defended. Master in Biomedicine, Universidade do Minho.',big:true},
+        {y:'2026',t:'Biostatistics',d:'Statistical analysis in SPSS: preparing and coding datasets, choosing tests against the shape of the data, running descriptive and inferential procedures, and reading the output back into a defensible interpretation rather than a p-value alone. Master in Biomedicine, Universidade do Minho.',big:true},
+        {y:'2026',t:'FELASA',d:'Certified European training in laboratory animal science — suturing, handling and restraint, animal husbandry, welfare assessment and the ethical and legal framework governing animal experimentation. Universidade do Minho, Life and Health Sciences Research Institute.',big:true},
+        {y:'2024',t:'Genetics Laboratory',d:'Covered the basics of DNA extraction; knowledge of PCR but not in practical terms; agarose gel electrophoresis as a simple practical to understand how it works; and knowledge only of ELISA.'},
         {y:'2023',t:'General and medical microbiology, parasitology',d:'Aseptic technique, bacterial culture, incubation, Gram staining, microscopy of human parasites.'},
         {y:'2023',t:'Evolutionary biology and comparative anatomy',d:'Hands-on dissection of cats and frogs, external anatomical study of sharks, and comparative analysis of frog, turtle, chicken and cat skeletons. MOTS Animal Laboratory.'},
         {y:'2023',t:'Pharmacology',d:'Drug dosage calculation, prescription analysis, pharmacodynamics.'},
+        {y:'2021–2024',t:'Fundamentals of Botany · Fundamentals of Zoology · Systematics Biology · Evolutionary Biology and Comparative Anatomy · Environmental Biology and Ecology · General Physiology · Biomolecules',d:'The core laboratory sequence of the BS Biology (Medical Biology) curriculum at De La Salle University-Dasmariñas, taken as a three-year compressed programme. Plant and animal structure worked through dissection and specimen preparation; classification and phylogeny built from morphological keys; organ-system function traced through physiology practicals; and the chemistry of carbohydrates, lipids, proteins and nucleic acids established by qualitative assay — with field and laboratory work in ecology alongside.',big:true},
         {y:'2024',t:'Hospital rotations — St. Luke’s Medical Center, Global City',d:'Observed workflow and provided limited assistance across the Chemistry, Serology, Microscopy, Microbiology, Phlebotomy, Pathology and Hematology sections, under standard operating procedures and hospital guidelines.',flag:'Skills only — no patient data'}
       ]},
       {name:'Certifications', items:[
@@ -949,9 +966,11 @@ const BOOKS = [
     theme:{bg:'#F5EADC',bar:'#EADAC6',bar2:'#DFC9AF',card:'#FDF7EE',line:'#D5BC9E',ink:'#3A2716',muted:'#7A6046',accent:'#7C5636'},
     bio:'Four published books, a national authorship certification, and commercial copy for startups and agencies. I write across registers — peer-reviewed, literary, and brand.',
     featured:{
-      y:'2025 · Arbitrail',
-      t:'Built a startup BPO’s entire written voice from nothing',
-      d:'Joined a company with no brand tone and left it with one. Developed the voice, then wrote everything it touched: onboarding handbook, service catalog, website copy, slide decks, one-pagers, video scripts, and the materials for their stand at Business Show Asia 2025 in Singapore. Ran B2B and B2C content across healthcare, travel and finance while the company repositioned into general outsourcing — refining service descriptions directly with the Manager, COO and CEO.'
+      y:'Published · Ukiyoto Publishing &amp; KM and H Black Paper Forest',
+      t:'Book one title · Book two title',
+      img:'assets/books.jpg',
+      alt:'The two published books',
+      flag:'Send the two titles and the cover image — placeholder until then'
     },
     tabs:[
       {name:'Books & Literary', items:[
@@ -964,7 +983,7 @@ const BOOKS = [
         {y:'—',t:'Citation systems',d:'AMA, CSE and APA. Mendeley and EndNote Basic. PubMed MeSH search.'}
       ]},
       {name:'Brand & Corporate', items:[
-        {y:'2025',t:'Arbitrail — brand tone and service catalog',d:'Built the voice for a startup BPO from scratch, working with the Manager, COO and CEO.',big:true},
+        {y:'2025',t:'Arbitrail — brand tone and service catalog',d:'Honed and shaped the written voice of a startup BPO, refining the tone and the service catalog in coordination with the Manager, COO and CEO.',big:true},
         {y:'2025',t:'Arbitrail — onboarding handbook',d:'Full internal handbook for new staff.',flag:'Confidential — described, not shown'},
         {y:'2025',t:'Arbitrail — website copy',d:'Information architecture and copy through a company repositioning.'},
         {y:'2025',t:'Zencreatif — Ten Twenty Five Cafe',d:'Food and beverage promotional copy.'},
@@ -980,8 +999,7 @@ const BOOKS = [
         {y:'2025',t:'Flyers, posters and one-pagers',d:'Print collateral for client-facing and internal use.'}
       ]},
       {name:'Decks & Scripts', items:[
-        {y:'2025',t:'Arbitrail slide decks and video scripts',d:'Client-facing and internal presentation collateral, plus scripts for video.'},
-        {y:'2021',t:'SIGN ME UP!',d:'Accessibility technology proposal — top 10 nationally.'}
+        {y:'2025',t:'Arbitrail slide decks and video scripts',d:'Client-facing and internal presentation collateral, plus scripts for video.'}
       ]},
       {name:'Certifications', items:[
         {y:'2021',t:'Certified Author, Illustrator and Designer',d:'National Book Development Board of the Philippines.'}
@@ -1352,13 +1370,19 @@ function paint(bk,tabIndex){
   strip.innerHTML='<a class="back" href="#/">← Return to the library</a>'+
     BOOKS.map(b=>`<a class="chip" href="#/${b.id}" style="--chip:${b.theme.accent}" ${b.id===bk.id?'aria-current="page"':''}>${esc(b.title)}</a>`).join('');
 
-  featEl.innerHTML = bk.featured ? `
+  const f=bk.featured;
+  featEl.innerHTML = f ? `
     <section class="featured">
       <span class="badge">Featured</span>
-      <span class="yr">${esc(bk.featured.y)}</span>
-      <h3>${esc(bk.featured.t)}</h3>
-      <p>${esc(bk.featured.d)}</p>
-      ${bk.featured.flag?`<span class="flag" style="display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px dashed ${t.muted};opacity:.75">${esc(bk.featured.flag)}</span>`:''}
+      <span class="yr">${esc(f.y)}</span>
+      <h3>${esc(f.t)}</h3>
+      ${f.d?`<p>${esc(f.d)}</p>`:''}
+      ${f.flag?`<span class="flag" style="display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px dashed ${t.muted};opacity:.75">${esc(f.flag)}</span>`:''}
+      ${f.img?`<span class="shot">
+          <img src="${esc(f.img)}" alt="${esc(f.alt||f.t)}" loading="lazy"
+               onerror="this.closest('.shot').remove()">
+          ${f.cap?`<span class="cap">${esc(f.cap)}</span>`:''}
+        </span>`:''}
     </section>` : '';
 
   tabsEl.innerHTML=bk.tabs.map((tb,i)=>{

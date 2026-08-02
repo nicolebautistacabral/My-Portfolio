@@ -76,6 +76,11 @@ Each book has a `featured` object — one hero piece shown above the tabs, befor
 anything else. Attention is highest in the first three seconds; spend it on your
 strongest work in that category.
 
+Give it `img` (plus optional `alt` and `cap`) and the image runs edge to edge
+across the bottom of the box. Add `d` for a description, or leave it out and let
+the picture carry the block. If the image file is missing the frame removes
+itself rather than showing a broken image.
+
 ---
 
 ## Files you still need to add
@@ -159,6 +164,8 @@ directory is the root. Push to deploy.
 - Name the signature illustration style
 - Real screenshots and URLs for the website cards
 - Confirm reprint rights on the two published book covers
-- Remaining research papers: the *Clerodendrum* thesis, the CD8+ T cell critique,
-  the coral rehabilitation and bioremediation papers — add each to `papers.js`
-  and set `paper:'<id>'` on its card
+- **The two book titles and a cover image** for the Writer featured block —
+  currently a placeholder; drop the image at `assets/books.jpg`
+- **SIGN ME UP!** and the **cigarette smoke filtration prototype** papers —
+  both cards sit in Medical → Research Papers flagged "Paper to be added";
+  add each to `papers.js` and set `paper:'<id>'` on its card
