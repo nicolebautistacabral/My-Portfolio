@@ -101,8 +101,14 @@ assets/
   nicole.jpg                      the portrait, cropped 5:6 to the arched frame
   papers/
     antimalarial-poster.jpg       the poster, rendered from the PDF
+    usv-deepsqueak.jpg            the DeepSqueak sample, the Medical hero image
     usv-fig1.jpg … usv-fig9.jpg   the nine figures from the rotation report
+    clero-table1.jpg, -table2.jpg the two thesis result tables
+    biorem-fig1.jpg, -fig2.jpg    the bioremediation conceptual framework
 ```
+
+Seven papers are readable in full at `#/paper/<id>`: `usv`, `attention`,
+`antimalarial`, `clerodendrum`, `cd8`, `coral`, `bioremediation`.
 
 If `assets/nicole.jpg` is ever missing the frame falls back to an `NBC`
 monogram rather than a broken image. The warm overlay that blends the studio
