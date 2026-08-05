@@ -732,6 +732,188 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 .paper-foot a{color:var(--pp-accent);text-decoration:none;border-bottom:1px solid currentColor}
 
 /* ============================================================
+   SCRAPBOOK — a soft, page-flipping reading room
+   ============================================================ */
+#scrapbook{
+  position:fixed;inset:0;z-index:80;display:none;flex-direction:column;
+  overflow-y:auto;font-family:var(--body);
+  background:
+    radial-gradient(120% 90% at 15% 0%, rgba(255,214,214,.55), transparent 55%),
+    radial-gradient(100% 80% at 100% 100%, rgba(230,200,180,.5), transparent 60%),
+    linear-gradient(160deg,#FBEEE6,#F3DCCF);
+  color:#3A2716;
+}
+#scrapbook.on{display:flex;animation:rise .5s var(--ease)}
+.sb-petals{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.sb-petals.paused *{animation-play-state:paused !important}
+
+.sb-bar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;gap:14px;
+  padding:10px clamp(14px,3vw,32px);
+  background:rgba(251,238,230,.88);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(122,96,70,.18);
+}
+.sb-bar .back{
+  font-family:var(--display);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 13px;border:1px solid rgba(122,96,70,.3);text-decoration:none;
+  color:#7C5636;white-space:nowrap;transition:background .25s;
+}
+.sb-bar .back:hover{background:rgba(122,96,70,.1)}
+.sb-bar .now{font-size:14px;color:#7A6046;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+
+.sb-inner{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:clamp(26px,4vw,54px) clamp(16px,4vw,32px) 80px;width:100%}
+.sb-kicker{font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#A8456B;margin:0 0 12px}
+.sb-inner h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,40px);
+  line-height:1.15;margin:0 0 12px;
+}
+.sb-intro{font-size:16.5px;color:#7A6046;max-width:62ch;margin:0 0 30px;font-style:italic}
+
+.sb-hero{
+  margin:0 0 44px;border-radius:8px;overflow:hidden;
+  box-shadow:0 18px 40px rgba(90,60,40,.22);border:1px solid rgba(255,255,255,.6);
+}
+.sb-hero img{width:100%;height:auto;display:block}
+.sb-hero .cap{display:block;padding:12px 18px;font-size:14px;color:#7A6046;background:rgba(255,255,255,.6);text-align:center}
+.sb-hero.pending{
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
+  aspect-ratio:16/10;background:repeating-linear-gradient(135deg,rgba(122,96,70,.06) 0 14px,rgba(122,96,70,.1) 14px 28px);
+  font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A7B5E;text-align:center;padding:20px;
+}
+
+/* the book */
+.flipbook-wrap{display:flex;flex-direction:column;align-items:center;gap:22px}
+.flipbook{
+  position:relative;width:100%;max-width:520px;aspect-ratio:5/6.6;
+  perspective:2200px;
+}
+.flipbook::before{
+  /* the binding — a soft shadow spine along the left edge */
+  content:'';position:absolute;left:-3px;top:2%;bottom:2%;width:14px;z-index:5;
+  background:linear-gradient(90deg,rgba(0,0,0,.18),transparent);
+  pointer-events:none;
+}
+.leaf{
+  position:absolute;inset:0;
+  transform-style:preserve-3d;transform-origin:left center;
+  transform:rotateY(0deg);
+  will-change:transform;
+}
+.leaf.flipped{animation:pageFlip .85s cubic-bezier(.4,.1,.2,1) forwards}
+.leaf.unflipping{animation:pageUnflip .85s cubic-bezier(.4,.1,.2,1) forwards}
+@keyframes pageFlip{
+  0%{transform:rotateY(0deg) translateZ(0)}
+  45%{transform:rotateY(-92deg) translateZ(60px)}
+  100%{transform:rotateY(-180deg) translateZ(0)}
+}
+@keyframes pageUnflip{
+  0%{transform:rotateY(-180deg) translateZ(0)}
+  55%{transform:rotateY(-92deg) translateZ(60px)}
+  100%{transform:rotateY(0deg) translateZ(0)}
+}
+.leaf-face{
+  position:absolute;inset:0;backface-visibility:hidden;
+  border-radius:3px;overflow:hidden;
+  background:
+    repeating-linear-gradient(90deg, rgba(139,109,76,.035) 0 1px, transparent 1px 3px),
+    radial-gradient(140% 100% at 0% 0%, rgba(255,255,255,.5), transparent 55%),
+    linear-gradient(155deg,#F2E6CE,#E9D8B8 60%,#E3CFA8);
+  box-shadow:0 10px 26px rgba(80,55,30,.28), inset 0 0 0 1px rgba(139,109,76,.18);
+  padding:clamp(20px,4vw,38px) clamp(20px,4vw,34px);
+  display:flex;flex-direction:column;
+}
+.leaf-face::after{
+  /* gutter shadow near the spine */
+  content:'';position:absolute;left:0;top:0;bottom:0;width:34px;
+  background:linear-gradient(90deg,rgba(90,60,30,.16),transparent);
+  pointer-events:none;
+}
+.leaf-face::before{
+  /* subtle grain */
+  content:'';position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+}
+.leafnum{
+  position:absolute;bottom:14px;right:20px;z-index:1;
+  font-family:var(--display);font-size:10.5px;letter-spacing:.1em;color:#9A7B5E;
+}
+.leaf-scroll{position:relative;z-index:1;overflow-y:auto;flex:1;padding-right:4px}
+
+.leaf .ptitle{
+  position:relative;z-index:1;
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  letter-spacing:.06em;font-size:clamp(19px,2.6vw,25px);color:#8A4B3E;
+  margin:0 0 22px;text-align:center;
+}
+.verse{position:relative;z-index:1;font-style:italic;font-size:clamp(16px,2.1vw,19px);line-height:1.95;color:#4A3A2E;flex:1;display:flex;flex-direction:column;justify-content:center}
+.verse .stanza{margin-bottom:1.5em}
+.verse .stanza:last-child{margin-bottom:0}
+.verse .ln{display:block;white-space:nowrap}
+.verse .i0{margin-left:0}
+.verse .i1{margin-left:2.4em}
+.verse .i2{margin-left:4.6em}
+.verse .i3{margin-left:6.8em}
+.essay p{position:relative;z-index:1;font-size:15px;line-height:1.75;margin:0 0 14px;color:#4A3A2E;text-align:justify;hyphens:auto}
+
+.pin-img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:2px}
+
+.flip-controls{display:flex;align-items:center;gap:16px}
+.flip-controls button{
+  font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;
+  cursor:pointer;transition:transform .2s,opacity .2s;
+}
+.flip-controls button:disabled{opacity:.35;cursor:default}
+#sbBack{
+  font-size:11px;color:#7C5636;border:1px solid rgba(122,96,70,.35);padding:9px 14px;background:transparent;
+}
+#sbBack:not(:disabled):hover{background:rgba(122,96,70,.08)}
+#sbFlip{
+  font-size:13px;color:#fff;background:linear-gradient(160deg,#A8456B,#7C5636);
+  padding:13px 30px;border-radius:30px;box-shadow:0 10px 22px rgba(122,70,80,.35);
+}
+#sbFlip:not(:disabled):hover{transform:translateY(-2px)}
+.sb-count{font-family:var(--display);font-size:11px;letter-spacing:.1em;color:#9A7B5E;min-width:56px;text-align:center}
+
+/* ============================================================
+   REEL GALLERY — embedded video/reel pages
+   ============================================================ */
+#reelgallery{
+  position:fixed;inset:0;z-index:80;display:none;flex-direction:column;overflow-y:auto;
+  font-family:var(--body);background:var(--pg-bg,#F9EFF1);
+}
+#reelgallery.on{display:flex;animation:rise .5s var(--ease)}
+.rg-bar{
+  position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:14px;
+  padding:10px clamp(14px,3vw,32px);background:var(--pg-bar,#F9EFF1);
+  border-bottom:1px solid var(--pg-line,#DEC0C6);backdrop-filter:blur(8px);
+}
+.rg-bar .back{
+  font-family:var(--display);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 13px;border:1px solid var(--pg-line,#DEC0C6);text-decoration:none;
+  color:var(--pg-accent,#A65D6B);white-space:nowrap;
+}
+.rg-bar .back:hover{background:var(--pg-line,#DEC0C6)}
+.rg-bar .now{font-size:14px;color:var(--pg-muted,#7B5C62);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rg-inner{max-width:1080px;margin:0 auto;padding:clamp(26px,4vw,54px) clamp(16px,4vw,32px) 80px;width:100%;background:var(--pg-bg,#F9EFF1);flex:1}
+.rg-inner h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,38px);color:var(--pg-ink,#3D262A);margin:0 0 12px}
+.rg-note{font-size:16.5px;color:var(--pg-muted,#7B5C62);max-width:62ch;margin:0 0 34px}
+.rg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.rg-clip{background:var(--pg-card,#fff);border:1px solid var(--pg-line,#DEC0C6);border-radius:6px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.08)}
+.rg-clip .frame{position:relative;background:#000;display:flex;align-items:center;justify-content:center}
+.rg-clip .frame iframe{display:block;max-width:100%}
+.rg-clip .label{padding:10px 14px;font-family:var(--display);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pg-accent,#A65D6B)}
+
+/* the embedded video in a featured panel */
+.fb-embed-wrap{
+  margin:18px -28px -26px;border-top:1px solid var(--pg-line);
+  position:relative;width:calc(100% + 56px);
+  padding-bottom:56.1%;height:0;overflow:hidden;background:#000;
+}
+.fb-embed-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media(max-width:640px){.fb-embed-wrap{margin:16px -20px -18px;width:calc(100% + 40px)}}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media(max-width:900px){
@@ -914,9 +1096,46 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
   </div>
 </section>
 
+<!-- ============ SCRAPBOOK (flip-through reading pages) ============ -->
+<section id="scrapbook" aria-label="Scrapbook" tabindex="-1">
+  <div class="sb-petals" id="sbPetals" aria-hidden="true"></div>
+  <div class="sb-bar">
+    <a class="back" id="sbBackLink" href="#/writer">← Back</a>
+    <span class="now" id="sbNow"></span>
+  </div>
+  <div class="sb-inner">
+    <p class="sb-kicker" id="sbKicker">Scrapbook</p>
+    <h1 id="sbTitle"></h1>
+    <p class="sb-intro" id="sbIntro"></p>
+    <div id="sbHero"></div>
+    <div class="flipbook-wrap">
+      <div class="flipbook" id="flipbook"></div>
+      <div class="flip-controls">
+        <button id="sbBack" aria-label="Previous page">‹ Back</button>
+        <span class="sb-count" id="sbCount"></span>
+        <button id="sbFlip">Flip</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REEL GALLERY (embedded video pages) ============ -->
+<section id="reelgallery" aria-label="Reel gallery" tabindex="-1">
+  <div class="rg-bar">
+    <a class="back" id="rgBackLink" href="#/storyteller">← Back</a>
+    <span class="now" id="rgNow"></span>
+  </div>
+  <div class="rg-inner">
+    <h1 id="rgTitle"></h1>
+    <p class="rg-note" id="rgNote"></p>
+    <div class="rg-grid" id="rgGrid"></div>
+  </div>
+</section>
+
 <div class="sr" id="live" aria-live="polite"></div>
 
 <script src="papers.js"></script>
+<script src="extras.js"></script>
 <script>
 /* ============================================================
    CONTENT — edit this object only. The UI reads from it.
@@ -1000,7 +1219,7 @@ const BOOKS = [
     tabs:[
       {name:'Books & Literary', items:[
         {y:'2021',t:'Published books: An Art of Words and Universal Quest',d:'Two collections of poetry and prose, released through Ukiyoto Publishing (Canada) and KM and H Black Paper Forest (Philippines).',big:true},
-        {y:'—',t:'Selected poetry and essays',d:'Read here as web text, not screenshots — writing should be readable, not photographed.'}
+        {y:'—',t:'Selected poetry and essays',d:'A few poems and a spoken-word essay, read here as they were written — not photographed.',scrapbook:'writing-samples',big:true}
       ]},
       {name:'Scientific Writing', items:[
         {y:'2026',t:'Laboratory rotation report',d:'Full scientific report on ultrasonic vocalizations in a chronic neuropathic pain model.',flag:'Read it in Medical →'},
@@ -1039,8 +1258,6 @@ const BOOKS = [
     bio:'Certified illustrator and designer. Two published book covers, a signature illustration style, and design work for small businesses and book campaigns.',
     featured:{
       y:'2021 · Published',
-      t:'Book cover design for Ukiyoto Publishing',
-      d:'Full cover layout and illustration for a published title — the work behind the National Book Development Board certification. Drop the cover image here at 1200px wide and let it carry the section.',
       flag:'Add artwork — this is the strongest thing you have'
     },
     tabs:[
@@ -1070,22 +1287,16 @@ const BOOKS = [
     spine:'linear-gradient(90deg,#6B3A42,#A65D6B 44%,#4E2A30)',
     cover:'linear-gradient(135deg,#F9EBEE,#EBD3D8)',
     theme:{bg:'#F9EFF1',bar:'#F0DDE1',bar2:'#E6CBD1',card:'#FFFAFB',line:'#DEC0C6',ink:'#3D262A',muted:'#7B5C62',accent:'#A65D6B'},
-    bio:'I edit video the way I write — for pacing. Storytelling reels, business short-form, and stage performance across 2021 to 2025.',
+    bio:'I edit video the way I write — for pacing. Storytelling performance and stage work, 2021 to 2025.',
     featured:{
       y:'2021–2025',
-      t:'Spoken word, on stage and on camera',
-      d:'Open mic performance at CAPO MNL and gallery events, and creative storytelling video built around written excerpts. The through-line across every section of this portfolio is the same one: take something written and find the pace that makes people stay for it.',
-      flag:'Embed one reel here — this section needs to be seen, not read'
+      t:'Storytelling Performance Video',
+      d:'Video editing, acting and performance, act direction, and the spoken words themselves — all produced by me.',
+      embed:'<iframe src="https://www.facebook.com/plugins/video.php?height=314&href='+encodeURIComponent('https://www.facebook.com/share/v/1cdD1KXReA/')+'&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'
     },
     tabs:[
       {name:'Storytelling Reels', items:[
-        {y:'2023',t:'Creative storytelling videos',d:'Original video built around written excerpts and book content, for Facebook and Instagram.',big:true},
-        {y:'2021–2025',t:'Open mic performance',d:'CAPO MNL and gallery events. Spoken word and stage work.'}
-      ]},
-      {name:'Video Editing', items:[
-        {y:'2025',t:'Short-form employee interviews',d:'Scripted, shot and cut for internal and brand channels.',flag:'Consent needed on camera'},
-        {y:'2024',t:'Small business short-form',d:'TikTok content for laundry and food businesses, end to end.'},
-        {y:'—',t:'Tools',d:'CapCut and Filmora.'}
+        {y:'2021–2025',t:'Open mic performance',d:'CAPO MNL and gallery events. Spoken word and stage work, watched here as embedded reels.',reels:'open-mic',big:true}
       ]}
     ]
   },
@@ -1276,7 +1487,8 @@ function moveCursor(d){
   dismissHint();
 }
 document.addEventListener('keydown',e=>{
-  if($('#chapter').classList.contains('on')||$('#paper').classList.contains('on')) return;
+  if($('#chapter').classList.contains('on')||$('#paper').classList.contains('on')
+     ||$('#scrapbook').classList.contains('on')||$('#reelgallery').classList.contains('on')) return;
   if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();moveCursor(1)}
   if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();moveCursor(-1)}
 });
@@ -1327,7 +1539,8 @@ if(!calm()){
    ROUTER
    ============================================================ */
 const ch=$('#chapter'), strip=$('#strip'), tabsEl=$('#tabs'), panelEl=$('#panel'),
-      featEl=$('#featured'), liveRegion=$('#live'), paperEl=$('#paper');
+      featEl=$('#featured'), liveRegion=$('#live'), paperEl=$('#paper'),
+      scrapEl=$('#scrapbook'), reelEl=$('#reelgallery');
 let current=null;
 
 function openBook(id,el){
@@ -1353,11 +1566,21 @@ function route(){
   const parts=(location.hash||'').replace(/^#\/?/,'').split('/').filter(Boolean);
 
   if(parts[0]==='paper' && parts[1] && PAPERS[parts[1]]){
-    closeChapter(true);
+    closeChapter(true); closeScrapbook(); closeReels();
     paintPaper(parts[1]);
     return;
   }
-  closePaper();
+  if(parts[0]==='scrapbook' && parts[1] && SCRAPBOOKS[parts[1]]){
+    closeChapter(true); closePaper(); closeReels();
+    paintScrapbook(parts[1]);
+    return;
+  }
+  if(parts[0]==='reels' && parts[1] && REELS[parts[1]]){
+    closeChapter(true); closePaper(); closeScrapbook();
+    paintReels(parts[1]);
+    return;
+  }
+  closePaper(); closeScrapbook(); closeReels();
 
   const bk=BOOKS.find(b=>b.id===parts[0]);
   if(!bk){ closeChapter(); return; }
@@ -1408,6 +1631,7 @@ function paint(bk,tabIndex){
                onerror="this.closest('.shot').remove()">
           ${f.cap?`<span class="cap">${esc(f.cap)}</span>`:''}
         </span>`:''}
+      ${f.embed?`<div class="fb-embed-wrap">${f.embed}</div>`:''}
     </section>` : '';
 
   tabsEl.innerHTML=bk.tabs.map((tb,i)=>{
@@ -1463,6 +1687,22 @@ function cardHTML(it,i){
       <span class="read">${kind} <span class="arrow">→</span></span>
     </a>`;
   }
+  if(it.scrapbook && SCRAPBOOKS[it.scrapbook]){
+    const sb=SCRAPBOOKS[it.scrapbook];
+    const n=sb.pages.length;
+    return `<a class="card${it.big?' big':''}" href="#/scrapbook/${it.scrapbook}" style="animation-delay:${Math.min(i*40,320)}ms">
+      <span class="pages">${n} page${n===1?'':'s'}</span>${inner}
+      <span class="read">Turn the pages <span class="arrow">→</span></span>
+    </a>`;
+  }
+  if(it.reels && REELS[it.reels]){
+    const rg=REELS[it.reels];
+    const n=rg.clips.length;
+    return `<a class="card${it.big?' big':''}" href="#/reels/${it.reels}" style="animation-delay:${Math.min(i*40,320)}ms">
+      <span class="pages">${n} clip${n===1?'':'s'}</span>${inner}
+      <span class="read">Watch the reels <span class="arrow">→</span></span>
+    </a>`;
+  }
   return `<article class="card${it.big?' big':''}" style="animation-delay:${Math.min(i*40,320)}ms">
     ${inner}${it.url?`<a class="read" href="${esc(it.url)}" target="_blank" rel="noopener">View <span class="arrow">→</span></a>`:''}
   </article>`;
@@ -1511,7 +1751,7 @@ function closeChapter(keepCurrent){
 $('#moreBtn').addEventListener('click',e=>{ e.preventDefault(); history.pushState(null,'','#/'); route(); });
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape') return;
-  if(paperEl.classList.contains('on')){ history.back(); return; }
+  if(paperEl.classList.contains('on')||scrapEl.classList.contains('on')||reelEl.classList.contains('on')){ history.back(); return; }
   if(ch.classList.contains('on')){ history.pushState(null,'','#/'); route(); }
 });
 
@@ -1668,6 +1908,158 @@ function closePaper(){
   if(!paperEl.classList.contains('on')) return;
   paperEl.classList.remove('on');
   headEls=[]; tocLinks=[];
+}
+
+/* ============================================================
+   SCRAPBOOK — flip-through reading pages
+   ============================================================ */
+const flipbookEl=$('#flipbook'), sbFlipBtn=$('#sbFlip'), sbBackBtn=$('#sbBack'), sbCount=$('#sbCount');
+let sbLeaves=[], sbAt=0, sbAnimating=false;
+
+function verseHTML(page){
+  return `<h2 class="ptitle">${esc(page.title)}</h2>
+    <div class="verse">${page.stanzas.map(st=>'<p class="stanza">'+
+      st.map(ln=>`<span class="ln i${ln.i}">${esc(ln.t)}</span>`).join('')+'</p>').join('')}</div>`;
+}
+function essayHTML(page){
+  return `<div class="leaf-scroll"><h2 class="ptitle">${esc(page.title)}</h2>
+    <div class="essay">${page.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>`;
+}
+function imagePageHTML(page){
+  return `<img class="pin-img" src="${esc(page.img)}" alt="${esc(page.alt||page.title||'')}"
+      loading="lazy" onerror="this.closest('.leaf-face').innerHTML='<div style=&quot;position:relative;z-index:1;margin:auto;text-align:center;font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A7B5E&quot;>Page pending</div>'">`;
+}
+
+function paintScrapbook(id){
+  const sb=SCRAPBOOKS[id];
+  const bk=BOOKS.find(b=>b.id===sb.cat);
+  const tabIdx=bk?bk.tabs.findIndex(t=>t.name===sb.tab):-1;
+  $('#sbBackLink').href = bk ? ('#/'+bk.id+(tabIdx>0?'/'+slug(sb.tab):'')) : '#/';
+  $('#sbBackLink').textContent = '← '+(sb.tab||'Back');
+  $('#sbNow').textContent = sb.title;
+  $('#sbKicker').textContent = (bk?bk.title+' · ':'')+'Scrapbook';
+  $('#sbTitle').textContent = sb.title;
+  $('#sbIntro').textContent = sb.intro||'';
+  document.title = sb.title+' — '+ME.name;
+
+  const heroEl=$('#sbHero');
+  if(sb.hero){
+    heroEl.innerHTML = `<figure class="sb-hero" id="sbHeroFig">
+        <img src="${esc(sb.hero.img)}" alt="${esc(sb.hero.alt||'')}" loading="lazy"
+             onerror="document.getElementById('sbHeroFig').classList.add('pending');document.getElementById('sbHeroFig').innerHTML='Cover photo pending'">
+        ${sb.hero.cap?`<figcaption class="cap">${esc(sb.hero.cap)}</figcaption>`:''}
+      </figure>`;
+  } else heroEl.innerHTML='';
+
+  flipbookEl.innerHTML = sb.pages.map((pg,i)=>{
+    let body='';
+    if(pg.type==='poem') body=verseHTML(pg);
+    else if(pg.type==='essay') body=essayHTML(pg);
+    else if(pg.type==='image') body=imagePageHTML(pg);
+    return `<div class="leaf" style="z-index:${sb.pages.length-i}" data-i="${i}">
+        <div class="leaf-face">${body}<span class="leafnum">${i+1} / ${sb.pages.length}</span></div>
+      </div>`;
+  }).join('');
+  sbLeaves=[...flipbookEl.querySelectorAll('.leaf')];
+  sbAt=0; sbAnimating=false;
+  sbLeaves.forEach(l=>{l.classList.remove('flipped','unflipping'); l.style.transform='';});
+  updateSbControls();
+
+  scrapPetalsInit();
+  scrapEl.classList.add('on');
+  scrapEl.scrollTop=0;
+  scrapEl.focus();
+  liveRegion.textContent='Opened scrapbook: '+sb.title;
+}
+
+function updateSbControls(){
+  sbBackBtn.disabled = sbAt<=0;
+  sbFlipBtn.disabled = sbAt>=sbLeaves.length;
+  sbFlipBtn.textContent = sbAt>=sbLeaves.length ? 'The End' : 'Flip';
+  sbCount.textContent = sbLeaves.length ? Math.min(sbAt+1,sbLeaves.length)+' / '+sbLeaves.length : '';
+}
+function sbFlipForward(){
+  if(sbAnimating || sbAt>=sbLeaves.length) return;
+  sbAnimating=true;
+  const leaf=sbLeaves[sbAt];
+  leaf.classList.add('flipped');
+  sbAt++;
+  updateSbControls();
+  leaf.addEventListener('animationend',()=>{ sbAnimating=false; },{once:true});
+}
+function sbFlipBack(){
+  if(sbAnimating || sbAt<=0) return;
+  sbAnimating=true;
+  sbAt--;
+  const leaf=sbLeaves[sbAt];
+  leaf.classList.remove('flipped');
+  leaf.classList.add('unflipping');
+  updateSbControls();
+  leaf.addEventListener('animationend',()=>{ leaf.classList.remove('unflipping'); sbAnimating=false; },{once:true});
+}
+sbFlipBtn.addEventListener('click',sbFlipForward);
+sbBackBtn.addEventListener('click',sbFlipBack);
+
+/* falling petals inside the scrapbook — spawned once, reused each visit */
+let scrapPetalsBuilt=false;
+function scrapPetalsInit(){
+  const box=$('#sbPetals');
+  if(scrapPetalsBuilt || calm()) return;
+  scrapPetalsBuilt=true;
+  for(let i=0;i<11;i++){
+    const p=document.createElement('div');
+    const far=Math.random()<.35;
+    p.className='petal'+(far?' far':'');
+    const dur=15+Math.random()*13;
+    p.style.left=(-4+Math.random()*30)+'vw';
+    p.style.animationDuration=dur+'s';
+    p.style.animationDelay=(-Math.random()*dur)+'s';
+    p.style.transform='scale('+(.55+Math.random()*.7)+')';
+    box.appendChild(p);
+  }
+  document.addEventListener('visibilitychange',()=>box.classList.toggle('paused',document.hidden));
+}
+
+function closeScrapbook(){
+  if(!scrapEl.classList.contains('on')) return;
+  scrapEl.classList.remove('on');
+}
+
+/* ============================================================
+   REEL GALLERY — embedded video / reel pages
+   ============================================================ */
+function paintReels(id){
+  const rg=REELS[id];
+  const bk=BOOKS.find(b=>b.id===rg.cat);
+  const t=bk?bk.theme:null;
+  if(t){
+    reelEl.style.setProperty('--pg-bg',t.bg); reelEl.style.setProperty('--pg-bar',t.bar);
+    reelEl.style.setProperty('--pg-card',t.card); reelEl.style.setProperty('--pg-line',t.line);
+    reelEl.style.setProperty('--pg-ink',t.ink); reelEl.style.setProperty('--pg-muted',t.muted);
+    reelEl.style.setProperty('--pg-accent',t.accent);
+  }
+  const tabIdx=bk?bk.tabs.findIndex(x=>x.name===rg.tab):-1;
+  $('#rgBackLink').href = bk ? ('#/'+bk.id+(tabIdx>0?'/'+slug(rg.tab):'')) : '#/';
+  $('#rgBackLink').textContent = '← '+(rg.tab||'Back');
+  $('#rgNow').textContent = rg.title;
+  $('#rgTitle').textContent = rg.title;
+  $('#rgNote').textContent = rg.note||'';
+  document.title = rg.title+' — '+ME.name;
+
+  $('#rgGrid').innerHTML = rg.clips.map(c=>`
+    <div class="rg-clip">
+      <div class="frame">${c.embed}</div>
+      <div class="label">${esc(c.label||'')}</div>
+    </div>`).join('');
+
+  reelEl.classList.add('on');
+  reelEl.scrollTop=0;
+  reelEl.focus();
+  liveRegion.textContent='Opened reel gallery: '+rg.title;
+}
+function closeReels(){
+  if(!reelEl.classList.contains('on')) return;
+  reelEl.classList.remove('on');
 }
 
 /* ---- go ---- */

@@ -3,11 +3,14 @@
 An interactive library. Five books on a shelf, one per body of work: **Medical**,
 **Writer & Author**, **Artist**, **Storyteller & Editor**, **Website Builder**.
 
-Two files, no build step, no dependencies beyond two Google webfonts.
+Three files, no build step, no dependencies beyond two Google webfonts.
 Open `index.html` in a browser and it runs.
 
-- `index.html` — the hall, the shelf, the category pages, the paper reader
+- `index.html` — the hall, the shelf, the category pages, the paper reader,
+  the scrapbook, the reel gallery
 - `papers.js` — the full text of each research paper and poster
+- `extras.js` — scrapbooks (flip-through reading pages) and reel galleries
+  (embedded video pages)
 
 ---
 
@@ -113,9 +116,13 @@ assets/
     usv-fig1.jpg … usv-fig9.jpg   the nine figures from the rotation report
     clero-table1.jpg, -table2.jpg the two thesis result tables
     biorem-fig1.jpg, -fig2.jpg    the bioremediation conceptual framework
-    cig-photo01.jpg … -16.jpg     build photos from the cigarette filtration paper
-    cig-progress-*.jpg            the concept sketch and one build photo, from the progress sheets
+    cig-photo01.jpg, -05, -07, -10, -14, -16.jpg   six build photos, picked from
+                                                    sixteen in the source PDF
+    cig-progress-sketch-1.jpg     the group's concept sketch, from the progress sheets
+    cig-progress-p3-1.jpg         the second exhaust fan, from the same
     cig-video.mp4                 field test of the finished device (23MB — see note below)
+  writer/
+    (empty — see "Files you still need to add" above: promo-flatlay.jpg)
 ```
 
 Nine papers are readable in full at `#/paper/<id>`: `usv`, `attention`,
@@ -133,6 +140,44 @@ If `assets/nicole.jpg` is ever missing the frame falls back to an `NBC`
 monogram rather than a broken image. The warm overlay that blends the studio
 green into the hall lives in `.portrait::after` — lower those opacities to
 leave the photo as shot.
+
+### Scrapbooks — flip-through reading pages
+
+`extras.js` defines `SCRAPBOOKS[id]`: a title, an optional `hero` image shown
+above the book, and a `pages` array — one leaf per page, each a `poem` (an
+array of stanzas, each line with an indent step 0–3, for staggered verse),
+an `essay` (a title plus verbatim paragraphs, scrolls internally if it runs
+long), or an `image` (a designed page, shown as a photo). Give any item a
+`scrapbook:'<id>'` key and the whole card opens it at `#/scrapbook/<id>` —
+falling petals, a vintage-paper flip-book with a 3D page-turn, a **Flip**
+button and a **‹ Back** button to page back.
+
+`writing-samples` (linked from Writer → Books & Literary → *Selected poetry
+and essays*) currently holds two poems, transcribed as text from the images
+supplied, and the full text of *Taguig Calls for Art to Action*. The `hero`
+image — the flat-lay photo of the printed books, shirt and merchandise —
+didn't come through as a file, so it's referenced at `assets/writer/promo-flatlay.jpg`
+and shows "Cover photo pending" until that file exists. More sample pages
+were promised for a follow-up message; append them to the `pages` array in
+the order they should be read.
+
+### Reel galleries — embedded video pages
+
+`extras.js` defines `REELS[id]`: a title, a note, and a `clips` array of
+`{embed, label}`, where `embed` is a literal `<iframe>` string (Facebook's
+`/plugins/video.php` embed, or Instagram's `/embed` path — neither needs
+their JS SDK loaded). Give any item a `reels:'<id>'` key and the card opens
+`#/reels/<id>`, a grid of the embedded clips.
+
+`open-mic` holds three clips. Two of the three pieces of embed code supplied
+for it were byte-identical (same Facebook video ID, `499922705621601`) — I
+used it once rather than duplicating the same video, on the assumption the
+repeat was a paste error. If a different second reel was intended, swap the
+second `embed` in `REELS['open-mic'].clips` in `extras.js`.
+
+Facebook and Instagram block their embeds from loading inside a sandboxed
+preview (no network access, strict CSP) — they'll show as broken-image icons
+there but render normally once the site is live on the open web.
 
 There is no Download CV button. The work itself is the portfolio; add one back
 in the left panel if you later want the PDFs offered alongside it.
@@ -165,6 +210,14 @@ entirely under `prefers-reduced-motion`.
 tracks your position, a reading-progress bar, figures with their captions, real
 HTML tables, and a numbered reference list.
 
+**The scrapbook.** A dedicated reading page for poems and short prose: falling
+petals, a vintage-paper flip-book with a real 3D page-turn (CSS animation, no
+library), and a Flip button rather than swipe gestures a viewer has to discover.
+
+**The reel gallery.** A clean grid for embedded video — Facebook and Instagram
+posts play in place via their standalone iframe embeds, no platform SDK
+required.
+
 **Print.** Ctrl+P on a category page produces a clean document with every tab
 flattened into it, not a screenshot of a dark room. Papers print as papers.
 
@@ -183,9 +236,11 @@ directory is the root. Push to deploy.
 
 ## Still to do
 
-- Real artwork in the Artist section — the book covers are the strongest thing
-  in the portfolio and currently exist only as descriptions
-- One embedded reel in Storyteller; that section needs to be watched, not read
+- **Real artwork in the Artist section.** The featured block currently shows
+  only a date and a flag — both the title and description were removed on
+  request, and no cover image has arrived yet. This is the thinnest part of
+  the portfolio for an illustrator; the book covers are the strongest thing
+  she has and a viewer can't see either of them.
 - Name the signature illustration style
 - Real screenshots and URLs for the website cards
 - Confirm reprint rights on the two published book covers
@@ -194,3 +249,17 @@ directory is the root. Push to deploy.
   didn't come through as an attachable file, only as an inline paste I can't
   save; drop it at `assets/books.jpg` and it appears automatically. Until then
   the block shows just the "Published books" eyebrow, no broken image.
+- **`assets/writer/promo-flatlay.jpg`** — the flat-lay photo (books, printed
+  shirt, mugs, pens) for the top of the *Selected Poetry and Essays* scrapbook.
+  Same situation as the Writer cover — inline paste, no file to save.
+- **More scrapbook pages.** Only three pages exist so far; more samples were
+  promised for a follow-up message — append them to `SCRAPBOOKS['writing-samples'].pages`
+  in `extras.js`.
+- **The Storyteller "Video Editing" tab was removed** on request — short-form
+  employee interviews, small-business TikTok work, and the CapCut/Filmora
+  tools line are no longer anywhere on the site. If any of that should live
+  somewhere else (a note on the reel gallery, an Artist tools list), it needs
+  a new home; right now it's simply gone.
+- **Confirm the second Open Mic reel.** Two of the three embed codes supplied
+  were identical (same video ID) — used once rather than twice. See the
+  "Reel galleries" section above.
