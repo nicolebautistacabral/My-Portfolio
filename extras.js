@@ -30,11 +30,8 @@ const SCRAPBOOKS = {
   tab:'Books & Literary',
   title:'Selected Poetry and Essays',
   intro:'A few pieces, read here as they were written — not photographed. More samples are on their way.',
-  hero:{
-    img:'assets/writer/promo-flatlay.jpg',
-    alt:'An Art of Words — paperbacks, a printed shirt, pens and mugs laid out together',
-    cap:'An Art of Words — ₱290 + shipping'
-  },
+  /* hero:{img,alt,cap} — the flat-lay photo never arrived as a file. Add it
+     back here when it does; the book starts straight after the intro until then. */
   pages:[
     {type:'poem', title:'That’s Not Love',
       stanzas:[
@@ -134,17 +131,25 @@ const REELS = {
   tab:'Storytelling Reels',
   title:'Open Mic Performance',
   note:'Spoken word and stage work, CAPO MNL and gallery events. Watched, not read.',
+  /* url — where the clip lives. Shown as a link under each frame, so the piece
+     is still reachable when a platform embed is blocked. */
   clips:[
     {
-      label:'Reel',
+      label:'Open mic \u2014 spoken word set',
+      host:'Facebook',
+      url:'https://www.facebook.com/share/r/1bCRrFFyje/',
       embed:'<iframe src="https://www.facebook.com/plugins/video.php?height=476&href='+encodeURIComponent('https://www.facebook.com/share/r/1bCRrFFyje/')+'&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'
     },
     {
-      label:'Instagram',
+      label:'Gallery event reading',
+      host:'Instagram',
+      url:'https://www.instagram.com/p/C-PEYSCvdo2/',
       embed:'<iframe src="https://www.instagram.com/p/C-PEYSCvdo2/embed" width="340" height="480" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'
     },
     {
-      label:'Instagram',
+      label:'CAPO MNL stage set',
+      host:'Instagram',
+      url:'https://www.instagram.com/p/Csf3HrfJ8X8/',
       embed:'<iframe src="https://www.instagram.com/p/Csf3HrfJ8X8/embed" width="340" height="480" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'
     }
   ]

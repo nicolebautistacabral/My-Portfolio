@@ -304,63 +304,13 @@ const PAPERS = {
   tab:'Presentations',
   kicker:'Poster Presentation · ICVS, Universidade do Minho',
   title:'Evaluation of Antimalarial Activity in Plasmodium falciparum',
-  author:'Nicole Cabral¹²,  Beatriz Velosa da Fonseca¹²,  Maria Isabel Veiga¹²',
+  author:'Nicole Cabral\u00b9\u00b2,  Beatriz Velosa da Fonseca\u00b9\u00b2,  Maria Isabel Veiga\u00b9\u00b2',
   meta:[
     ['Affiliation 1','Life and Health Sciences Research Institute (ICVS), School of Medicine, University of Minho, Braga, Portugal'],
-    ['Affiliation 2','ICVS/3B’s – PT Government Associate Laboratory, Braga/Guimarães, Portugal']
+    ['Affiliation 2','ICVS/3B\u2019s \u2013 PT Government Associate Laboratory, Braga/Guimar\u00e3es, Portugal']
   ],
   poster:{img:'assets/papers/antimalarial-poster.jpg', alt:'Poster: Evaluation of Antimalarial activity in Plasmodium falciparum'},
-  blocks:[
-    {h:'Introduction'},
-    {p:'Despite decades of global intervention, malaria caused an estimated 282 million cases and 610,000 deaths in 2024 (WHO World Malaria Report 2025), with Plasmodium falciparum resistance to artemisinin-based therapies and shortage of drug treatments need urgent attention [1,3]. As a result, Portugal remain vulnerable to imported malaria from tourists and migrants returning from sub-Saharan Africa, Asia, and South America, with 81.5% of infections [2]. Evaluating antimalarial compounds requires in-vitro maintenance of P. falciparum, sustaining asexual blood stages in human erythrocytes at 37°C under a low-oxygen atmosphere (3% O₂, 5% CO₂, 92% N₂) in RPMI 1640 medium supplemented with hypoxanthine and human serum [3]. Cultures are kept within an optimal ring-stage range (at 1-2%) with 4% hematocrit to sustain the log-phase growth [3]. In vitro maintenance and parasitemia assessment of the chloroquine-sensitive 3D7 and chloroquine-resistant Dd2 strains provide the basis methods to do susceptibility assays (IC50) that can evaluate novel antimalarial compounds for overcoming drug resistance and promote drug development.'},
-
-    {h:'Aims'},
-    {p:'To maintain in vitro culture of Plasmodium falciparum (Dd2 and 3D7), drug susceptibility assay, and monitor parasite growth by parasitemia assessment.'},
-
-    {h:'Methods'},
-    {h3:'Parasite culture maintenance [sterile conditions]'},
-    {p:'Maintain incubated blood cultures: P. falciparum (3D7 &amp; Dd2 strains). Aspiration of old medium, then assess parasitemia. Add 5 mL MCM. Maintain the 4% hematocrit. Add gas mixture [3% O₂, 5% CO₂, 92% N₂]. Incubation 37°C.'},
-    {h3:'Parasitemia assessment'},
-    {ol:[
-      'After aspirating the culture, add a drop on the slide.',
-      'Fix with 100% methanol (10 seconds).',
-      'Cover with 10% Giemsa stain (10 to 15 mins).',
-      'Identify parasites and the RBCs.',
-      'Choose a quadrant in each 4 fields and quantify the parasites.'
-    ]},
-    {note:'Formula — No. of infected RBCs (parasites) ÷ (4 × Total no. of RBCs) = (n) × 100% = (n%) parasitemia'},
-    {h3:'Susceptibility assays'},
-    {ol:[
-      'IC50 in Rings — 1% hematocrit, 1% parasitemia.',
-      'Perform synchronization by 5% sorbitol treatment.',
-      'Perform serial dilution of Chloroquine (CQ) drug.',
-      'Incubation 37°C for 72 hours.',
-      'Add SYBR Green I in the microplate.',
-      'Detect parasite growth on microplate reader.'
-    ]},
-
-    {h:'Results'},
-    {table:{
-      cap:'Chloroquine IC50 and resistance index',
-      head:['Chloroquine','3D7 IC50 (nM)','Dd2 IC50 (nM)','Resistance index (Dd2 ÷ 3D7)'],
-      rows:[
-        ['CQ BEA','4.9 ± 0.5','134.6 ± 36.8','~28×'],
-        ['CQ HTS','8.2 ± 2.7','270.3 ± 2.1','~33×']
-      ]
-    }},
-    {p:'Chloroquine produced clear dose-dependent killing in both strains. The chloroquine-sensitive 3D7 had low IC50 values (4.9–8.2 nM), while the resistant Dd2 required ~28–33× higher concentrations (134.6–270.3 nM), consistent across two independent runs (R1, R2) and two preparations (BEA, HTS). The no-drug control (MCM) remained at ~100% survival throughout, confirming culture viability. These known resistance patterns validate the assay for screening novel compounds.'},
-    {note:'Figure 1 — MCM = no-drug control; CQ BEA, CQ HTS = two chloroquine preparations; R1, R2 = independent replicates.'},
-
-    {h:'Conclusion'},
-    {p:'We established in vitro maintenance of P. falciparum with parasitemia assessment and evaluating by drug susceptibility assays. Given malaria\'s persistent global burden [1], such capacity is vital on antimalarial drug further development.'},
-
-    {h:'References'},
-    {refs:[
-      'World Health Organization. World Malaria Report 2025. World Health Organization; 2025. Serrano D, Santos-Reis A, Silva C, et al. Imported malaria in Portugal: prevalence of polymorphisms in the anti-malarial drug resistance genes pfmdr1 and pfk13. Microorganisms. 2021;9(10):2045. doi:10.3390/microorganisms9102045',
-      'Trager W, Jensen JB. Human malaria parasites in continuous culture. Science. 1976;193(4254):673-675. doi:10.1126/science.781840',
-      'Delves MJ, Straschil U, Ruecker A, et al. Routine in vitro culture of Plasmodium falciparum gametocytes to evaluate novel transmission-blocking interventions. Nat Protoc. 2016;11(9):1668-1680. doi:10.1038/nprot.2016.096'
-    ]}
-  ]
+  blocks:[]
 },
 
 /* ══════════════════════════════════════════════════════════ */

@@ -460,6 +460,30 @@ a{color:inherit}
   display:block;padding:10px 28px 12px;font-size:13.5px;color:var(--pg-muted);line-height:1.5;
 }
 @media(max-width:640px){.featured .shot{margin:16px -20px -18px}.featured .shot .cap{padding:9px 20px 10px}}
+/* two or more covers standing side by side — the books themselves, not a photo of them */
+.featured .covers{
+  display:flex;flex-wrap:wrap;gap:26px;align-items:flex-end;
+  margin:20px -28px -26px;padding:26px 28px 24px;
+  border-top:1px solid var(--pg-line);background:var(--pg-bar);
+}
+.featured .covers a{
+  display:block;text-decoration:none;color:inherit;
+  transition:transform .3s var(--ease);
+}
+.featured .covers a:hover,.featured .covers a:focus-visible{transform:translateY(-4px)}
+/* fixed height, width follows — two covers of different proportions still
+   stand level, the way they would on a shelf */
+.featured .covers img{
+  height:clamp(190px,24vw,272px);width:auto;display:block;background:var(--pg-card);
+  box-shadow:0 10px 26px rgba(58,39,22,.22);
+}
+.featured .covers .cap{
+  display:block;margin-top:11px;font-size:13px;line-height:1.45;color:var(--pg-muted);
+}
+.featured .covers .cap b{display:block;font-weight:600;color:var(--pg-ink);font-size:14px}
+@media(max-width:640px){
+  .featured .covers{margin:18px -20px -18px;padding:20px;gap:18px}
+}
 
 .tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--pg-line);margin-bottom:26px}
 .tab{
@@ -483,7 +507,10 @@ a{color:inherit}
 }
 @keyframes cardIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(0,0,0,.12)}
-.card.big{grid-column:span 2}
+/* a wide card takes the whole row. Spanning two of three columns orphans the
+   third on every row a run of them appears in, which most tabs have. */
+.card.big{grid-column:1/-1}
+.card.big p{max-width:88ch}
 @media(max-width:640px){.card.big{grid-column:span 1}}
 .card .yr{font-family:var(--display);font-size:10.5px;letter-spacing:.2em;color:var(--pg-accent);display:block;margin-bottom:7px}
 .card h3{margin:0 0 7px;font-size:17.5px;font-weight:600;line-height:1.3}
@@ -496,7 +523,7 @@ a{color:inherit}
   display:flex;align-items:center;justify-content:center;
   margin:-18px -20px 14px;
   border-bottom:1px solid var(--pg-line);
-  aspect-ratio:3/4;overflow:hidden;background:var(--pg-bar);
+  height:clamp(210px,24vw,290px);overflow:hidden;background:var(--pg-bar);
 }
 .card .thumb img{width:100%;height:100%;object-fit:contain;display:block}
 
@@ -544,6 +571,7 @@ a.card:hover .read .arrow{transform:translateX(5px)}
 .pin img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
 .site-meta{padding:15px 17px}
 .site-meta h3{margin:0 0 5px;font-size:16.5px;font-weight:600}
+.site-meta .site-d{margin:0;font-size:14.5px;line-height:1.55;color:var(--pg-muted)}
 .site-meta dl{margin:9px 0 0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:13.5px}
 .site-meta dt{font-family:var(--display);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--pg-accent)}
 .site-meta dd{margin:0;color:var(--pg-muted)}
@@ -594,6 +622,10 @@ a.card:hover .read .arrow{transform:translateX(5px)}
   gap:44px;
 }
 @media(min-width:1100px){ .paper-wrap{grid-template-columns:210px 1fr} }
+/* a paper with no headings has no contents list — drop the empty column and
+   give the page over to the artwork, which is the whole document here */
+.paper-wrap.solo{max-width:1320px}
+@media(min-width:1100px){ .paper-wrap.solo{grid-template-columns:1fr} }
 
 /* table of contents */
 .ptoc{display:none}
@@ -783,16 +815,17 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 }
 .sb-hero img{width:100%;height:auto;display:block}
 .sb-hero .cap{display:block;padding:12px 18px;font-size:14px;color:#7A6046;background:rgba(255,255,255,.6);text-align:center}
-.sb-hero.pending{
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
-  aspect-ratio:16/10;background:repeating-linear-gradient(135deg,rgba(122,96,70,.06) 0 14px,rgba(122,96,70,.1) 14px 28px);
-  font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A7B5E;text-align:center;padding:20px;
-}
+/* no placeholder frame if the hero image is missing — the book is the point,
+   and an empty box at the top pushes it below the fold */
 
 /* the book */
 .flipbook-wrap{display:flex;flex-direction:column;align-items:center;gap:22px}
 .flipbook{
-  position:relative;width:100%;max-width:520px;aspect-ratio:5/6.6;
+  /* the width is capped by the height left over after the header and the
+     controls, so the Flip button never lands below the fold */
+  position:relative;width:100%;
+  max-width:min(520px, calc((100dvh - 330px) * 0.757));
+  aspect-ratio:5/6.6;
   perspective:2200px;
 }
 .flipbook::before{
@@ -858,7 +891,10 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
   font-family:var(--display);font-size:10.5px;letter-spacing:.14em;
   text-transform:uppercase;color:#9A7B5E;
 }
-.verse{position:relative;z-index:1;font-style:italic;font-size:clamp(16px,2.1vw,19px);line-height:1.95;color:#4A3A2E;flex:1;display:flex;flex-direction:column;justify-content:center}
+.poem-group{position:relative;z-index:1;margin:auto 0;width:100%;max-height:100%;overflow-y:auto}
+.poem-group .ptitle{margin-bottom:22px}
+.poem-group .pkicker{margin-top:-14px}
+.verse{position:relative;z-index:1;font-style:italic;font-size:clamp(16px,2.1vw,19px);line-height:1.95;color:#4A3A2E}
 .verse .stanza{margin-bottom:1.5em}
 .verse .stanza:last-child{margin-bottom:0}
 .verse .ln{display:block}
@@ -914,9 +950,20 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 .rg-note{font-size:16.5px;color:var(--pg-muted,#7B5C62);max-width:62ch;margin:0 0 34px}
 .rg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
 .rg-clip{background:var(--pg-card,#fff);border:1px solid var(--pg-line,#DEC0C6);border-radius:6px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.08)}
-.rg-clip .frame{position:relative;background:#000;display:flex;align-items:center;justify-content:center}
-.rg-clip .frame iframe{display:block;max-width:100%}
-.rg-clip .label{padding:10px 14px;font-family:var(--display);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--pg-accent,#A65D6B)}
+/* every frame the same size, whatever the platform's own iframe dimensions —
+   otherwise one card pillarboxes in black next to the others */
+.rg-clip .frame{position:relative;height:480px;background:var(--pg-bar,#F0DDE1);overflow:hidden}
+.rg-clip .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.rg-clip .label{
+  padding:11px 14px 13px;display:flex;flex-direction:column;gap:5px;
+  border-top:1px solid var(--pg-line,#DEC0C6);
+}
+.rg-clip .label b{font-size:14.5px;font-weight:600;color:var(--pg-ink,#3D262A)}
+.rg-clip .label a{
+  font-family:var(--display);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--pg-accent,#A65D6B);text-decoration:none;
+}
+.rg-clip .label a:hover{text-decoration:underline}
 
 /* the embedded video in a featured panel */
 .fb-embed-wrap{
@@ -926,6 +973,16 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 }
 .fb-embed-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 @media(max-width:640px){.fb-embed-wrap{margin:16px -20px -18px;width:calc(100% + 40px)}}
+/* a platform embed can be blocked by a privacy extension or a locked-down
+   network — always leave a way through to the original post */
+.embed-out{
+  display:block;margin:0 -28px -26px;padding:11px 28px 13px;
+  border-top:1px solid var(--pg-line);background:var(--pg-bar);
+  font-family:var(--display);font-size:10.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--pg-accent);text-decoration:none;
+}
+.embed-out:hover{background:var(--pg-bar-2)}
+@media(max-width:640px){.embed-out{margin:0 -20px -18px;padding:10px 20px 12px}}
 
 /* ============================================================
    RESPONSIVE
@@ -1104,7 +1161,7 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
     <span class="pct" id="pPct">0%</span>
     <span class="pprog" id="pProg"></span>
   </div>
-  <div class="paper-wrap">
+  <div class="paper-wrap" id="pWrap">
     <nav class="ptoc" id="pToc" aria-label="Contents"></nav>
     <article class="paper" id="pBody"></article>
   </div>
@@ -1228,9 +1285,13 @@ const BOOKS = [
     bio:'Two published books, a national authorship certification, and commercial copy for startups and agencies. I write across registers — peer-reviewed, literary, and brand.',
     featured:{
       y:'Published books',
-      img:'assets/books.jpg',
-      alt:'An Art of Words and Universal Quest, side by side',
-      cap:'An Art of Words &amp; Universal Quest'
+      d:'Two collections of poetry and prose — written, and with the covers illustrated and designed by me.',
+      covers:[
+        {img:'assets/artist/cover-artofwords-front.jpg', url:'assets/artist/cover-artofwords-full.jpg',
+         t:'An Art of Words', pub:'KM and H Black Paper Forest, Philippines', alt:'Front cover of An Art of Words'},
+        {img:'assets/artist/cover-universal-quest.jpg',
+         t:'Universal Quest', pub:'Ukiyoto Publishing, Canada', alt:'Front cover of Universal Quest'}
+      ]
     },
     tabs:[
       {name:'Books & Literary', items:[
@@ -1274,11 +1335,15 @@ const BOOKS = [
     bio:'Certified illustrator and designer. Two published book covers, a signature illustration style, and design work for small businesses and book campaigns.',
     featured:{
       y:'2021 · Published',
-      flag:'Add artwork — this is the strongest thing you have'
+      t:'An Art of Words — full wraparound cover',
+      d:'Back cover, spine and front, illustrated and laid out as one continuous drawing for KM and H Black Paper Forest Publishing House.',
+      img:'assets/artist/cover-artofwords-full.jpg',
+      alt:'The full wraparound cover of An Art of Words — back cover, spine and front',
+      cap:'Line illustration in blue, gold and rose, carried across all three panels.'
     },
     tabs:[
       {name:'Book Cover Design', items:[
-        {y:'2021',t:'Ukiyoto Publishing cover',d:'Full cover layout and illustration for Universal Quest.',img:'assets/artist/cover-universal-quest.jpg',url:'assets/artist/cover-universal-quest.jpg',flag:'Rights check pending',big:true},
+        {y:'2021',t:'Ukiyoto Publishing cover',d:'Full cover layout and illustration for Universal Quest.',img:'assets/artist/cover-universal-quest.jpg',url:'assets/artist/cover-universal-quest.jpg',flag:'Rights check pending'},
         {y:'2021',t:'KM and H Black Paper Forest cover',d:'Full wraparound cover — back, spine and front — for An Art of Words.',img:'assets/artist/cover-artofwords-front.jpg',url:'assets/artist/cover-artofwords-full.jpg',flag:'Rights check pending'}
       ]},
       {name:'Digital Illustration', items:[
@@ -1305,7 +1370,9 @@ const BOOKS = [
       y:'2021–2025',
       t:'Storytelling Performance Video',
       d:'Video editing, acting and performance, act direction, and the spoken words themselves — all produced by me.',
-      embed:'<iframe src="https://www.facebook.com/plugins/video.php?height=314&href='+encodeURIComponent('https://www.facebook.com/share/v/1cdD1KXReA/')+'&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'
+      embed:'<iframe src="https://www.facebook.com/plugins/video.php?height=314&href='+encodeURIComponent('https://www.facebook.com/share/v/1cdD1KXReA/')+'&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>',
+      embedUrl:'https://www.facebook.com/share/v/1cdD1KXReA/',
+      embedHost:'Facebook'
     },
     tabs:[
       {name:'Storytelling Reels', items:[
@@ -1318,15 +1385,17 @@ const BOOKS = [
     spine:'linear-gradient(90deg,#2E2E2C,#4A4A46 45%,#232321)',
     cover:'linear-gradient(135deg,#F0F0EE,#DDDDD9)',
     theme:{bg:'#F2F2F0',bar:'#E6E6E3',bar2:'#DADAD6',card:'#FFFFFF',line:'#CBCBC6',ink:'#262624',muted:'#6C6C68',accent:'#4A4A46'},
-    bio:'Sites I have built, with the role and the stack stated plainly. Clicking a card opens the live site in a new tab.',
+    bio:'Sites I have built, with the role and the stack stated plainly.',
     featured:{
-      y:'—',
+      y:'You are looking at it',
       t:'This portfolio',
       d:'Hand-built in HTML, CSS and vanilla JavaScript. The shelf, the stone arch and the lit book nook are CSS and inline SVG rather than WebGL, which is why the whole hall loads in well under a second on a phone.'
     },
     tabs:[
       {name:'Websites Built', sites:[
-        {t:'Marketing Team Quiz Portal',role:'Built as Marketing Head, to train my marketing team efficiently.',stack:'—',status:'Internal tool',url:'#',img:'',note:'Link pending'}
+        {t:'Marketing Team Quiz Portal',
+         d:'I built this quiz portal as a Marketing Head, to train my marketing team efficiently.',
+         role:'Design and build',status:'Internal tool',url:'#',img:'',note:'Link pending'}
       ]}
     ]
   }
@@ -1633,7 +1702,7 @@ function paint(bk,tabIndex){
   featEl.innerHTML = f ? `
     <section class="featured">
       <span class="badge">Featured</span>
-      <span class="yr">${esc(f.y)}</span>
+      ${(f.y&&f.y!=='—')?`<span class="yr">${esc(f.y)}</span>`:''}
       ${f.t?`<h3>${esc(f.t)}</h3>`:''}
       ${f.d?`<p>${esc(f.d)}</p>`:''}
       ${f.flag?`<span class="flag" style="display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px dashed ${t.muted};opacity:.75">${esc(f.flag)}</span>`:''}
@@ -1642,7 +1711,14 @@ function paint(bk,tabIndex){
                onerror="this.closest('.shot').remove()">
           ${f.cap?`<span class="cap">${esc(f.cap)}</span>`:''}
         </span>`:''}
-      ${f.embed?`<div class="fb-embed-wrap">${f.embed}</div>`:''}
+      ${f.covers?`<span class="covers">${f.covers.map(c=>`
+          <a href="${esc(c.url||c.img)}" target="_blank" rel="noopener">
+            <img src="${esc(c.img)}" alt="${esc(c.alt||c.t||'')}" loading="lazy"
+                 onerror="this.closest('a').remove()">
+            <span class="cap"><b>${esc(c.t||'')}</b>${esc(c.pub||'')}</span>
+          </a>`).join('')}</span>`:''}
+      ${f.embed?`<div class="fb-embed-wrap">${f.embed}</div>
+        ${f.embedUrl?`<a class="embed-out" href="${esc(f.embedUrl)}" target="_blank" rel="noopener">Watch it on ${esc(f.embedHost||'the original post')} ↗</a>`:''}`:''}
     </section>` : '';
 
   tabsEl.innerHTML=bk.tabs.map((tb,i)=>{
@@ -1694,8 +1770,10 @@ function cardHTML(it,i){
     const p=PAPERS[it.paper];
     const mins=Math.max(1,Math.round(wordCount(p)/220));
     const kind=p.poster?'View the poster':'Read the full paper';
+    /* a poster carries its own text — a reading estimate off an empty body would read "1 min" */
+    const badge=(p.blocks&&p.blocks.length)?mins+' min':'Poster';
     return `<a class="card${it.big?' big':''}" href="#/paper/${it.paper}" style="animation-delay:${Math.min(i*40,320)}ms">
-      <span class="pages">${mins} min</span>${inner}
+      <span class="pages">${badge}</span>${inner}
       <span class="read">${kind} <span class="arrow">→</span></span>
     </a>`;
   }
@@ -1723,6 +1801,9 @@ function cardHTML(it,i){
 function renderTab(bk,i){
   const tb=bk.tabs[i];
   if(tb.sites){
+    /* a field that isn't known yet prints nothing — an em dash in a definition
+       list reads as a value, and "Stack —" is worse than no Stack row at all */
+    const row=(k,v)=>(v&&v!=='—')?`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`:'';
     panelEl.innerHTML='<div class="sites">'+tb.sites.map((s,n)=>{
       const linkable = s.url && s.url!=='#';
       const tag = linkable ? 'a' : 'div';
@@ -1732,10 +1813,11 @@ function renderTab(bk,i){
         <div class="pin">${s.img?`<img src="${esc(s.img)}" alt="Screenshot of ${esc(s.t)}" loading="lazy">`:'Screenshot — 16:9'}</div>
         <div class="site-meta">
           <h3>${esc(s.t)}</h3>
+          ${s.d?`<p class="site-d">${esc(s.d)}</p>`:''}
           <dl>
-            <dt>Role</dt><dd>${esc(s.role)}</dd>
-            <dt>Stack</dt><dd>${esc(s.stack)}</dd>
-            <dt>Status</dt><dd>${s.status==='Live'?'<span class="live-dot">● Live</span>':esc(s.status)}</dd>
+            ${row('Role',s.role)}
+            ${row('Stack',s.stack)}
+            ${s.status?`<dt>Status</dt><dd>${s.status==='Live'?'<span class="live-dot">● Live</span>':esc(s.status)}</dd>`:''}
           </dl>
           ${s.note?`<span class="flag" style="display:inline-block;margin-top:11px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px dashed var(--pg-muted);opacity:.75">${esc(s.note)}</span>`:''}
         </div>
@@ -1777,7 +1859,7 @@ document.addEventListener('keydown',e=>{
    PAPER VIEW
    ============================================================ */
 const pBody=$('#pBody'), pToc=$('#pToc'), pBack=$('#pBack'), pNow=$('#pNow'),
-      pProg=$('#pProg'), pPct=$('#pPct');
+      pProg=$('#pProg'), pPct=$('#pPct'), pWrap=$('#pWrap');
 
 function blockHTML(b,heads){
   if(b.h){ const id='s-'+slug(b.h); heads.push({id,label:b.h}); return `<h2 id="${id}">${esc(b.h)}</h2>`; }
@@ -1870,7 +1952,7 @@ function paintPaper(id){
     <h1>${esc(p.title)}</h1>
     <p class="byline">${esc(p.author||'')}</p>
     ${p.meta?`<dl class="meta">${p.meta.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`:''}
-    <span class="readtime">${mins} min read</span>
+    ${(p.blocks&&p.blocks.length)?`<span class="readtime">${mins} min read</span>`:''}
     ${p.poster?`<div class="poster-view">
         <img src="${esc(p.poster.img)}" alt="${esc(p.poster.alt||p.title)}">
         <a class="zoom" href="${esc(p.poster.img)}" target="_blank" rel="noopener">Open the poster full size ↗</a>
@@ -1888,6 +1970,7 @@ function paintPaper(id){
   pToc.innerHTML = heads.length
     ? '<b>Contents</b>'+heads.map(h=>`<a href="#${h.id}" data-t="${h.id}">${esc(h.label)}</a>`).join('')
     : '';
+  pWrap.classList.toggle('solo', !heads.length);
 
   paperEl.classList.add('on');
   paperEl.scrollTop=0;
@@ -1935,10 +2018,12 @@ const flipbookEl=$('#flipbook'), sbFlipBtn=$('#sbFlip'), sbBackBtn=$('#sbBack'),
 let sbLeaves=[], sbAt=0, sbAnimating=false;
 
 function verseHTML(page){
-  return `<h2 class="ptitle">${esc(page.title)}</h2>
+  /* title, kicker and verse centre on the leaf as one block — centring the
+     verse alone strands the title at the top of the page */
+  return `<div class="poem-group"><h2 class="ptitle">${esc(page.title)}</h2>
     ${page.kicker?`<p class="pkicker">${esc(page.kicker)}</p>`:''}
     <div class="verse${page.align==='center'?' center':''}">${page.stanzas.map(st=>'<p class="stanza">'+
-      st.map(ln=>`<span class="ln i${ln.i}">${esc(ln.t)}</span>`).join('')+'</p>').join('')}</div>`;
+      st.map(ln=>`<span class="ln i${ln.i}">${esc(ln.t)}</span>`).join('')+'</p>').join('')}</div></div>`;
 }
 function essayHTML(page){
   return `<div class="leaf-scroll"><h2 class="ptitle">${esc(page.title)}</h2>
@@ -1965,7 +2050,7 @@ function paintScrapbook(id){
   if(sb.hero){
     heroEl.innerHTML = `<figure class="sb-hero" id="sbHeroFig">
         <img src="${esc(sb.hero.img)}" alt="${esc(sb.hero.alt||'')}" loading="lazy"
-             onerror="document.getElementById('sbHeroFig').classList.add('pending');document.getElementById('sbHeroFig').innerHTML='Cover photo pending'">
+             onerror="document.getElementById('sbHero').innerHTML=''">
         ${sb.hero.cap?`<figcaption class="cap">${esc(sb.hero.cap)}</figcaption>`:''}
       </figure>`;
   } else heroEl.innerHTML='';
@@ -2068,7 +2153,10 @@ function paintReels(id){
   $('#rgGrid').innerHTML = rg.clips.map(c=>`
     <div class="rg-clip">
       <div class="frame">${c.embed}</div>
-      <div class="label">${esc(c.label||'')}</div>
+      <div class="label">
+        <b>${esc(c.label||'')}</b>
+        ${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener">Open on ${esc(c.host||'the original post')} ↗</a>`:''}
+      </div>
     </div>`).join('');
 
   reelEl.classList.add('on');

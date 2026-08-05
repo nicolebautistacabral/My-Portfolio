@@ -37,7 +37,12 @@ updating themselves.
 
 The two book cover cards in Artist → Book Cover Design are the reference
 example: `img` for the thumbnail, `url` pointing at the same (or a larger)
-image so "View →" opens it full size.
+image so "View →" opens it full size. Thumbnails are a fixed height with
+`object-fit:contain`, so covers of different proportions still line up.
+
+`big:true` makes a card take the **whole row**, not two of three columns —
+spanning two orphaned the third column on every row of a run of wide cards,
+which most tabs have.
 
 ### A tab
 
@@ -50,7 +55,8 @@ image so "View →" opens it full size.
 The Website Builder book uses `sites` instead of `items`:
 
 ```js
-{ t:'Site name', role:'Design and build', stack:'HTML, CSS, JS',
+{ t:'Site name', d:'One sentence on what it is.',
+  role:'Design and build', stack:'HTML, CSS, JS',
   status:'Live', url:'https://…', img:'assets/sites/name.jpg',
   note:'Link pending' }             // optional — small dashed note, same as a card's flag
 ```
@@ -58,7 +64,9 @@ The Website Builder book uses `sites` instead of `items`:
 Leave `img` empty and the card shows a 16:9 placeholder. `status:'Live'` renders
 a green dot; anything else prints as plain text. Leave `url` empty or `'#'`
 and the card renders as a plain block instead of a link — no dead click
-target while a real URL is still pending.
+target while a real URL is still pending. A field you leave out (or set to
+`'—'`) prints nothing at all rather than an empty row — "Stack —" reads as a
+value, which is worse than no Stack line.
 
 ### Papers that open as their own page
 
@@ -81,8 +89,11 @@ sidebar, the reading-time estimate and the progress bar from that structure
 automatically. Every word in those blocks is the author's own and is
 reproduced exactly as written.
 
-Set `poster:{img:'…', alt:'…'}` instead of an abstract for poster presentations —
-the image is shown large at the top, with the transcribed text below it.
+Set `poster:{img:'…', alt:'…'}` instead of an abstract for poster presentations.
+A poster already carries its own text, so `antimalarial` leaves `blocks:[]` and
+the page is the artwork and nothing else: no contents column, no reading-time
+estimate, and the reading measure widens to give the poster the full page. Any
+paper with no headings gets that same single-column treatment.
 
 Set `banner:'hands'` on a paper to open it with the five-hand sign-language
 header instead of the plain kicker line — used on `signup`. The banner markup
@@ -99,6 +110,12 @@ Give it `img` (plus optional `alt` and `cap`) and the image runs edge to edge
 across the bottom of the box. Add `d` for a description, or leave it out and let
 the picture carry the block. If the image file is missing the frame removes
 itself rather than showing a broken image.
+
+`covers:[{img,url,t,pub,alt},…]` instead of `img` stands two or more book
+covers side by side at a matched height, each captioned with its title and
+publisher — used on Writer. `embed` takes a literal `<iframe>`; pair it with
+`embedUrl` and `embedHost` so a viewer whose network or privacy extension
+blocks the platform still gets a link through to the original post.
 
 ---
 
@@ -129,8 +146,13 @@ assets/
     cig-progress-sketch-1.jpg     the group's concept sketch, from the progress sheets
     cig-progress-p3-1.jpg         the second exhaust fan, from the same
     cig-video.mp4                 field test of the finished device (23MB — see note below)
-  writer/
-    (empty — see "Files you still need to add" above: promo-flatlay.jpg)
+  artist/
+    cover-artofwords-front.jpg    front cover, re-cropped off the wraparound to
+                                    the trim box — the earlier crop clipped the
+                                    "A COLLECTION OF POEMS AND PROSES" line and
+                                    carried a printer's trim mark
+    cover-artofwords-full.jpg     the full wraparound, trim marks cropped off
+    cover-universal-quest.jpg     front cover, as supplied
 ```
 
 Nine papers are readable in full at `#/paper/<id>`: `usv`, `attention`,
@@ -162,16 +184,20 @@ p. 88"). Give any item a `scrapbook:'<id>'` key and the whole card opens it
 at `#/scrapbook/<id>` — falling petals, a vintage-paper flip-book with a
 3D page-turn, a **Flip** button and a **‹ Back** button to page back.
 
+On a poem page the title, kicker and verse centre on the leaf **as one block**.
+Centring the verse on its own stranded the title at the top of the page with a
+hand's width of blank paper between them.
+
 `writing-samples` (linked from Writer → Books & Literary → *Selected poetry
 and essays*) holds seven pages: four poems (two transcribed from the images
 supplied, one from a scanned book page, one from a quote card), the essay
 *Taguig Calls for Art to Action*, and the essay *"Mag-ingay Ka Nga, Ang
 Tahimik Mo!"* — written in Filipino, kept exactly as submitted. The `hero`
-image — the flat-lay photo of the printed books, shirt and merchandise —
-didn't come through as a file, so it's referenced at
-`assets/writer/promo-flatlay.jpg` and shows "Cover photo pending" until that
-file exists. More sample pages were promised for a follow-up message; append
-them to the `pages` array in the order they should be read.
+key is commented out: the flat-lay photo of the books, shirt and merchandise
+never arrived as a file, and an empty placeholder frame at the top pushed the
+book itself below the fold. Uncomment it when the photo exists. More sample
+pages were promised for a follow-up message; append them to the `pages` array
+in the order they should be read.
 
 Poem lines wrap on narrow screens rather than clipping — a couple of the
 newer poems have lines much longer than the first two, and forcing them onto
@@ -180,16 +206,19 @@ one line ran text off the edge of the page on small phones.
 ### Reel galleries — embedded video pages
 
 `extras.js` defines `REELS[id]`: a title, a note, and a `clips` array of
-`{embed, label}`, where `embed` is a literal `<iframe>` string (Facebook's
-`/plugins/video.php` embed, or Instagram's `/embed` path — neither needs
-their JS SDK loaded). Give any item a `reels:'<id>'` key and the card opens
-`#/reels/<id>`, a grid of the embedded clips.
+`{embed, label, url, host}`, where `embed` is a literal `<iframe>` string
+(Facebook's `/plugins/video.php` embed, or Instagram's `/embed` path — neither
+needs their JS SDK loaded). Give any item a `reels:'<id>'` key and the card
+opens `#/reels/<id>`, a grid of the embedded clips. Every frame is forced to
+the same height whatever the platform's own iframe dimensions, so one card
+doesn't pillarbox in black next to the others.
 
 `open-mic` holds three clips: a Facebook reel and two Instagram posts.
 
-Facebook and Instagram block their embeds from loading inside a sandboxed
-preview (no network access, strict CSP) — they'll show as broken-image icons
-there but render normally once the site is live on the open web.
+Facebook and Instagram embeds can be blocked by a privacy extension, a
+locked-down network, or a sandboxed preview — which is why every clip carries
+`url` and `host`, printed under the frame as "Open on Instagram ↗". The piece
+stays reachable even when the embed shows nothing.
 
 There is no Download CV button. The work itself is the portfolio; add one back
 in the left panel if you later want the PDFs offered alongside it.
@@ -250,19 +279,17 @@ directory is the root. Push to deploy.
 
 - **Digital Illustration and Graphic Design still have no images.** Book
   Cover Design is now strong — both covers (Universal Quest, An Art of
-  Words) are in, extracted from the source PDF at full resolution, each
-  linking to a full-size view. The other two Artist tabs are still text-only.
+  Words) are in, extracted from the source PDF and cropped to the trim box,
+  each linking to a full-size view. The other two Artist tabs are still
+  text-only.
 - Real screenshots and URLs for the website cards
 - Confirm reprint rights on the two book covers — the flag is still on both
   cards; nothing legal has changed, only the artwork itself is now visible
-- **A cover image for the Writer featured block** — the titles are in
-  (*An Art of Words*, *Universal Quest*), but the photo of the two books
-  didn't come through as an attachable file, only as an inline paste I can't
-  save; drop it at `assets/books.jpg` and it appears automatically. Until then
-  the block shows just the "Published books" eyebrow, no broken image.
 - **`assets/writer/promo-flatlay.jpg`** — the flat-lay photo (books, printed
-  shirt, mugs, pens) for the top of the *Selected Poetry and Essays* scrapbook.
-  Same situation as the Writer cover — inline paste, no file to save.
+  shirt, mugs, pens) for the top of the *Selected Poetry and Essays*
+  scrapbook. It only ever came through as an inline paste, with no file to
+  save, so the `hero` key in `extras.js` is commented out. Drop the file in
+  and uncomment it.
 - **More scrapbook pages.** Seven pages exist now; more samples were promised
   for a follow-up message — append them to `SCRAPBOOKS['writing-samples'].pages`
   in `extras.js`.
