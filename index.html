@@ -683,6 +683,28 @@ figure.pfig figcaption{
   color:var(--pp-accent);text-decoration:none;border-bottom:1px solid currentColor;
 }
 
+/* photo gallery — a grid of build/investigation photos, each opens full size */
+.pgallery{margin:22px 0 34px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.pgallery a{display:block;text-decoration:none;border-radius:2px;overflow:hidden;border:1px solid var(--pp-line);background:#fff}
+.pgallery img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .35s var(--ease)}
+.pgallery a:hover img{transform:scale(1.06)}
+.pgallery figcaption{padding:7px 9px;font-size:12.5px;line-height:1.4;color:var(--pp-muted)}
+
+/* an embedded video, played in place — never a download link */
+.pvideo{margin:0 0 8px}
+.pvideo video{width:100%;height:auto;display:block;border-radius:3px;background:#000;box-shadow:0 16px 40px rgba(0,0,0,.18)}
+.pvideo figcaption{margin-top:10px;font-size:14.5px;line-height:1.6;color:var(--pp-muted);max-width:78ch}
+
+/* five-hand sign-language header, used only where a paper opts in */
+.hero-hands{
+  margin:0 0 22px;border-radius:10px;overflow:hidden;
+  box-shadow:0 10px 30px rgba(20,60,95,.14);
+}
+.hero-hands svg{display:block;width:100%;height:auto}
+.hero-hands .cap{
+  display:block;margin-top:10px;font-size:13.5px;font-style:italic;color:var(--pp-muted);
+}
+
 .ptable{margin:32px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .ptable table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
 .ptable th,.ptable td{border:1px solid var(--pp-line);padding:8px 11px;text-align:left}
@@ -747,11 +769,14 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
   #paper:not(.on){display:none !important}
   .chapter-inner,.paper-wrap{max-width:100%;padding:0;display:block}
   .chapter-inner h2{color:#000;font-size:22pt}
-  .featured,.card,.site,figure.pfig,.ptable{break-inside:avoid;page-break-inside:avoid;box-shadow:none;animation:none}
+  .featured,.card,.site,figure.pfig,.ptable,.pgallery{break-inside:avoid;page-break-inside:avoid;box-shadow:none;animation:none}
   .card,.site{border:1px solid #bbb;margin-bottom:10pt}
   .grid,.sites{display:block}
   .card:hover,.site:hover{transform:none}
   .paper h2{page-break-after:avoid}
+  .pvideo video{display:none}
+  .pvideo::before{content:'[ video omitted from print — watch it on the page ]';font-size:9.5pt;font-style:italic;color:#555}
+  .hero-hands{box-shadow:none}
   .print-all{display:block !important}
 }
 .print-all{display:none}
@@ -931,13 +956,14 @@ const BOOKS = [
         {y:'2023',t:'A Critique Paper on Autoreactive CD8+ T Cell Exhaustion Distinguishes Subjects with Slow Type 1 Diabetes Progression',d:'Section-by-section critique of a Journal of Clinical Investigation paper, scored against a structured rubric across abstract, introduction, literature, methodology, results, discussion and conclusion.',paper:'cd8',big:true},
         {y:'2021',t:'The Implementation of Microfragmentation as a Methodological Approach for Coral Rehabilitation in Bolinao Coral Reef System',d:'Methodological proposal for restoring the Bolinao-Anda reef complex — donor site selection, species identification, fragmentation and nursery transfer.',paper:'coral',big:true},
         {y:'2021',t:'Bioremediation of Heavy Metal Polluted Water Samples from Pasig River Using Endophytic Fungi Isolated from Blumea balsamifera (L.)',d:'Practical research on mycoremediation — isolating endophytic fungi from Sambong leaves and screening their biosorption capacity against Langmuir and Freundlich isotherm models.',paper:'bioremediation',big:true},
-        {y:'2021',t:'SIGN ME UP! — sign language detection app',d:'Top 10 national finalist, The Next Bright Idea competition, Enderun Colleges.',flag:'Paper to be added'},
-        {y:'2021',t:'Cigarette smoke filtration prototype',d:'Design and testing of a smoke purification prototype.',flag:'Paper to be added'}
+        {y:'2021',t:'Sign Me Up! — Concept Paper for a Sign Language Translator App',d:'Concept proposal for an app that translates sign language into audio and text, and audio back into sign, to close the gap between sign-language and non-sign-language users. Top 10 national finalist, The Next Bright Idea, Enderun Colleges.',paper:'signup',big:true},
+        {y:'2021',t:'Cigarette Smoke Filtration: A Prototype for Smoke Purification',d:'Homemade smoke-filtration device built around a recycled exhaust fan, an activated-charcoal filter and a citrus-liquid stage, field-tested against secondhand smoke in Bonifacio Global City.',paper:'cigarette',big:true}
       ]},
       {name:'Presentations', items:[
         {y:'2026',t:'Evaluation of Antimalarial Activity in Plasmodium falciparum',d:'Poster presentation. In vitro maintenance of chloroquine-sensitive 3D7 and chloroquine-resistant Dd2 strains, parasitemia assessment by Giemsa, and chloroquine IC50 susceptibility assays showing a ~28–33× resistance index. ICVS, Universidade do Minho.',paper:'antimalarial',big:true},
         {y:'2026',t:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain',d:'Presented alongside the written report — the DeepSqueak pipeline, network training and validation, and the USV parameters across the three-chamber paradigm.',paper:'usv',big:true},
-        {y:'2024',t:'Recombinant human wild-type G6PD and G6PD Viangchan',d:'Production and differential enzyme activity across variants.',url:'https://canva.link/yhgbfaxyq0649jg'}
+        {y:'2021',t:'Cigarette Smoke Filtration: A Prototype for Smoke Purification',d:'Progress documentation of the build — the concept sketch, the two exhaust fans, the homemade charcoal filter, and a video of the finished device under test. Grade 12 STEM project.',paper:'cigarette-progress',big:true},
+        {y:'2024',t:'Recombinant human wild-type G6PD and G6PD Viangchan',d:'Production and differential enzyme activity across variants.',url:'https://canva.link/g6pdviangchan'}
       ]},
       {name:'Laboratory', items:[
         {y:'2026',t:'Genetics',d:'Applied genetics rather than theory alone — worked through case study briefs that take a clinical or population scenario and require the underlying inheritance, variant interpretation and consequence to be reasoned out and defended. Master in Biomedicine, Universidade do Minho.',big:true},
@@ -953,7 +979,7 @@ const BOOKS = [
       {name:'Certifications', items:[
         {y:'2026',t:'Fundamental Neuroscience of Neuroimaging',d:'Johns Hopkins University. Neuroscience through MRI applications.'},
         {y:'2026',t:'Bioethics and Scientific Integrity Training',d:'Universidade do Minho, ICVS, 2026.'},
-        {y:'2026',t:'FELASA Course Completion',d:'Certified European training programme on animal science — Universidade do Minho, Life and Health Sciences Research Institute.'},
+        {y:'2026',t:'FELASA Certificate of Completion',d:'An accredited training programme in Laboratory Animal Science that complies with European Directive 2010/63/EU. Universidade do Minho, Life and Health Sciences Research Institute.'},
         {y:'2026',t:'Laboratory Safety Training',d:'Mandatory Practices in Laboratory Safety — Universidade do Minho, Life and Health Sciences Research Institute, 2026.'},
         {y:'2025',t:'Medical Virtual Assistant Trainee',d:'ProVa. US healthcare systems, HIPAA, EMR/EHR, coding and scribing basics.'}
       ]}
@@ -964,17 +990,16 @@ const BOOKS = [
     spine:'linear-gradient(90deg,#4A3120,#7C5636 44%,#38230F)',
     cover:'linear-gradient(135deg,#F2E3D0,#DCC3A6)',
     theme:{bg:'#F5EADC',bar:'#EADAC6',bar2:'#DFC9AF',card:'#FDF7EE',line:'#D5BC9E',ink:'#3A2716',muted:'#7A6046',accent:'#7C5636'},
-    bio:'Four published books, a national authorship certification, and commercial copy for startups and agencies. I write across registers — peer-reviewed, literary, and brand.',
+    bio:'Two published books, a national authorship certification, and commercial copy for startups and agencies. I write across registers — peer-reviewed, literary, and brand.',
     featured:{
-      y:'Published · Ukiyoto Publishing &amp; KM and H Black Paper Forest',
-      t:'Book one title · Book two title',
+      y:'Published books',
       img:'assets/books.jpg',
-      alt:'The two published books',
-      flag:'Send the two titles and the cover image — placeholder until then'
+      alt:'An Art of Words and Universal Quest, side by side',
+      cap:'An Art of Words &amp; Universal Quest'
     },
     tabs:[
       {name:'Books & Literary', items:[
-        {y:'2021',t:'Four published titles',d:'Ukiyoto Publishing (Canada) and KM and H Black Paper Forest (Philippines). Essays, poetry, short stories and prose.',big:true},
+        {y:'2021',t:'Published books: An Art of Words and Universal Quest',d:'Two collections of poetry and prose, released through Ukiyoto Publishing (Canada) and KM and H Black Paper Forest (Philippines).',big:true},
         {y:'—',t:'Selected poetry and essays',d:'Read here as web text, not screenshots — writing should be readable, not photographed.'}
       ]},
       {name:'Scientific Writing', items:[
@@ -1375,11 +1400,11 @@ function paint(bk,tabIndex){
     <section class="featured">
       <span class="badge">Featured</span>
       <span class="yr">${esc(f.y)}</span>
-      <h3>${esc(f.t)}</h3>
+      ${f.t?`<h3>${esc(f.t)}</h3>`:''}
       ${f.d?`<p>${esc(f.d)}</p>`:''}
       ${f.flag?`<span class="flag" style="display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px dashed ${t.muted};opacity:.75">${esc(f.flag)}</span>`:''}
       ${f.img?`<span class="shot">
-          <img src="${esc(f.img)}" alt="${esc(f.alt||f.t)}" loading="lazy"
+          <img src="${esc(f.img)}" alt="${esc(f.alt||f.t||'')}" loading="lazy"
                onerror="this.closest('.shot').remove()">
           ${f.cap?`<span class="cap">${esc(f.cap)}</span>`:''}
         </span>`:''}
@@ -1517,8 +1542,52 @@ function blockHTML(b,heads){
     </table></div>`;
   }
   if(b.refs) return '<ol class="refs">'+b.refs.map(r=>`<li>${esc(r)}</li>`).join('')+'</ol>';
+  if(b.gallery) return '<div class="pgallery">'+b.gallery.map(g=>`
+      <a href="${esc(g.img)}" target="_blank" rel="noopener">
+        <img src="${esc(g.img)}" alt="${esc(g.cap||'Photo')}" loading="lazy">
+        <figcaption>${esc(g.cap||'')}</figcaption>
+      </a>`).join('')+'</div>';
+  if(b.video) return `<figure class="pvideo">
+      <video controls preload="metadata" playsinline>
+        <source src="${esc(b.video)}" type="video/mp4">
+      </video>
+      ${b.cap?`<figcaption>${esc(b.cap)}</figcaption>`:''}
+    </figure>`;
   return '';
 }
+
+/* five hands lined up in a common sign — thumb, index and pinky raised.
+   Used as an optional header for papers about sign language / accessibility. */
+const HAND_BANNER = `<div class="hero-hands"><svg viewBox="0 0 1000 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five hands making the same sign, thumb index and pinky raised">
+<defs>
+  <linearGradient id="hbBG" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#E4EDF6"/><stop offset="1" stop-color="#CBE0F1"/>
+  </linearGradient>
+  <linearGradient id="hbFill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2E77A8"/><stop offset="1" stop-color="#123E60"/>
+  </linearGradient>
+  <symbol id="hbHand" viewBox="0 0 110 180">
+    <g fill="url(#hbFill)">
+      <rect x="38" y="140" width="30" height="34" rx="9"/>
+      <path d="M28,90 Q26,150 55,150 Q84,150 82,90 Q82,68 68,66 L68,88 Q68,66 55,66 Q42,66 42,88 Z"/>
+      <rect x="-4" y="90" width="38" height="16" rx="8" transform="rotate(-46 -4 90)"/>
+      <rect x="41" y="60" width="28" height="20" rx="8" fill="#0E3450"/>
+      <rect x="35" y="6" width="16" height="68" rx="8"/>
+      <rect x="64" y="22" width="14" height="50" rx="7" transform="rotate(10 64 22)"/>
+    </g>
+  </symbol>
+</defs>
+<rect width="1000" height="220" fill="url(#hbBG)"/>
+<g stroke="#8FB4D4" stroke-width="1.5" stroke-dasharray="1 7" stroke-linecap="round" opacity="0.6" fill="none">
+  <path d="M110,64 Q160,46 205,62"/><path d="M300,50 Q350,34 395,52"/>
+  <path d="M495,60 Q545,44 590,58"/><path d="M685,48 Q735,32 780,50"/>
+</g>
+<use href="#hbHand" x="30" y="26" width="108" height="163" transform="rotate(-9 84 108)" opacity="0.88"/>
+<use href="#hbHand" x="220" y="10" width="108" height="163" transform="rotate(5 274 92)" opacity="0.94"/>
+<use href="#hbHand" x="410" y="20" width="108" height="163" transform="rotate(-3 464 102)"/>
+<use href="#hbHand" x="600" y="6" width="108" height="163" transform="rotate(7 654 88)" opacity="0.94"/>
+<use href="#hbHand" x="790" y="24" width="108" height="163" transform="rotate(-6 844 106)" opacity="0.88"/>
+</svg><span class="cap">A shared sign — thumb, index and pinky raised, the rest folded in.</span></div>`;
 
 function paintPaper(id){
   const p=PAPERS[id];
@@ -1538,6 +1607,7 @@ function paintPaper(id){
   const mins=Math.max(1,Math.round(wordCount(p)/220));
 
   pBody.innerHTML=`
+    ${p.banner==='hands'?HAND_BANNER:''}
     <p class="kicker">${esc(p.kicker||'')}</p>
     <h1>${esc(p.title)}</h1>
     <p class="byline">${esc(p.author||'')}</p>

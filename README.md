@@ -62,13 +62,21 @@ download. The `<id>` must match a key in `papers.js`.
 Inside `papers.js`, a paper is a title block plus an array of content blocks:
 `{h:'Heading'}`, `{h3:'Sub-heading'}`, `{p:'Paragraph'}`, `{list:[…]}`,
 `{ol:[…]}`, `{defs:[[term,meaning],…]}`, `{fig:'path', cap:'caption'}`,
-`{table:{cap,head,rows}}`, `{note:'aside'}` and `{refs:[…]}`. The reader builds
-the contents sidebar, the reading-time estimate and the progress bar from that
-structure automatically. Every word in those blocks is the author's own and is
+`{table:{cap,head,rows}}`, `{note:'aside'}`, `{refs:[…]}`,
+`{gallery:[{img,cap},…]}` for a grid of photos that each open full size, and
+`{video:'path', cap:'caption'}` for a video played in place with native
+controls — never offered as a download. The reader builds the contents
+sidebar, the reading-time estimate and the progress bar from that structure
+automatically. Every word in those blocks is the author's own and is
 reproduced exactly as written.
 
 Set `poster:{img:'…', alt:'…'}` instead of an abstract for poster presentations —
 the image is shown large at the top, with the transcribed text below it.
+
+Set `banner:'hands'` on a paper to open it with the five-hand sign-language
+header instead of the plain kicker line — used on `signup`. The banner markup
+lives once in `index.html` as the `HAND_BANNER` constant; add a new key there
+and reference it the same way for a different visual header.
 
 ### The featured block
 
@@ -105,10 +113,21 @@ assets/
     usv-fig1.jpg … usv-fig9.jpg   the nine figures from the rotation report
     clero-table1.jpg, -table2.jpg the two thesis result tables
     biorem-fig1.jpg, -fig2.jpg    the bioremediation conceptual framework
+    cig-photo01.jpg … -16.jpg     build photos from the cigarette filtration paper
+    cig-progress-*.jpg            the concept sketch and one build photo, from the progress sheets
+    cig-video.mp4                 field test of the finished device (23MB — see note below)
 ```
 
-Seven papers are readable in full at `#/paper/<id>`: `usv`, `attention`,
-`antimalarial`, `clerodendrum`, `cd8`, `coral`, `bioremediation`.
+Nine papers are readable in full at `#/paper/<id>`: `usv`, `attention`,
+`antimalarial`, `clerodendrum`, `cd8`, `coral`, `bioremediation`, `signup`,
+`cigarette`. A tenth, `cigarette-progress`, carries the build's progress
+report and the field-test video under Presentations, sharing the same title
+as the `cigarette` research paper in Research Papers — same project, two
+different documents.
+
+`cig-video.mp4` is committed as-is (no compression tooling was available in
+this environment). 23MB is under GitHub's warning threshold but will slow a
+fresh clone; if more video gets added later, worth moving to Git LFS.
 
 If `assets/nicole.jpg` is ever missing the frame falls back to an `NBC`
 monogram rather than a broken image. The warm overlay that blends the studio
@@ -170,8 +189,8 @@ directory is the root. Push to deploy.
 - Name the signature illustration style
 - Real screenshots and URLs for the website cards
 - Confirm reprint rights on the two published book covers
-- **The two book titles and a cover image** for the Writer featured block —
-  currently a placeholder; drop the image at `assets/books.jpg`
-- **SIGN ME UP!** and the **cigarette smoke filtration prototype** papers —
-  both cards sit in Medical → Research Papers flagged "Paper to be added";
-  add each to `papers.js` and set `paper:'<id>'` on its card
+- **A cover image for the Writer featured block** — the titles are in
+  (*An Art of Words*, *Universal Quest*), but the photo of the two books
+  didn't come through as an attachable file, only as an inline paste I can't
+  save; drop it at `assets/books.jpg` and it appears automatically. Until then
+  the block shows just the "Published books" eyebrow, no broken image.

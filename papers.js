@@ -15,6 +15,12 @@
      {table:{cap:'…',head:[…],rows:[[…]]}}
      {refs:['…','…']}            numbered reference list
      {note:'…'}                  small aside
+     {gallery:[{img,cap},…]}     grid of photos, each opens full size
+     {video:'path', poster:'path', cap:'…'}   an embedded video, played in place
+
+   A paper may also set `banner:'hands'` to open with the five-hand
+   sign-language header defined once in index.html, instead of the
+   plain kicker line.
 
    The wording of every paragraph is the author's own and is
    reproduced verbatim from the source documents.
@@ -353,6 +359,228 @@ const PAPERS = {
       'World Health Organization. World Malaria Report 2025. World Health Organization; 2025. Serrano D, Santos-Reis A, Silva C, et al. Imported malaria in Portugal: prevalence of polymorphisms in the anti-malarial drug resistance genes pfmdr1 and pfk13. Microorganisms. 2021;9(10):2045. doi:10.3390/microorganisms9102045',
       'Trager W, Jensen JB. Human malaria parasites in continuous culture. Science. 1976;193(4254):673-675. doi:10.1126/science.781840',
       'Delves MJ, Straschil U, Ruecker A, et al. Routine in vitro culture of Plasmodium falciparum gametocytes to evaluate novel transmission-blocking interventions. Nat Protoc. 2016;11(9):1668-1680. doi:10.1038/nprot.2016.096'
+    ]}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'signup': {
+  cat:'medical',
+  tab:'Research Papers',
+  banner:'hands',
+  kicker:'Concept Paper · March 2021',
+  title:'Sign Me Up! — Concept Paper for a Sign Language Translator App',
+  author:'Cabral, Nicole B. · Itol, Dancel · Sarapolin, Mico Jay M.',
+  meta:[
+    ['Institution','Senator Renato "Compañero" Cayetano Memorial Science and Technology High School'],
+    ['Section','12 - STEM 202'],
+    ['Date','March 2021'],
+    ['Recognition','Top 10 National Finalist, The Next Bright Idea, Enderun Colleges']
+  ],
+  blocks:[
+    {h:'Introduction'},
+    {p:'Deaf and mute community around the world is growing due to a number of factors. These factors include heredity, ageing, some health complications, and of course, environmental factors such as living or working in a place where the intensity of noise exceeds 80 decibels for several hours can lead to temporary or worse, permanent deafness (Mills &amp; Going, 1984; Mayo Clinic, 2019). Partly due to their disability, they are having difficulties communicating with others. Luckily, sign language (includes the widely taught British and American varieties, and also the local variety, Filipino) does not require oral communication, which was constructed 200 years ago. This was exclusively designated for people who are having difficulties or incapable of speaking (US National Institute on Deafness and Other Communication Disorders, 2019).'},
+    {p:'In current times, over five percent of the global population or 430 million people are either deaf or mute to some varying degrees (World Health Organization, 2021).'},
+    {p:'Sadly, some government state fundings that allocates the teaching of sign language to children have been dwindling due to lack of interest and different alternatives (Davey &amp; Miller, 2011). Due to this, people are increasingly unaware how to interpret deaf and muted people who are using sign languages to communicate in their day-to-day lives. For instance, there are deaf and muted people who have livelihoods who are dependent on using sign languages to communicate with non-sign language users (Corpuz, n.d).'},
+    {p:'With said circumstances, the proponents of this project proposal are determined to break the ‘barrier’ between the users and non-users of sign language by making an app that can easily translate sign languages into audio and/or written text within minutes just by recording the video of a person communicating with sign language. If this project were given fundings, this would help countless lives as there are lots of people working despite their deafness and muteness just to provide for themselves and for their family. And most importantly, this app would also promote equality amongst deaf and muted people due to the fact that they can finally voice out their silent struggles because of their disabilities.'},
+
+    {h:'Rationale / Background'},
+    {p:'Disability is an evolving concept that includes long-term physical, mental, or intellectual disorders. Alternatively, sensory impairments are acquired through injury, illness, or congenital conditions (Word Health Organization &amp; World Bank, 2011). Hearing impairments are one of these disabilities that are still considered widely as a dilemma in society. There are people who, because of their incapability to hear, refer to those who are deaf, experience profound changes to their surroundings and quality of life due to hearing loss. To say that some people believe that deaf and hard-of-hearing individuals are less intelligent, but it must not be because that is for the facts to prove it. While most people assume that people who are born deaf and mute lack the use of their natural sense of hearing and have inferior cognitive abilities, they are just as intelligent as those who are born with sound or verbal intelligence.'},
+    {p:'Once someone begins to use sign language, still, all are automatically made aware of the reality of the deaf community. Regardless of what language is spoken in the country, deaf and mute people know sign language. There are various methods of communication, including spoken word and nonverbal communication. On the contrary, learning to communicate through signs and symbols requires only learning, not difficult skills, especially the deaf and the mute have no access to. Dealing with those who are capable of detecting the difference in spoken language is more difficult than those who hear only is more difficult for them to comprehend (Adams &amp; Malvern, 2003). So, to a certain extent, gestures can be meaningful in processing, as they provide meaning in communication. Formal research on Philippine Sign Language has only begun in the previous years. To a large extent, it is underappreciated in the workplace, schools, courts, and the media. Despite being self-sufficient, sign language is also known as Filipino Sign Language (FSL), and remains marginalized in Filipino society. The language has been the focus of significant efforts for nearly two decades and is yet to make much of an impact on Filipino society.'},
+    {p:'As far as sign language is concerned, language policy is virtually non-existent (Philippine Deaf Resource Center, 2005). These pieces of information are relevant for the mobile application to be visualized. However, it is difficult to get financial support at the current time, particularly during this crisis. Another critical issue to take into consideration is whether Computer Science, Engineering, and Linguistics will make the mobile application standards less technical for the users. There is also the possibility that the design presentation will demonstrate additional difficulties for sign language interpreters. There shall be an extensive need for hand signs, manual signals, or a large body of data and analysis in order for applications to be built in to be done in the field of linguistics. Moreover, coordination across the various disciplines shall have to be taken on by the deaf community, the government, and the non-government entities for this design pitch to be successful and efficient. Optimistically, the Filipino Deaf and Mute communities continue to be a lively and active segment on the islands, sharing and working with other Deaf people across the nation, yet, individual identity is preserved through the fact that each gesture influences the entire group of people existing.'},
+
+    {h:'Project Description'},
+    {p:'This concept aims to provide a conducive environment for the ones with hearing impaired. By inventing an app, it will help to automatically translate their sign language within a conversation with the non-sign language users. So that they can easily reach out the other individuals, not just their peers. Since, the relationship between the hearing community and the deaf/muted community created a barrier when they continued to misinterpret each other, especially when the deaf individuals were seen to lack something because of their hearing disability (Clason, 2019). To break down this stigma, this invention will give them a chance to finally live a comfortable space in society without feeling undervalued.'},
+    {p:'According to Morgan (2015), the use of technology changed the way everyone communicates, in which it brought an opportunity to the deaf community (including the muted people). To further apply the advantages of technology in this study, a sign language app translator will be invented and it will be termed as, “Sign Me Up!”. But the conditions that will be considered are not only for scanning the hand gestures of the sign language users, it will also feature the reply of non-sign language users by converting their audio into depictions of sign language. From these two factors, its benefit will clear out their once misinterpretation as both parties are finally able to understand and communicate with each other.'},
+    {p:'If this app were to be finalized, its success will be determined if the sign language users and non-sign language users were able to adapt continuously with this new form of interaction. Plus if using this app becomes a habit to converse with the sign language users, it will form a deeper bond with the other group. Therefore, this concludes that the app is recommendable and convenient for any users to connect with the deaf and muted community.'},
+
+    {h:'References'},
+    {refs:[
+      'Adams, C., &amp; Malvern, C. (2003, December 23). In what language do deaf people think? Retrieved July 22, 2016, from http://www.straightdope.com/columns/read/2486/in-what-language-do-deaf-people-think',
+      'Clason (2019). "Deaf Culture and Community: Why It is Important." Healthy Hearing, www.healthyhearing.com/report/52285-The-importance-of-deaf-culture.',
+      'Morgan (2015). "Technology Breaking Down Barriers Between Deaf and Hearing Communities." Deseret News, www.deseret.com.',
+      'Going and Mills (2020). American Sign Language. NIDCD. Retrieved from www.nidcd.nih.gov/health/american-sign-language.',
+      'World Health Organization (2020). "Deafness and Hearing Loss." www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss.',
+      'Mayo Clinic (2019). "Hearing Loss - Symptoms and Causes." Retrieved from www.mayoclinic.org/diseases-conditions/hearing-loss/symptoms-causes/syc-20373072.',
+      '"American Sign Language on the Brink of Extinction | The Takeaway | WNYC Studios." WNYC Studios, www.wnycstudios.org/podcasts/takeaway/segments/148707-american-sign-language-threatened.',
+      'Corpuz (n.d). アジア経済研究所, www.ide.go.jp/library/English/Publish/Download/Jrp/pdf/151_04.pdf.',
+      '"Review of Environmental Factors Affecting Hearing." PubMed Central (PMC). Retrieved from www.ncbi.nlm.nih.gov/pmc/articles/PMC1568958/.',
+      'Philippine Deaf Resource Center. (2005). Preliminary Sectoral Position Papers for an Initiative in Language Planning for Sign Language Policy for the Republic of the Philippines: A Compilation. Unpublished manuscript, Quezon City.',
+      'World Health Organization and World Bank (2011). World report on disability. Geneva: WHO. Retrieved from www.who.int/disabilities/world_report/2011/report.pdf.'
+    ]}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'cigarette': {
+  cat:'medical',
+  tab:'Research Papers',
+  kicker:'Research Paper · STEM 202 · June 2021',
+  title:'Cigarette Smoke Filtration: A Prototype for Smoke Purification',
+  author:'Cabral, Nicole · Dela Cruz, Tricia Joice · Reyes, Ivy Rochelle · Sarapolin, Mico Jay · Vivas, Robert (STEM 202) · Cudel, Paul Daniel (STEM 201)',
+  meta:[
+    ['Institution','Senator Renato "Compañero" Cayetano Memorial Science and Technology High School'],
+    ['Date','June 2021']
+  ],
+  blocks:[
+    {h:'Introduction'},
+    {h3:'Background of the Study'},
+    {p:'Using cigarettes can cause threats. It gives alarming effects on the lungs, while the smoke it expels in the air can badly affect the environment, and it creates room for secondhand smoke. This cigarette smoking states the act of intaking and exhaling fumes of a dried tobacco (Centers for Disease Control and Prevention, n.d.). Some individuals are susceptible to serious addiction to this form of activity. Based on a survey conducted in 2009, there are 28.3% population of Filipinos who smoke and 48.8% Filipinos who smoke in their households (Bellew et al., 2013). This leaves millions of households exposed to the harmful effects of cigarette smoking, specifically secondhand smokers. Secondhand Smoke (SHS) or also known as passive smoke pertains to the mixture of smoke which arises from the burning end of the cigarette and the smoke expelled by the smoker. It is estimated that secondhand smoke contains 7,000 chemicals, 700 of which are known to be carcinogenic (Centers for Disease Control and Prevention, n.d.).'},
+    {p:'The said risky effects led this study to come up with a device that filters the smoke. Its necessary components consist of an activated charcoal filter, exhaust fan, and acetic acid (vinegar) in building the cigarette smoke filtration. The basic function of the exhaust fan is to extract the contaminated air and take in the fresh air in exchange (Finolex, 2019). In this study, the exhaust fan will be the main driver to make sure that the smoke circulates inside the homemade smoke filtration. While, both the activated carbon and vinegar are useful installments in the device to absorb and eliminate the smoke being expelled from the cigarette (Ullman and Vila, 2021). In addition to the article of Ullman and Vila (2021), the unpleasant smell of the vinegar should not be a concern because its presence will later dissipate naturally.'},
+    {p:'At this firm, home experiments will be carried out to determine the effectiveness and performance of the cigarette smoke filter. Since there are many smokers that are unable to stop smoking, developing this homemade device seeks to mitigate pollution from purifying the cigarette smoke being expelled to the environment. Moreover, it is capable of reducing the risks or presence of second-hand smoke. At the same time, this product will serve as an advantage amidst the pandemic. Given that the coronavirus can bring a crucial issue for the lungs if cigarette smoke is constantly suspended in the air (Department of Health Press Release, 2020).'},
+    {h3:'Conceptual Framework'},
+    {p:'The dismissal of smoke or the eliminated smoke after the filtration process is dependent on the air pressure from the exhaust fan. The lower the air flow it exhibits, the less chance that the smoke expelled by the smoker will be acquired by the exhaust fan. In this case, the circulation of the smoke will not execute properly in the device. Therefore, the results may vary from what is predicted; instead of getting rid of the smoke.'},
+
+    {h:'Statement of the Problem'},
+    {p:'This research aims to assess its prototype’s functionality and to answer the following:'},
+    {ol:[
+      'Will the air pressure from the exhaust fan affect the circulation of cigarette smoke?',
+      'Will the smoke be adsorbed by the filter?',
+      'What are the primary installments to eliminate smoke during the filtration process?'
+    ]},
+
+    {h:'Hypothesis'},
+    {p:'There is a tendency that cigarette smoke will be eliminated after undergoing the filtration process.'},
+
+    {h:'Definition of Terms'},
+    {defs:[
+      ['Acetic Acid (Vinegar)','A solution that will help to get rid of the smoke.'],
+      ['Activated Charcoal Filter or Activated Carbon','This variable is also the main function for smoke removal since the carbon in the charcoal can chemically trap smells.'],
+      ['Airborne Contaminants','Are unfavorable harmful particles that are floating in vapor as well as fumes, gaseous molecules, and mist.'],
+      ['Carcinogen','A cancer-inducing factor that acts together with another factor that promotes the acceleration of cancer.'],
+      ['Cigarette Smoke Filtration','A device that filters cigarette smoke and reduces its harmful chemicals that are dangerous to people and to the environment.'],
+      ['Exhaust Fan','It is a tool that will absorb and circulate cigarette smoke in the device.']
+    ]},
+
+    {h:'Importance of the Study'},
+    {p:'Smoking is prevalent in the Philippines, so exposure to the chemicals present in cigarette smoke can lead to harmful impacts that may affect people and the environment. The development of this project can lead to the prevention of these risks that are posed by second-hand smoke. If the results that the researchers obtain from the project will be effective, the product will benefit the individuals that are constantly exposed to secondhand smoke. It will also be advantageous to smokers who are recognizant of the smoke they expel. Additionally, this will be used as an advantage amidst the pandemic. Given that, the impact of the coronavirus can put the lungs more in a critical condition if the body takes in the smoke (Department of Health Press Release, 2020). Therefore, the association of Covid-19 and cigarette smoking can cause severe effects or even death (Gonzalez, 2020; Department of Health Press Release, 2020). Furthermore, this output may also serve as an initial step for future researchers who desire to further develop a similar product.'},
+
+    {h:'Scope and Limitation'},
+    {p:'This study focuses on the functions of cigarette smoke filtration in eliminating cigarette smoke either indoor or outdoor settings in the Philippines. It will cover specific areas in Bonifacio Global Cities (BGC) where cigarette smokers mostly engage in. The smoke they expel will eventually absorb and filter it into a refined and cleansed air. Given that it is a wide site, there are many parking lots and spaces for smoking (MOK, 2020). This study aims to determine its capacity to filter, it does not consider other variables on other contaminated air that can affect the results of the study.'},
+
+    {h:'Review of Related Literature and Studies'},
+    {h3:'Cigarette Smoke Filtration'},
+    {p:'The following materials will be utilized in the creation of the mechanism of the cigarette smoke filter: exhaust fan, activated charcoal filter and foam. The exhaust fan will serve as the main driver in siphoning the cigarette smoke. In a study conducted to find the significance of the use of a central forced-air fan in filters, results show that utilizing air fans could reduce indoor particle concentrations by 25–50% (Wallace, 2004). The application of an activated charcoal filter also reduces the levels of p-benzosemiquinone, a cigarette volatile compound (VOCs), to 73–80% less than those without (Dey, 2010). Another study that aims to find the physiological effects of activated charcoal filtration of cigarette smoke in rats finds a significant development in Laryngeal epithelial cells of rats of those who inhaled smoke which undergone through activated charcoal filtration (Gaworski et al., 2009). The use of foam in filters also reduces the carcinogenic compounds found in tobacco smoke and an increased absorption in nitrosamines, acetamides, and other compounds (Verdolotti et al., 2012).'},
+    {p:'Several studies indicate that smoke or air purifiers have a significant effect in mitigating the exposure of secondhand smoke in households with cigarette users. In Baltimore, Maryland, the utilization of air purifiers shows reduced levels of Particulate Matter (PM2.5) and salivary cotinine in non-smoking individuals (Rice et al., 2018). PM2.5 refers to an inhalable particulate matter which is 2.5 micrometers and smaller (United States Environmental Protection Agency, n.d.). Research conducted in childcare centers in South Korea shows feasible results on the reduction of PM2.5 with the use of air filters and thus leading to increased air quality (Oh, 2014). In a study published to determine the effectiveness of performance of room filters in Cigarette Smokers\' Homes, researchers show a decrease in PM concentrations by 30−70% including a significantly reduced half-life of PM0.3-1.0 (Batterman, 2005).'},
+    {h3:'Development of Cigarette Smoke Filtration'},
+    {p:'Smoke or air purifiers can be a beneficial device for reducing exposure to airborne particulate matter, as well as to mitigate health risks (Hayward Score, 2020). In understanding how it aims, this study will first comprise the said materials: exhaust fan, activated carbon filter, a liquid citrus fruit in a pump, and a foam. All of these tools will serve as the components of the cigarette smoke filtration for this project.'},
+    {p:'Based on the related article about its product of Puget Sound Clean Air Agency (2021), the essence of filter fans can filter out the small particles from any types of smoke. Two of the reliable video sources found that a homemade cigarette smoke filter or Do It Yourself (DIY) cigarette smoke extractor will function easily with only simple components to be assembled. As for the tutorial in the first source of Crazy Cute Experiments (2017), they gathered the wires, a computer fan, a protective mask as a filter, and a rubber band. When these parts were being adhered together, the result appeared to be successful as the smoke was purified by its filter. Meanwhile, this structure varies from the second source desertsun02 (2019), when he demonstrated how to build a cigarette smoke filter with an activated carbon that plays a crucial role to its overall functionality. It is a bucket design that consists of a small 12V DC fan, a non-metal window screen, cable ties, and holds four pounds of activated carbon. An activated carbon is a type of filtration that can eliminate any unpleasant odors, such as solder fumes, cigarette smoke, industrial odors, and etc., (desertsun02, 2019). As a result, the comments from his video made good reviews when his handmade product was confirmed to function effectively.'},
+    {p:'The aforementioned video sources were one of the causes that the group gathered some ideas on how to construct their own design of cigarette smoke filtration, herein it will be viewed in a tube model. This intends to filter out the cigarette smoke to further prevent the harmful causes of smoking; for both mitigating second-hand smoke and environmental pollution.'},
+    {h3:'Smoking in the Philippines'},
+    {p:'The Global Tobacco Surveillance System (GTSS) was introduced in 2009 and distributed on a national level for the first time, the second time in 2015. During the six years between the two survey periods, the country\'s distinct periods, the Philippines has succeeded in reducing cigarette use and, in particular, in both structurings, the excise taxes to be consistent with the Framework Convention on Tobacco Control and the varying tobacco control efforts undertaken by local governments that took place, such as the development and implementation of laws that were fully compliant with the framework convention (Global Adult Tobacco Survey, 2015). A study published by the Union (2020) claims that approximately 17.3 million adults (28% of the population) in the Philippines use cigarettes, and the numbers of men (48%) are higher among those who smoke more (9%). Roughly half of young people ages 13 to 15 and half of adults over the age of 15 are risked by second-hand smoke in their homes. One-third of all cigarette users die from cigarette use, while at the peak of their careers, and 87,600 Filipinos per year lose their lives due to cigarettes, plus the number of daily tobacco fatalities rises to 240. There is an approximate $858 million annual expenditure required for tobacco-related illnesses treated in the Philippines. Smoking is prohibited in mainly indoor public places and workplaces, including authorities establishments, healthcare centers, and educational organizations, and buildings visited often by minors; however, established smoking areas are authorized in other public places and workplaces, including bars and cabarets. So in some public places, smoking areas are being designated (Tobacco Control Laws, 2021).'},
+    {p:'While numerous anti-smoking policies have been in place for generations, each with numerous stories about the dangers to people and the individuals involved, there are countless who are still pursuing to use cigarette products and family after family each story of destruction. Understandably, it has long been observed that biological, social, and particularly cultural factors play significant functions in the propensity for cigarette use. The science now reveals that research evidence about people\'s levels of experimentation, such as technological designs, as well as the health impacts and research-based strategies, has decreased the rate of progression to addiction and reduced both initial and population use.'},
+    {h3:'Areas that have produced Cigarette Smoke Filtration'},
+    {p:'The smoke emitted from cigarettes has toxicological properties which are dangerous and hazardous like volatile organic compounds. Having cigarette filters can reduce smoke deliveries of a wide range of toxic substances, especially VOCs in home or any places. Just like in other countries such as the United Kingdom, United States of America, Canada, and Singapore, there are alternative air purifiers to eliminate cigarette smokes, such as PECO, Carbon, and HEPA (High Efficiency Particulate Air) filters. In Japan, most of their cigarettes contain charcoal filters which efficiently absorbs gas phase toxins in mainstream smoke. The majority of cigarette brands made and sold in Japan have activated carbon (charcoal) granules found in the filter. The charcoal filter effectively absorbs gas phase contaminants in conventional smoke, such as hydrogen cyanide, formaldehyde, ammonia, and crotonaldehyde. The study stated that the taste of charcoal has no effect on the body; rather, it can help the smoker to weaken the chance of having lung cancer (Cancer Sci, 2005).'},
+
+    {h:'Methodology'},
+    {h3:'Research Design'},
+    {p:'The researchers conducted the inquiry using a pre-experimental design. Experimental design is a highly effective technique for defining the relationship between cause and effect. It is a causal technique in which the independent variable\'s effect on the dependent variable is determined. In a pre-experimental research design, the effect of applying an independent variable that is presumed to cause change is examined on a group or multiple dependent groups. Typically, this design enables researchers to control and manipulate the research environment, including the modifiable predictor variable. This is because it occurs in a real-world setting where it is impossible to eliminate all irrelevant variables.'},
+    {h3:'Population'},
+    {p:'This study will be conducted in specific areas in Bonifacio Global City. Given that it is a wide site, there are many parking lots and spaces for smoking where smokers mostly engage in (MOK, 2020). The target respondents will be easier to gather there, wherein it will be 10 both men and women who are experienced smokers. Thus, the product is not massive enough to control over the smoking activity, this project will estimate a few respondents to test if this will only cover enough smokers in a specific area.'},
+    {h3:'Sampling Method'},
+    {p:'In the research method, the researchers used a purposive sampling technique. Purposive sampling technique is used to recruit participants according to criteria set by the researchers through their expertise in order for them to gain detailed feedback and explanation towards the subject matter (McCombes, 2019).'},
+    {p:'For the study, the researcher requires:'},
+    {ol:[
+      'Adult of legal age;',
+      'Smoker for about 5 years and above;',
+      'Consent of the person involved in the study.'
+    ]},
+    {h3:'Data Collection Procedure'},
+    {p:'The data will be gathered with the implementation of the prototype cigarette filter that was constructed by the researchers. The data will be collected through a series of tests that would provide valuable data that would help identify the accuracy of the researcher’s hypothesis.'},
+    {p:'The researchers will utilize qualitative data collection methods. This involves the collection of data and its interpretation based on the outcome of the mechanism of the product. Observations would be tallied based on the variance in the behavior of the cigarette smoke. The results that will be gathered will undergo an analysis. Certain factors and points will be weighed in as the basis of the interpretation of the data collected. The process would further determine the effectiveness of the product and the subsequent approval or rejection of the hypothesis constructed.'},
+
+    {h:'Presentation, Analysis, and Interpretation of Data'},
+    {table:{
+      cap:'Air flow and estimated MERV rating of the two recycled exhaust fans tested, with the observed effect on smoke uptake.',
+      head:['Component','Air Flow','MERV (estimated)','Observation on Smoke'],
+      rows:[
+        ['1st Recycled Exhaust Fan (without blades)','When tested, it has a low speed of air.','MERV 1 to 8; AFI &lt;65% to AFI 85%-90% or NBS 25%-30% to NBS 30%-35%; with a controlled contaminant over a particle bigger than 10.0µm or within 3.0µm-10.0µm.','The smoke was unlikely to be taken in by the exhaust fan due to low air ventilation.'],
+        ['2nd Recycled Exhaust Fan (Brand: Dowell)','It has a sufficient speed of air.','Between MERV 9 to 10; NBS 40%-85%; particle size within 1.0µm-3.0µm or within 0.3µm-1.0µm.','It has the potential to suck the smoke and circulate in the homemade device.']
+      ]
+    }},
+    {p:'Upon experimenting, the researchers first tested the first recycled exhaust fan. When plugged in, the researchers thought that it could be a reliable tool for the project and would serve as the main driver to absorb the smoke. However, it was later conducted that the eliminated smoke after the filtration process was confirmed to be dependent on its speed. Therefore, the first test failed. So, they later utilized another exhaust fan to be plastered on the first exhaust fan. In short terms, the first recycled fan became the mouthing base for the pipe and the second exhaust fan. This second attempt became successful.'},
+    {p:'Based from the table of MayAir (n.d) about the Minimum Efficiency Reporting Values or also considered as Air Filters and Efficiency, MERV 9 to 16 are medium filters that are capable to filter out particles within 1.0µm-3.0µm or 0.3µm-1.0µm, and of those particles include the smoke. As a support, in another study of Wojcik (2021), it is indicated that for about MERV 13 is for smoke when the filter is taped in a box fan and it has found to be 80% effective. Moreover, around MERV 8 to 13 or 11 to 13 measures the effectiveness of air filters (Greatist, 2021; Montana Wildfire Smoke, 2021). Therefore, this project can conclude that the homemade Cigarette Smoke Filtration is between MERV 8 to 13. As a result, it is validated that this project is proven to be effective.'},
+
+    {h:'Summary, Conclusions, and Recommendations'},
+    {h3:'Conclusions'},
+    {p:'The test conducted by the researchers suggests the effectiveness of the product has a positive effect on the removal of cigarette smoke in the air. The results show a significant loss on the visible precipitate that cigarette smoke possesses, which leads to the eventual elimination of these particulates as seen with the mechanical filtration apparatus in the prototype.'},
+    {p:'With the results, we can conclude that the prototype can be used as a mechanism that greatly impacts the amount of cigarette smoke, specifically second-hand smoke in the surrounding area. With that comes the prevention of the negative implications brought by the presence of cigarette smoke to the individuals exposed to it.'},
+    {h3:'Recommendations'},
+    {p:'The recommendations are given for the future researchers to improve the study and to create a better product:'},
+    {ol:[
+      'Improvements on using a favorable scent like citrus fruit as an exchange to the smoke being introduced to the air filtration tube.',
+      'Conduct a laboratory test for: Air Ventilation Pressure, Speed of the air filtration, Compatibility to the harsh environment, Electrical Resistance and Controllability of switches of the product.',
+      'Operate a longer period of experimentation from public smoking areas in the Philippines.',
+      'To be installed not only in public areas, but also in prominent casinos such as Resorts World Manila and Solaire since casinos are exposed in this form of activity.'
+    ]},
+
+    {h:'Pictures of the Investigation'},
+    {p:'Almost all materials are recycled except the manual pump and silver spray paint.'},
+    {gallery:[
+      {img:'assets/papers/cig-photo01.jpg', cap:'The pipe fitted through the recycled exhaust fan housing.'},
+      {img:'assets/papers/cig-photo05.jpg', cap:'The pipe assembled with the first exhaust fan.'},
+      {img:'assets/papers/cig-photo07.jpg', cap:'The thin blue cloth used for the filter, chosen for its cheesecloth-like weave.'},
+      {img:'assets/papers/cig-photo10.jpg', cap:'Activated charcoal for the filter stage.'},
+      {img:'assets/papers/cig-photo14.jpg', cap:'The finished device — the second exhaust fan (Dowell) joined to the filtration pipe.'},
+      {img:'assets/papers/cig-photo16.jpg', cap:'The manual pump, for circulating the citrus-liquid stage.'}
+    ]},
+
+    {h:'References'},
+    {refs:[
+      'Department of Health Press Release (2020). DOH, PPS: A Smoke-Free Philippines Lessens COVID-19 Risk, Tobacco Use Weakens Lungs and Immune System. doh.gov.ph.',
+      'Global Adult Tobacco Survey: Executive Summary (2015). Philippine Statistics Authority.',
+      'Hayward Score (2020). Increase Filtration with a DIY Filtered Box Fan. www.haywardscore.com.',
+      'MayAir (n.d). Table for Air Filters. iaqtechnology.eu.',
+      'Montana Wildfire Smoke (2021). "DIY Fan Filter." www.montanawildfiresmoke.org.',
+      'Polzin, G. M., Zhang, L., Hearn, B. A., Tavakoli, A. D., Vaughan, C., Ding, Y. S., Ashley, D. L., &amp; Watson, C. H. (2008). Effect of charcoal-containing cigarette filters on gas phase volatile organic compounds in mainstream cigarette smoke. Tobacco Control, 17(Supplement 1), i10-i16.',
+      'Wojcik, G. (2021). "How to Make a DIY Air Purifier with a Box Fan." Greatist, greatist.com/discover/diy-air-purifier.'
+    ]}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'cigarette-progress': {
+  cat:'medical',
+  tab:'Presentations',
+  kicker:'Progress Documentation · STEM 202 · 2021',
+  title:'Cigarette Smoke Filtration: A Prototype for Smoke Purification',
+  author:'Cabral, Nicole · Dela Cruz, Tricia Joice · Reyes, Ivy Rochelle · Sarapolin, Mico Jay · Vivas, Robert (STEM 202) · Cudel, Paul Daniel (STEM 201)',
+  meta:[
+    ['Institution','Senator Renato "Compañero" Cayetano Memorial Science and Technology High School'],
+    ['Form','III Project Progress Report Sheets']
+  ],
+  blocks:[
+    {video:'assets/papers/cig-video.mp4', cap:'Field test of the assembled cigarette smoke filtration device — the exhaust fan propelling air through the length of the pipe.'},
+    {note:'This is a Grade 12 – STEM project.'},
+
+    {h:'Progress Report'},
+    {h3:'April 30, 2021'},
+    {fig:'assets/papers/cig-progress-sketch-1.jpg', cap:'The group\'s concept sketch, illustrated by Ms. Cabral — louver, exhaust fan and activated charcoal filter at the intake end; foam cases and the citrus-liquid pump along the body of the tube.'},
+    {p:'The figure above was illustrated by Ms. Cabral as she was able to gather ideas from her group mates to come up with a concept of how the product should look like. But take note that the design is theoretical and may be an attempt for the process because changes might happen from its composition if ever there is a need to confirm and correct the parts of the product. Since the needed materials were not yet finalized and have not yet begun, it resulted for the group to first discuss and decide the functions and the design of the prototype. As a start, Ms. Dela Cruz and Mr. Sarapolin looked up DIYs or Do It Yourself Cigarette Smoke Filtration on Youtube. The group was able to cooperate on how they could produce the tube filtration in a unique manner when they researched ideas from the web. Mr. Vivas insisted that the product should be originally made just by using different components to create a new design. The other tools needed for constructing the product were changed or added. Ms. Reyes, at first, suggested the charcoal itself so it could be utilized as the carbon for the prototype. But this was further delayed when Mr. Cudel suggested that the filtration would be better by using an activated charcoal filter as a replacement because an actual charcoal will not be effective.'},
+    {p:'Furthermore, with this concept, the cigarette smoke will be absorbed by the exhaust fan. Then, the smoke will later go through the activated charcoal filter to eliminate and to filter the toxins of cigarette smoke. Afterwards, the next step is it will go through another filtration process to further purify the smoke, which is shown from the second figure above. The pump contains the liquid of a chosen citrus fruit and it will circulate to the case or to the container of the foam. Its purpose is to discard the odor. This filtration process will undergo twice because there are two foam cases in the tube. Regarding the liquid citrus fruit, this product is suggested to renew its liquid in the pump whenever it contaminates.'},
+
+    {h3:'May 23, 2021'},
+    {p:'Few days later, even though the old dusty fan was functioning, the group realized that the air it expelled was proven to be slow. The group didn’t want to buy an exhaust fan because they wanted to be resourceful of the materials. So in all honesty, there’s an exhaust fan from the room of Ms. Cabral’s uncle. As a result, the group settled to utilize that exhaust fan, leaving a hole space on the wall of the room. Besides, the room already has an air conditioner and a fan. They decided to bind two fans, since the first fan doesn’t have blades attached within. Upon working, take note that when materials are being adhered together, by piercing the components with holes and connecting them with screws, the group honestly had assistance with an adult. Of course, it is something that needs to be included in the report. But then again, what matters is that, the member should still help and create the product, because such duty should not be thrown to anyone outside the group or the ones who has no responsibility of this project.'},
+    {fig:'assets/papers/cig-progress-p3-1.jpg', cap:'The second exhaust fan, sourced from a relative, before assembly.'},
+    {p:'Since Ms. Cabral is currently residing in Bicol, she went to the gold processing plant to ask for charcoal. While the blue veil was given by her relative when she asked for a cloth that needs to be thin or flimsy. Mr. Cudel once reminded the group that the filter cloth should be the same as the characteristics of a cheese cloth. So in this part, they have finally accomplished in making a homemade activated carbon filter. Two carbon filters were placed on both ends of the pipe.'},
+
+    {h3:'May 24, 2021'},
+    {note:'The footage described below is the video at the top of this page.'},
+    {p:'Watch the video link below to see the proof of the air being propelled to the other end of the pipe. Ms. Cabral put a half ribbon that was taped on the edge of the pipe to be able to confirm it to the viewer if the air being expelled from the exhaust fan actually works.'},
+    {p:'On the other hand, Ms. Cabral’s father tested the cigarette as he exhaled the smoke near the exhaust fan. When the smoke was being tossed out, the exhaust fan was able to suck the smoke in the filtration. This was the second part that is very crucial to confirm and examine the homemade product if it truly works. But the group decided not to record it yet because they would want to test it first with the manual pump (a new component that was mentioned from the group’s past progress sheet report, in which will be added as the group’s own version of their cigarette smoke filtration) that contains the citrus fruit. In which, it will further verify if it does work this time with a new component added. Since, this will vary from the DIY smoke filtration that Ms. Dela Cruz and Mr. Sarapolin have researched in YouTubes and will label this product as an original idea.'},
+
+    {h3:'May 25, 2021'},
+    {p:'The manual pump that the group ordered has just arrived today. They also decided to buy spray paint to make the product look presentable, which is the color silver. Now, it is estimated by this week or by tomorrow, wherein the finalization of the product will be fulfilled. Even if one person was able to demonstrate and complete it, the teamwork of this group didn’t miss out. As long as they supported, gave suggestions, and helped with how the structure of the cigarette smoke filtration should look like, the results will work out in the end.'},
+    {p:'The 7th progress report sheet might be passed tomorrow or within this week, which will be the final output of the product. With a splash of spray paint and a manual pump to be connected.'},
+
+    {h:'Members'},
+    {defs:[
+      ['Cabral, Nicole','STEM 202'],
+      ['Dela Cruz, Tricia Joice','STEM 202'],
+      ['Reyes, Ivy Rochelle','STEM 202'],
+      ['Sarapolin, Mico Jay','STEM 202'],
+      ['Vivas, Robert','STEM 202'],
+      ['Cudel, Paul Daniel','STEM 201']
     ]}
   ]
 },
