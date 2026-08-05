@@ -492,6 +492,13 @@ a{color:inherit}
   display:inline-block;margin-top:11px;font-size:11px;letter-spacing:.08em;
   text-transform:uppercase;padding:3px 8px;border:1px dashed var(--pg-muted);opacity:.75;
 }
+.card .thumb{
+  display:flex;align-items:center;justify-content:center;
+  margin:-18px -20px 14px;
+  border-bottom:1px solid var(--pg-line);
+  aspect-ratio:3/4;overflow:hidden;background:var(--pg-bar);
+}
+.card .thumb img{width:100%;height:100%;object-fit:contain;display:block}
 
 /* a card that opens a full paper */
 a.card{display:block;text-decoration:none;color:inherit}
@@ -844,16 +851,23 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
   position:relative;z-index:1;
   font-family:var(--display);font-weight:700;text-transform:uppercase;
   letter-spacing:.06em;font-size:clamp(19px,2.6vw,25px);color:#8A4B3E;
-  margin:0 0 22px;text-align:center;
+  margin:0 0 8px;text-align:center;
+}
+.pkicker{
+  position:relative;z-index:1;text-align:center;margin:0 0 22px;
+  font-family:var(--display);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:#9A7B5E;
 }
 .verse{position:relative;z-index:1;font-style:italic;font-size:clamp(16px,2.1vw,19px);line-height:1.95;color:#4A3A2E;flex:1;display:flex;flex-direction:column;justify-content:center}
 .verse .stanza{margin-bottom:1.5em}
 .verse .stanza:last-child{margin-bottom:0}
-.verse .ln{display:block;white-space:nowrap}
+.verse .ln{display:block}
 .verse .i0{margin-left:0}
 .verse .i1{margin-left:2.4em}
 .verse .i2{margin-left:4.6em}
 .verse .i3{margin-left:6.8em}
+.verse.center{text-align:center}
+.verse.center .ln{margin-left:0 !important;white-space:normal}
 .essay p{position:relative;z-index:1;font-size:15px;line-height:1.75;margin:0 0 14px;color:#4A3A2E;text-align:justify;hyphens:auto}
 
 .pin-img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:2px}
@@ -1188,6 +1202,8 @@ const BOOKS = [
         {y:'2026',t:'Genetics',d:'Applied genetics rather than theory alone — worked through case study briefs that take a clinical or population scenario and require the underlying inheritance, variant interpretation and consequence to be reasoned out and defended. Master in Biomedicine, Universidade do Minho.',big:true},
         {y:'2026',t:'Biostatistics',d:'Statistical analysis in SPSS: preparing and coding datasets, choosing tests against the shape of the data, running descriptive and inferential procedures, and reading the output back into a defensible interpretation rather than a p-value alone. Master in Biomedicine, Universidade do Minho.',big:true},
         {y:'2026',t:'FELASA',d:'Certified European training in laboratory animal science — suturing, handling and restraint, animal husbandry, welfare assessment and the ethical and legal framework governing animal experimentation. Universidade do Minho, Life and Health Sciences Research Institute.',big:true},
+        {y:'2026',t:'Lab Rotation — Antimalarial Activity',d:'Sterile in vitro maintenance of Plasmodium falciparum (3D7 and Dd2 strains); parasitemia quantification by Giemsa staining and light microscopy; drug susceptibility (IC50) assay setup — sorbitol synchronization, serial dilution, and SYBR Green detection on a microplate reader. ICVS, Universidade do Minho.',big:true},
+        {y:'2026',t:'Lab Rotation — Ultrasonic Vocalization',d:'Behavioral recording of the three-chamber social paradigm; USV detection and spectrogram analysis in DeepSqueak; training and validating two custom detector networks against a built-in baseline; three-way ANOVA and post-hoc statistical workflow. Universidade do Minho.',big:true},
         {y:'2024',t:'Genetics Laboratory',d:'Covered the basics of DNA extraction; knowledge of PCR but not in practical terms; agarose gel electrophoresis as a simple practical to understand how it works; and knowledge only of ELISA.'},
         {y:'2023',t:'General and medical microbiology, parasitology',d:'Aseptic technique, bacterial culture, incubation, Gram staining, microscopy of human parasites.'},
         {y:'2023',t:'Evolutionary biology and comparative anatomy',d:'Hands-on dissection of cats and frogs, external anatomical study of sharks, and comparative analysis of frog, turtle, chicken and cat skeletons. MOTS Animal Laboratory.'},
@@ -1262,14 +1278,11 @@ const BOOKS = [
     },
     tabs:[
       {name:'Book Cover Design', items:[
-        {y:'2021',t:'Ukiyoto Publishing cover',d:'Full cover layout and illustration for a published title.',flag:'Rights check pending',big:true},
-        {y:'2021',t:'KM and H Black Paper Forest cover',d:'Second published cover design.',flag:'Rights check pending'}
+        {y:'2021',t:'Ukiyoto Publishing cover',d:'Full cover layout and illustration for Universal Quest.',img:'assets/artist/cover-universal-quest.jpg',url:'assets/artist/cover-universal-quest.jpg',flag:'Rights check pending',big:true},
+        {y:'2021',t:'KM and H Black Paper Forest cover',d:'Full wraparound cover — back, spine and front — for An Art of Words.',img:'assets/artist/cover-artofwords-front.jpg',url:'assets/artist/cover-artofwords-full.jpg',flag:'Rights check pending'}
       ]},
       {name:'Digital Illustration', items:[
         {y:'—',t:'Illustration selects',d:'Procreate and IbisPaint. Eight to twelve strongest pieces, not everything — a portfolio is an edit, not an archive.',big:true}
-      ]},
-      {name:'Signature Style', items:[
-        {y:'—',t:'Name the style here',d:'"Niche style" tells a viewer nothing. Give it a name, then show four pieces that prove the name is real.',flag:'Needs a name'}
       ]},
       {name:'Graphic Design', items:[
         {y:'2022',t:'Book campaign graphics',d:'Promotional materials and excerpt cards for Facebook and Instagram.'},
@@ -1309,13 +1322,11 @@ const BOOKS = [
     featured:{
       y:'—',
       t:'This portfolio',
-      d:'Hand-built in HTML, CSS and vanilla JavaScript. No framework, no build step, no dependencies beyond two webfonts. The shelf, the stone arch and the lit book nook are CSS and inline SVG rather than WebGL, which is why the whole hall loads in well under a second on a phone.'
+      d:'Hand-built in HTML, CSS and vanilla JavaScript. The shelf, the stone arch and the lit book nook are CSS and inline SVG rather than WebGL, which is why the whole hall loads in well under a second on a phone.'
     },
     tabs:[
       {name:'Websites Built', sites:[
-        {t:'Site name',role:'Design and build',stack:'HTML, CSS, JS',status:'Live',url:'#',img:''},
-        {t:'Site name',role:'Copy and layout',stack:'Framer',status:'Live',url:'#',img:''},
-        {t:'Site name',role:'Full build',stack:'WordPress',status:'Archived',url:'#',img:''}
+        {t:'Marketing Team Quiz Portal',role:'Built as Marketing Head, to train my marketing team efficiently.',stack:'—',status:'Internal tool',url:'#',img:'',note:'Link pending'}
       ]}
     ]
   }
@@ -1674,6 +1685,7 @@ function wordCount(p){
 
 function cardHTML(it,i){
   const inner=`
+    ${it.img?`<span class="thumb"><img src="${esc(it.img)}" alt="${esc(it.t)}" loading="lazy" onerror="this.closest('.thumb').remove()"></span>`:''}
     <span class="yr">${esc(it.y)}</span>
     <h3>${esc(it.t)}</h3>
     <p>${esc(it.d)}</p>
@@ -1711,8 +1723,12 @@ function cardHTML(it,i){
 function renderTab(bk,i){
   const tb=bk.tabs[i];
   if(tb.sites){
-    panelEl.innerHTML='<div class="sites">'+tb.sites.map((s,n)=>`
-      <a class="site" href="${esc(s.url)}" target="_blank" rel="noopener" style="animation-delay:${n*50}ms">
+    panelEl.innerHTML='<div class="sites">'+tb.sites.map((s,n)=>{
+      const linkable = s.url && s.url!=='#';
+      const tag = linkable ? 'a' : 'div';
+      const attrs = linkable ? `href="${esc(s.url)}" target="_blank" rel="noopener"` : '';
+      return `
+      <${tag} class="site" ${attrs} style="animation-delay:${n*50}ms">
         <div class="pin">${s.img?`<img src="${esc(s.img)}" alt="Screenshot of ${esc(s.t)}" loading="lazy">`:'Screenshot — 16:9'}</div>
         <div class="site-meta">
           <h3>${esc(s.t)}</h3>
@@ -1721,8 +1737,10 @@ function renderTab(bk,i){
             <dt>Stack</dt><dd>${esc(s.stack)}</dd>
             <dt>Status</dt><dd>${s.status==='Live'?'<span class="live-dot">● Live</span>':esc(s.status)}</dd>
           </dl>
+          ${s.note?`<span class="flag" style="display:inline-block;margin-top:11px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:1px dashed var(--pg-muted);opacity:.75">${esc(s.note)}</span>`:''}
         </div>
-      </a>`).join('')+'</div>';
+      </${tag}>`;
+    }).join('')+'</div>';
     return;
   }
   panelEl.innerHTML='<div class="grid">'+tb.items.map(cardHTML).join('')+'</div>';
@@ -1918,7 +1936,8 @@ let sbLeaves=[], sbAt=0, sbAnimating=false;
 
 function verseHTML(page){
   return `<h2 class="ptitle">${esc(page.title)}</h2>
-    <div class="verse">${page.stanzas.map(st=>'<p class="stanza">'+
+    ${page.kicker?`<p class="pkicker">${esc(page.kicker)}</p>`:''}
+    <div class="verse${page.align==='center'?' center':''}">${page.stanzas.map(st=>'<p class="stanza">'+
       st.map(ln=>`<span class="ln i${ln.i}">${esc(ln.t)}</span>`).join('')+'</p>').join('')}</div>`;
 }
 function essayHTML(page){

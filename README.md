@@ -30,9 +30,14 @@ updating themselves.
   d:'One or two sentences. What it was, what you did.',
   big:true,                      // optional — card spans two columns
   flag:'Rights check pending',   // optional — small dashed note
-  url:'https://…'                // optional — adds a "View →" link
-}
+  url:'https://…',               // optional — adds a "View →" link
+  img:'assets/…'                 // optional — a thumbnail across the top of the card,
+}                                 // shown in full (not cropped); removes itself if the file is missing
 ```
+
+The two book cover cards in Artist → Book Cover Design are the reference
+example: `img` for the thumbnail, `url` pointing at the same (or a larger)
+image so "View →" opens it full size.
 
 ### A tab
 
@@ -46,11 +51,14 @@ The Website Builder book uses `sites` instead of `items`:
 
 ```js
 { t:'Site name', role:'Design and build', stack:'HTML, CSS, JS',
-  status:'Live', url:'https://…', img:'assets/sites/name.jpg' }
+  status:'Live', url:'https://…', img:'assets/sites/name.jpg',
+  note:'Link pending' }             // optional — small dashed note, same as a card's flag
 ```
 
 Leave `img` empty and the card shows a 16:9 placeholder. `status:'Live'` renders
-a green dot; anything else prints as plain text.
+a green dot; anything else prints as plain text. Leave `url` empty or `'#'`
+and the card renders as a plain block instead of a link — no dead click
+target while a real URL is still pending.
 
 ### Papers that open as their own page
 
@@ -145,21 +153,29 @@ leave the photo as shot.
 
 `extras.js` defines `SCRAPBOOKS[id]`: a title, an optional `hero` image shown
 above the book, and a `pages` array — one leaf per page, each a `poem` (an
-array of stanzas, each line with an indent step 0–3, for staggered verse),
-an `essay` (a title plus verbatim paragraphs, scrolls internally if it runs
-long), or an `image` (a designed page, shown as a photo). Give any item a
-`scrapbook:'<id>'` key and the whole card opens it at `#/scrapbook/<id>` —
-falling petals, a vintage-paper flip-book with a 3D page-turn, a **Flip**
-button and a **‹ Back** button to page back.
+array of stanzas, each line with an indent step 0–3, for staggered verse;
+add `align:'center'` to center the stanza instead, ignoring indent), an
+`essay` (a title plus verbatim paragraphs, scrolls internally if it runs
+long), or an `image` (a designed page, shown as a photo). A poem can also
+carry a small `kicker` line under its title (used for "Universal Quest,
+p. 88"). Give any item a `scrapbook:'<id>'` key and the whole card opens it
+at `#/scrapbook/<id>` — falling petals, a vintage-paper flip-book with a
+3D page-turn, a **Flip** button and a **‹ Back** button to page back.
 
 `writing-samples` (linked from Writer → Books & Literary → *Selected poetry
-and essays*) currently holds two poems, transcribed as text from the images
-supplied, and the full text of *Taguig Calls for Art to Action*. The `hero`
+and essays*) holds seven pages: four poems (two transcribed from the images
+supplied, one from a scanned book page, one from a quote card), the essay
+*Taguig Calls for Art to Action*, and the essay *"Mag-ingay Ka Nga, Ang
+Tahimik Mo!"* — written in Filipino, kept exactly as submitted. The `hero`
 image — the flat-lay photo of the printed books, shirt and merchandise —
-didn't come through as a file, so it's referenced at `assets/writer/promo-flatlay.jpg`
-and shows "Cover photo pending" until that file exists. More sample pages
-were promised for a follow-up message; append them to the `pages` array in
-the order they should be read.
+didn't come through as a file, so it's referenced at
+`assets/writer/promo-flatlay.jpg` and shows "Cover photo pending" until that
+file exists. More sample pages were promised for a follow-up message; append
+them to the `pages` array in the order they should be read.
+
+Poem lines wrap on narrow screens rather than clipping — a couple of the
+newer poems have lines much longer than the first two, and forcing them onto
+one line ran text off the edge of the page on small phones.
 
 ### Reel galleries — embedded video pages
 
@@ -169,11 +185,7 @@ the order they should be read.
 their JS SDK loaded). Give any item a `reels:'<id>'` key and the card opens
 `#/reels/<id>`, a grid of the embedded clips.
 
-`open-mic` holds three clips. Two of the three pieces of embed code supplied
-for it were byte-identical (same Facebook video ID, `499922705621601`) — I
-used it once rather than duplicating the same video, on the assumption the
-repeat was a paste error. If a different second reel was intended, swap the
-second `embed` in `REELS['open-mic'].clips` in `extras.js`.
+`open-mic` holds three clips: a Facebook reel and two Instagram posts.
 
 Facebook and Instagram block their embeds from loading inside a sandboxed
 preview (no network access, strict CSP) — they'll show as broken-image icons
@@ -236,14 +248,13 @@ directory is the root. Push to deploy.
 
 ## Still to do
 
-- **Real artwork in the Artist section.** The featured block currently shows
-  only a date and a flag — both the title and description were removed on
-  request, and no cover image has arrived yet. This is the thinnest part of
-  the portfolio for an illustrator; the book covers are the strongest thing
-  she has and a viewer can't see either of them.
-- Name the signature illustration style
+- **Digital Illustration and Graphic Design still have no images.** Book
+  Cover Design is now strong — both covers (Universal Quest, An Art of
+  Words) are in, extracted from the source PDF at full resolution, each
+  linking to a full-size view. The other two Artist tabs are still text-only.
 - Real screenshots and URLs for the website cards
-- Confirm reprint rights on the two published book covers
+- Confirm reprint rights on the two book covers — the flag is still on both
+  cards; nothing legal has changed, only the artwork itself is now visible
 - **A cover image for the Writer featured block** — the titles are in
   (*An Art of Words*, *Universal Quest*), but the photo of the two books
   didn't come through as an attachable file, only as an inline paste I can't
@@ -252,14 +263,14 @@ directory is the root. Push to deploy.
 - **`assets/writer/promo-flatlay.jpg`** — the flat-lay photo (books, printed
   shirt, mugs, pens) for the top of the *Selected Poetry and Essays* scrapbook.
   Same situation as the Writer cover — inline paste, no file to save.
-- **More scrapbook pages.** Only three pages exist so far; more samples were
-  promised for a follow-up message — append them to `SCRAPBOOKS['writing-samples'].pages`
+- **More scrapbook pages.** Seven pages exist now; more samples were promised
+  for a follow-up message — append them to `SCRAPBOOKS['writing-samples'].pages`
   in `extras.js`.
 - **The Storyteller "Video Editing" tab was removed** on request — short-form
   employee interviews, small-business TikTok work, and the CapCut/Filmora
   tools line are no longer anywhere on the site. If any of that should live
   somewhere else (a note on the reel gallery, an Artist tools list), it needs
   a new home; right now it's simply gone.
-- **Confirm the second Open Mic reel.** Two of the three embed codes supplied
-  were identical (same video ID) — used once rather than twice. See the
-  "Reel galleries" section above.
+- **The Marketing Team Quiz Portal card has no link, stack, or screenshot.**
+  Currently shows "Link pending" and a 16:9 placeholder — send a URL and, if
+  worth naming, what it was built with.
