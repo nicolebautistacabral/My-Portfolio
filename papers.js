@@ -220,6 +220,51 @@ const PAPERS = {
 },
 
 /* ══════════════════════════════════════════════════════════ */
+'usv-presentation': {
+  cat:'medical',
+  tab:'Presentations',
+  kicker:'Presentation · ICVS, Universidade do Minho · June 2026',
+  title:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain',
+  author:'Nicole Bautista Cabral',
+  meta:[
+    ['Supervision','Juliana Fiúza-Fernandes · Hugo Leite-Almeida'],
+    ['Institution','Universidade do Minho, Life and Health Sciences Research Institute (ICVS)']
+  ],
+  blocks:[
+    {p:'Presented alongside the full written report in Research Papers — the same project, as the slide deck it was defended with. The 27 slides are shown here as they were presented; the complete methods and results are transcribed in full in the research paper.'},
+    {slides:[
+      {img:'assets/papers/usv-presentation/slide-01.jpg', cap:'1 — Title: Analysis of ultrasonic vocalizations in a rat model of chronic neuropathic pain during 3-chamber social paradigm'},
+      {img:'assets/papers/usv-presentation/slide-02.jpg', cap:'2 — "The question is not, Can they reason? nor, Can they talk? but, Can they suffer?" — Jeremy Bentham, on animals, 1789'},
+      {img:'assets/papers/usv-presentation/slide-03.jpg', cap:'3 — Rat USVs (20–100 kHz) lie beyond the 20 kHz human hearing limit — DeepSqueak makes them visible'},
+      {img:'assets/papers/usv-presentation/slide-04.jpg', cap:'4 — Chronic pain affects 20–30% of people worldwide; rats cannot self-report, so behaviour, physiology and vocalizations stand in'},
+      {img:'assets/papers/usv-presentation/slide-05.jpg', cap:'5 — Ultrasonic vocalizations: 22-kHz long alarm calls (distress) versus 50-kHz short frequency-modulated calls (appetitive)'},
+      {img:'assets/papers/usv-presentation/slide-06.jpg', cap:'6 — Aims: detect USVs across both 3-CH sessions, characterize them by group, and test for pain-related alterations'},
+      {img:'assets/papers/usv-presentation/slide-07.jpg', cap:'7 — Methods'},
+      {img:'assets/papers/usv-presentation/slide-08.jpg', cap:'8 — Figure 1: the sociability session (Empty vs Naive) and the social preference session (SHAM vs SNI)'},
+      {img:'assets/papers/usv-presentation/slide-09.jpg', cap:'9 — Figure 3: the five-week USV analysis timeline, from call detection through network training to statistical export'},
+      {img:'assets/papers/usv-presentation/slide-10.jpg', cap:'10 — DeepSqueak’s built-in networks: Long Rat Detector YOLO R1 (22 kHz) and Rat Detector YOLO R1 (50 kHz)'},
+      {img:'assets/papers/usv-presentation/slide-11.jpg', cap:'11 — Call detection settings in DeepSqueak: analysis length, frequency cutoffs and score threshold for each network'},
+      {img:'assets/papers/usv-presentation/slide-12.jpg', cap:'12 — 3-CH sociability session audio samples, run blindly across male and female rats'},
+      {img:'assets/papers/usv-presentation/slide-13.jpg', cap:'13 — 3-CH social preference session audio samples, run blindly across male and female rats'},
+      {img:'assets/papers/usv-presentation/slide-14.jpg', cap:'14 — Long Rat Detector outputs against related published spectrograms (Palomares et al., Allen et al., Laine et al.)'},
+      {img:'assets/papers/usv-presentation/slide-15.jpg', cap:'15 — The Long Rat Detector was excluded from the pipeline: its outputs did not resemble genuine 22-kHz calls on inspection'},
+      {img:'assets/papers/usv-presentation/slide-16.jpg', cap:'16 — Rat Detector YOLO R1 outputs: genuine detected calls beside its false positives'},
+      {img:'assets/papers/usv-presentation/slide-17.jpg', cap:'17 — Custom training network, audio samples 1–2: raw audio through RD, RD-V1 and RD-V2 detections side by side'},
+      {img:'assets/papers/usv-presentation/slide-18.jpg', cap:'18 — Custom training network, audio samples 3–4: the same comparison across all three networks'},
+      {img:'assets/papers/usv-presentation/slide-19.jpg', cap:'19 — Quantitative validation of the three detector networks — precision, recall and F1 across four audio segments'},
+      {img:'assets/papers/usv-presentation/slide-20.jpg', cap:'20 — Results'},
+      {img:'assets/papers/usv-presentation/slide-21.jpg', cap:'21 — Three-way ANOVA compared each USV parameter across sex, target group and explorer group'},
+      {img:'assets/papers/usv-presentation/slide-22.jpg', cap:'22 — Sociability session: a social partner increased call number and bandwidth, with no effect on the other parameters'},
+      {img:'assets/papers/usv-presentation/slide-23.jpg', cap:'23 — Social preference session: more calls on the SNI side overall; longer, broader-bandwidth, more sinuous calls in males specifically'},
+      {img:'assets/papers/usv-presentation/slide-24.jpg', cap:'24 — Limitations: excluded distress calls, chamber-pooled vocalizations, and a detector dependent on a small training sample'},
+      {img:'assets/papers/usv-presentation/slide-25.jpg', cap:'25 — In summary: 50-kHz call structure tracks social context and sex — pain’s vocal signature may be structural and sex-dependent'},
+      {img:'assets/papers/usv-presentation/slide-26.jpg', cap:'26 — Acknowledgements: Juliana Fiúza-Fernandes, Hugo Leite-Almeida, ICVS'},
+      {img:'assets/papers/usv-presentation/slide-27.jpg', cap:'27 — Thank you'}
+    ]}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
 'attention': {
   cat:'medical',
   tab:'Research Papers',
@@ -963,6 +1008,122 @@ const PAPERS = {
       'Yang, H. B., Tan, N., Wu, F. J., et al. (2012). Biosorption of Uranium(VI) by a mangrove endophytic fungus Fusarium sp. #ZZF51 from the South China Sea. Journal of Radioanalytical and Nuclear Chemistry, 292(3), 1011–1016.',
       'Yazdani, M., Yap, C. K., Abdullah, F., & Tan, S. G. (2010). An in vitro study on the adsorption, absorption and uptake capacity of Zn by the bioremediator Trichoderma atroviride. EnvironmentAsia, 3(1), 53-59.',
       'Yoshimura, C., Yamanaka, C., Fujii, M., Leungprasert, S., & Tanchuling, M. A. (2015). Heavy metals in suspended sediments in rivers flowing through Megacities in Southeast Asia.'
+    ]}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'arbitrail-branding': {
+  cat:'writer',
+  tab:'Brand & Corporate',
+  kicker:'Brand Copy & Design · Arbitrail · 2025',
+  title:'Arbitrail Branding',
+  author:'Nicole Bautista Cabral',
+  meta:[
+    ['Client','Arbitrail — data-driven BPO service provider'],
+    ['Role','Brand tone, service catalog and social copy, coordinated with the Manager, COO and CEO']
+  ],
+  blocks:[
+    {p:'Brand tone and service catalog work for Arbitrail, a BPO service provider — carried across a trade-show roll-up banner, LinkedIn captions, and paid social graphics for their business-growth and quality-assurance messaging.'},
+    {slides:[
+      {img:'assets/writer/arbitrail/slide-5.jpg', cap:'Publication material — the roll-up banner design and its stand mockup, run for a trade-show floor.'},
+      {img:'assets/writer/arbitrail/slide-6.jpg', cap:'Paid social graphics: "Scaling Growth Through Service Quality" and a CX-metrics data post — captioned, designed and written.'},
+      {img:'assets/writer/arbitrail/slide-7.jpg', cap:'"The Strategic Role of Quality Assurance in Business Growth" — graphic and matching LinkedIn caption on client trust, risk mitigation and operational excellence.'},
+      {img:'assets/writer/arbitrail/slide-8.jpg', cap:'Website-launch social post, paired with a LinkedIn feature on the founder and a pull-quote card.'}
+    ]}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'zencreatif-cafe': {
+  cat:'writer',
+  tab:'Brand & Corporate',
+  kicker:'Food & Beverage Copy · Ten Twenty-Five Café · 2025',
+  title:'Zencreatif — Ten Twenty Five Cafe',
+  author:'Nicole Bautista Cabral',
+  meta:[
+    ['Client','Ten Twenty-Five Café, Valenzuela City, Philippines'],
+    ['Role','Promotional copywriting and caption design, dish by dish']
+  ],
+  blocks:[
+    {p:'Menu-item promotional copy for Ten Twenty-Five Café — a caption for every dish, written to the same warm, unhurried voice the café itself runs on.'},
+    {slides:[
+      {img:'assets/writer/zencreatif-cafe/post-06.jpg', cap:'"Every café tells a story" — the café’s own moment, opening the set.'},
+      {img:'assets/writer/zencreatif-cafe/post-01.jpg', cap:'Carrot Cake — "a little escape," the frosting smooth, the cake moist and rich.'},
+      {img:'assets/writer/zencreatif-cafe/post-02.jpg', cap:'Signature Chicken Burger — "each layer is a mood, a little pause in your day."'},
+      {img:'assets/writer/zencreatif-cafe/post-03.jpg', cap:'Daing na Bangus, dish of the month — flavorful, garlicky, comforting.'},
+      {img:'assets/writer/zencreatif-cafe/post-04.jpg', cap:'Bacon Carbonara — "a plate that quietly wins you over."'},
+      {img:'assets/writer/zencreatif-cafe/post-05.jpg', cap:'Nasi Lemak — "a tradition worth tasting," Malaysia’s national dish done Ten Twenty-Five’s way.'}
+    ]}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'roasted-chicken-menu': {
+  cat:'artist',
+  tab:'Graphic Design',
+  kicker:'Menu & Food Content Design · 2024',
+  title:'Roasted Chicken Menu Design',
+  author:'Nicole Bautista Cabral',
+  meta:[
+    ['Client','Niok’s Lechon Manok — ala pork bagnet sisig'],
+    ['Role','Menu layout, pricing panels and food photography compositing']
+  ],
+  blocks:[
+    {p:'Two-page menu design for Niok’s Lechon Manok — whole and half roasted chicken, grilled liempo, crispy bagnet and bagnet sisig — plus a delivery promo panel, built around the client’s existing food photography.'},
+    {note:'The two menu photos are on their way — sent as a pasted image rather than an attached file, so there is nothing yet to save at this path. Add them at assets/artist/menu-nioks-1.jpg and assets/artist/menu-nioks-2.jpg and they will appear here automatically.'}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'book-campaign-graphics': {
+  cat:'artist',
+  tab:'Graphic Design',
+  kicker:'Promotional Design · 2022',
+  title:'Book Campaign Graphics',
+  author:'Nicole Bautista Cabral',
+  meta:[
+    ['Project','An Art of Words — pre-order campaign'],
+    ['Role','Promotional graphic and layout for Facebook and Instagram']
+  ],
+  blocks:[
+    {p:'Pre-order announcement graphic for An Art of Words — the cover art, author photo and pricing laid out for a single social post.'},
+    {note:'The pre-order graphic is on its way — sent as a pasted image rather than an attached file, so there is nothing yet to save at this path. Add it at assets/artist/book-campaign-preorder.jpg and it will appear here automatically.'}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'illustrations': {
+  cat:'artist',
+  tab:'Digital Illustration',
+  kicker:'Digital Illustration · Procreate & IbisPaint',
+  title:'Illustrations',
+  author:'Nicole Bautista Cabral',
+  blocks:[
+    {p:'A small, edited selection rather than a full archive — two pieces to start.'},
+    {note:'Two illustrations are on their way — sent as pasted images rather than attached files, so there is nothing yet to save at these paths. Add them at assets/artist/illustration-roses-rain.jpg and assets/artist/illustration-swan.jpg and they will appear here automatically.'}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'zencreatif-jnc': {
+  cat:'writer',
+  tab:'Brand & Corporate',
+  kicker:'E-Commerce Copy · JNC Corporation · 2025',
+  title:'Zencreatif — JNC Corporation',
+  author:'Nicole Bautista Cabral',
+  meta:[
+    ['Client','JNC Corporation — Swirluxe (jewelry) and Silkeen (apparel)'],
+    ['Role','Product copywriting across clothing, jewelry and confectionery']
+  ],
+  blocks:[
+    {p:'Product-launch captions for JNC Corporation across two lines — Swirluxe jewelry and Silkeen apparel — plus a confectionery drop, each written to its own register: soft and sentimental for jewelry, direct and practical for apparel.'},
+    {slides:[
+      {img:'assets/writer/zencreatif-jnc/post-16.jpg', cap:'Silkeen tops — "made to complement your movement, your vibe, and your day."'},
+      {img:'assets/writer/zencreatif-jnc/post-17.jpg', cap:'Swirluxe necklace — "a gleam as serene as twilight," carrying the calm of lavender fields.'},
+      {img:'assets/writer/zencreatif-jnc/post-19.jpg', cap:'Silkeen seamless panty — sleek, breathable, made for all-day wear.'},
+      {img:'assets/writer/zencreatif-jnc/post-20.jpg', cap:'YK Hello Kitty XXL lollipop — "big on sweetness and big on cuteness."'},
+      {img:'assets/writer/zencreatif-jnc/post-21.jpg', cap:'Swirluxe Infinity earrings — "delicate craftsmanship with eternal charm."'}
     ]}
   ]
 }

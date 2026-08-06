@@ -729,6 +729,14 @@ figure.pfig figcaption{
 .pgallery a:hover img{transform:scale(1.06)}
 .pgallery figcaption{padding:7px 9px;font-size:12.5px;line-height:1.4;color:var(--pp-muted)}
 
+/* a slide deck — 16:9 kept whole (contain, not cover), a slide is not a photo
+   to crop. Wider cards than the photo gallery since slide text needs to stay legible. */
+.pslides{margin:22px 0 34px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.pslides a{display:block;text-decoration:none;border-radius:2px;overflow:hidden;border:1px solid var(--pp-line);background:#fff;transition:box-shadow .3s}
+.pslides a:hover{box-shadow:0 10px 24px rgba(0,0,0,.14)}
+.pslides img{width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#fff}
+.pslides figcaption{padding:7px 9px;font-size:12.5px;line-height:1.4;color:var(--pp-muted);border-top:1px solid var(--pp-line)}
+
 /* an embedded video, played in place — never a download link */
 .pvideo{margin:0 0 8px}
 .pvideo video{width:100%;height:auto;display:block;border-radius:3px;background:#000;box-shadow:0 16px 40px rgba(0,0,0,.18)}
@@ -801,7 +809,7 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 .sb-bar .back:hover{background:rgba(122,96,70,.1)}
 .sb-bar .now{font-size:14px;color:#7A6046;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
 
-.sb-inner{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:clamp(26px,4vw,54px) clamp(16px,4vw,32px) 80px;width:100%}
+.sb-inner{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:clamp(26px,4vw,54px) clamp(16px,4vw,32px) 80px;width:100%}
 .sb-kicker{font-family:var(--display);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#A8456B;margin:0 0 12px}
 .sb-inner h1{
   font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,40px);
@@ -818,55 +826,77 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 /* no placeholder frame if the hero image is missing — the book is the point,
    and an empty box at the top pushes it below the fold */
 
-/* the book */
-.flipbook-wrap{display:flex;flex-direction:column;align-items:center;gap:22px}
+/* the book — an open spread, two pages at once, the way a book is actually read */
+.flipbook-wrap{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}
 .flipbook{
   /* the width is capped by the height left over after the header and the
      controls, so the Flip button never lands below the fold */
   position:relative;width:100%;
-  max-width:min(520px, calc((100dvh - 330px) * 0.757));
-  aspect-ratio:5/6.6;
-  perspective:2200px;
+  max-width:min(1040px, calc((100dvh - 320px) * 1.515));
+  aspect-ratio:10/6.6;
+  perspective:3000px;
+  margin:0 auto;
 }
 .flipbook::before{
-  /* the binding — a soft shadow spine along the left edge */
-  content:'';position:absolute;left:-3px;top:2%;bottom:2%;width:14px;z-index:5;
-  background:linear-gradient(90deg,rgba(0,0,0,.18),transparent);
+  /* the binding — a soft shadow down the center gutter */
+  content:'';position:absolute;left:50%;top:1%;bottom:1%;width:30px;z-index:6;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(60,38,20,.22),transparent);
   pointer-events:none;
 }
+.sb-static-left{
+  /* the left page before anything has been flipped — an inside cover, not a void */
+  position:absolute;left:0;top:0;width:50%;height:100%;z-index:0;
+  border-radius:3px 0 0 3px;overflow:hidden;
+  background:
+    repeating-linear-gradient(90deg, rgba(139,109,76,.035) 0 1px, transparent 1px 3px),
+    radial-gradient(140% 100% at 100% 0%, rgba(255,255,255,.45), transparent 55%),
+    linear-gradient(205deg,#F2E6CE,#E9D8B8 60%,#E3CFA8);
+  box-shadow:0 10px 26px rgba(80,55,30,.24), inset 0 0 0 1px rgba(139,109,76,.18);
+}
 .leaf{
-  position:absolute;inset:0;
+  position:absolute;right:0;top:0;width:50%;height:100%;
   transform-style:preserve-3d;transform-origin:left center;
   transform:rotateY(0deg);
   will-change:transform;
 }
-.leaf.flipped{animation:pageFlip .85s cubic-bezier(.4,.1,.2,1) forwards}
-.leaf.unflipping{animation:pageUnflip .85s cubic-bezier(.4,.1,.2,1) forwards}
+.leaf.flipped{animation:pageFlip .95s cubic-bezier(.4,.1,.2,1) forwards}
+.leaf.unflipping{animation:pageUnflip .95s cubic-bezier(.4,.1,.2,1) forwards}
 @keyframes pageFlip{
   0%{transform:rotateY(0deg) translateZ(0)}
-  45%{transform:rotateY(-92deg) translateZ(60px)}
+  45%{transform:rotateY(-92deg) translateZ(70px)}
   100%{transform:rotateY(-180deg) translateZ(0)}
 }
 @keyframes pageUnflip{
   0%{transform:rotateY(-180deg) translateZ(0)}
-  55%{transform:rotateY(-92deg) translateZ(60px)}
+  55%{transform:rotateY(-92deg) translateZ(70px)}
   100%{transform:rotateY(0deg) translateZ(0)}
 }
 .leaf-face{
   position:absolute;inset:0;backface-visibility:hidden;
-  border-radius:3px;overflow:hidden;
+  overflow:hidden;
   background:
     repeating-linear-gradient(90deg, rgba(139,109,76,.035) 0 1px, transparent 1px 3px),
     radial-gradient(140% 100% at 0% 0%, rgba(255,255,255,.5), transparent 55%),
     linear-gradient(155deg,#F2E6CE,#E9D8B8 60%,#E3CFA8);
   box-shadow:0 10px 26px rgba(80,55,30,.28), inset 0 0 0 1px rgba(139,109,76,.18);
-  padding:clamp(20px,4vw,38px) clamp(20px,4vw,34px);
+  padding:clamp(20px,3.6vw,40px) clamp(20px,3.4vw,36px);
   display:flex;flex-direction:column;
 }
-.leaf-face::after{
-  /* gutter shadow near the spine */
+/* the back face is pre-mirrored so that once its parent leaf finishes its own
+   -180deg turn, the double mirroring cancels out and the page reads normally —
+   sitting on the left, exactly where a turned leaf's other side belongs */
+.leaf-face.back{transform:rotateY(180deg);border-radius:3px 0 0 3px}
+.leaf-face.front{border-radius:0 3px 3px 0}
+.leaf-face.front::after{
+  /* gutter shadow at the spine, on the leaf's bound edge */
   content:'';position:absolute;left:0;top:0;bottom:0;width:34px;
   background:linear-gradient(90deg,rgba(90,60,30,.16),transparent);
+  pointer-events:none;
+}
+.leaf-face.back::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:34px;
+  background:linear-gradient(270deg,rgba(90,60,30,.16),transparent);
   pointer-events:none;
 }
 .leaf-face::before{
@@ -875,10 +905,21 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
 }
 .leafnum{
-  position:absolute;bottom:14px;right:20px;z-index:1;
+  position:absolute;bottom:14px;z-index:1;
   font-family:var(--display);font-size:10.5px;letter-spacing:.1em;color:#9A7B5E;
 }
+.leafnum.r{right:20px}
+.leafnum.l{left:20px}
 .leaf-scroll{position:relative;z-index:1;overflow-y:auto;flex:1;padding-right:4px}
+@media(max-width:760px){
+  /* too narrow for two pages side by side — the JS pairs one page per leaf
+     instead of two, so this is purely a re-shaping of the same structure,
+     not a content cutoff */
+  .flipbook{max-width:520px;aspect-ratio:5/6.6;perspective:2200px}
+  .flipbook::before{display:none}
+  .sb-static-left{display:none}
+  .leaf{left:0;width:100%}
+}
 
 .leaf .ptitle{
   position:relative;z-index:1;
@@ -1251,7 +1292,7 @@ const BOOKS = [
       ]},
       {name:'Presentations', items:[
         {y:'2026',t:'Evaluation of Antimalarial Activity in Plasmodium falciparum',d:'Poster presentation. In vitro maintenance of chloroquine-sensitive 3D7 and chloroquine-resistant Dd2 strains, parasitemia assessment by Giemsa, and chloroquine IC50 susceptibility assays showing a ~28–33× resistance index. ICVS, Universidade do Minho.',paper:'antimalarial',big:true},
-        {y:'2026',t:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain',d:'Presented alongside the written report — the DeepSqueak pipeline, network training and validation, and the USV parameters across the three-chamber paradigm.',paper:'usv',big:true},
+        {y:'2026',t:'Analysis of Ultrasonic Vocalization in a Rat Model of Chronic Neuropathic Pain',d:'The 27-slide deck presented alongside the written report — the DeepSqueak pipeline, network training and validation, and the USV parameters across the three-chamber paradigm.',paper:'usv-presentation',big:true},
         {y:'2021',t:'Cigarette Smoke Filtration: A Prototype for Smoke Purification',d:'Progress documentation of the build — the concept sketch, the two exhaust fans, the homemade charcoal filter, and a video of the finished device under test. Grade 12 STEM project.',paper:'cigarette-progress',big:true},
         {y:'2024',t:'Recombinant human wild-type G6PD and G6PD Viangchan',d:'Production and differential enzyme activity across variants.',url:'https://canva.link/g6pdviangchan'}
       ]},
@@ -1304,23 +1345,10 @@ const BOOKS = [
         {y:'—',t:'Citation systems',d:'AMA, CSE and APA. Mendeley and EndNote Basic. PubMed MeSH search.'}
       ]},
       {name:'Brand & Corporate', items:[
-        {y:'2025',t:'Arbitrail — brand tone and service catalog',d:'Honed and shaped the written voice of a startup BPO, refining the tone and the service catalog in coordination with the Manager, COO and CEO.',big:true},
-        {y:'2025',t:'Arbitrail — onboarding handbook',d:'Full internal handbook for new staff.',flag:'Confidential — described, not shown'},
-        {y:'2025',t:'Arbitrail — website copy',d:'Information architecture and copy through a company repositioning.'},
-        {y:'2025',t:'Zencreatif — Ten Twenty Five Cafe',d:'Food and beverage promotional copy.'},
-        {y:'2025',t:'Zencreatif — JNC Corporation',d:'E-commerce copy across clothing, luxury goods and confectionery.'}
-      ]},
-      {name:'Social & Content', items:[
-        {y:'2025',t:'B2B and B2C social content',d:'Microblogs, carousels and static posts across healthcare, travel and finance.'},
-        {y:'2025',t:'Short-form internal interviews',d:'Interviewed employees across the company and cut the results for brand channels.'},
-        {y:'2024',t:'Small business content',d:'Laundry service and roasted chicken menus across Facebook, Instagram and TikTok.'}
-      ]},
-      {name:'Print & Promotional', items:[
-        {y:'2025',t:'Business Show Asia 2025, Singapore',d:'Copy and event materials for an international trade show stand.',big:true},
-        {y:'2025',t:'Flyers, posters and one-pagers',d:'Print collateral for client-facing and internal use.'}
-      ]},
-      {name:'Decks & Scripts', items:[
-        {y:'2025',t:'Arbitrail slide decks and video scripts',d:'Client-facing and internal presentation collateral, plus scripts for video.'}
+        {y:'2025',t:'Arbitrail Branding',d:'Honed and shaped the written voice of a startup BPO — brand tone, service catalog and social copy — in coordination with the Manager, COO and CEO.',paper:'arbitrail-branding',big:true},
+        {y:'2025',t:'Arbitrail — onboarding handbook',d:'Full internal handbook for new staff.',flag:'Confidential — not shown'},
+        {y:'2025',t:'Zencreatif — Ten Twenty Five Cafe',d:'Food and beverage promotional copy.',paper:'zencreatif-cafe'},
+        {y:'2025',t:'Zencreatif — JNC Corporation',d:'E-commerce copy across clothing, luxury goods and confectionery.',paper:'zencreatif-jnc'}
       ]},
       {name:'Certifications', items:[
         {y:'2021',t:'Certified Author, Illustrator and Designer',d:'National Book Development Board of the Philippines.'}
@@ -1335,24 +1363,24 @@ const BOOKS = [
     bio:'Certified illustrator and designer. Two published book covers, a signature illustration style, and design work for small businesses and book campaigns.',
     featured:{
       y:'2021 · Published',
-      t:'An Art of Words — full wraparound cover',
-      d:'Back cover, spine and front, illustrated and laid out as one continuous drawing for KM and H Black Paper Forest Publishing House.',
-      img:'assets/artist/cover-artofwords-full.jpg',
-      alt:'The full wraparound cover of An Art of Words — back cover, spine and front',
-      cap:'Line illustration in blue, gold and rose, carried across all three panels.'
+      t:'Book Designing',
+      d:'Manuscript writing, editing and proofreading, and the cover — written and illustrated end to end for both titles.',
+      img:'assets/artist/featured-books-designed.jpg',
+      alt:'Both books, An Art of Words and Universal Quest, staged together — book designing, manuscript writing, editing and proofreading, written and illustrated by Nicole B. Cabral',
+      cap:'An Art of Words & Universal Quest — written, illustrated and designed cover to cover.'
     },
     tabs:[
       {name:'Book Cover Design', items:[
-        {y:'2021',t:'Ukiyoto Publishing cover',d:'Full cover layout and illustration for Universal Quest.',img:'assets/artist/cover-universal-quest.jpg',url:'assets/artist/cover-universal-quest.jpg',flag:'Rights check pending'},
-        {y:'2021',t:'KM and H Black Paper Forest cover',d:'Full wraparound cover — back, spine and front — for An Art of Words.',img:'assets/artist/cover-artofwords-front.jpg',url:'assets/artist/cover-artofwords-full.jpg',flag:'Rights check pending'}
+        {y:'2021',t:'Ukiyoto Publishing cover',d:'Full cover layout and illustration for Universal Quest.',img:'assets/artist/cover-universal-quest.jpg',url:'assets/artist/cover-universal-quest.jpg'},
+        {y:'2021',t:'KM and H Black Paper Forest cover',d:'Full wraparound cover — back, spine and front — for An Art of Words.',img:'assets/artist/cover-artofwords-front.jpg',url:'assets/artist/cover-artofwords-full.jpg'}
       ]},
       {name:'Digital Illustration', items:[
-        {y:'—',t:'Illustration selects',d:'Procreate and IbisPaint. Eight to twelve strongest pieces, not everything — a portfolio is an edit, not an archive.',big:true}
+        {y:'—',t:'Illustrations',d:'Procreate and IbisPaint. Eight to twelve strongest pieces, not everything — a portfolio is an edit, not an archive.',paper:'illustrations',big:true}
       ]},
       {name:'Graphic Design', items:[
-        {y:'2022',t:'Book campaign graphics',d:'Promotional materials and excerpt cards for Facebook and Instagram.'},
+        {y:'2022',t:'Book campaign graphics',d:'Promotional materials and excerpt cards for Facebook and Instagram.',paper:'book-campaign-graphics'},
         {y:'2024',t:'Laundry service branding',d:'Service graphics across three platforms.'},
-        {y:'2024',t:'Roasted chicken menu design',d:'Food menu and content design.'},
+        {y:'2024',t:'Roasted chicken menu design',d:'Food menu and content design.',paper:'roasted-chicken-menu'},
         {y:'—',t:'Tools',d:'Adobe Acrobat, Canva, Procreate, IbisPaint, CapCut, Filmora.'}
       ]},
       {name:'Certifications', items:[
@@ -1395,7 +1423,7 @@ const BOOKS = [
       {name:'Websites Built', sites:[
         {t:'Marketing Team Quiz Portal',
          d:'I built this quiz portal as a Marketing Head, to train my marketing team efficiently.',
-         role:'Design and build',status:'Internal tool',url:'#',img:'',note:'Link pending'}
+         role:'Design and build',status:'Live',url:'https://kayvemarketingquizportal.netlify.app/',img:''}
       ]}
     ]
   }
@@ -1769,9 +1797,11 @@ function cardHTML(it,i){
   if(it.paper && PAPERS[it.paper]){
     const p=PAPERS[it.paper];
     const mins=Math.max(1,Math.round(wordCount(p)/220));
-    const kind=p.poster?'View the poster':'Read the full paper';
-    /* a poster carries its own text — a reading estimate off an empty body would read "1 min" */
-    const badge=(p.blocks&&p.blocks.length)?mins+' min':'Poster';
+    const slideBlock=(p.blocks||[]).find(b=>b.slides);
+    const kind=p.poster?'View the poster':slideBlock?'View the deck':'Read the full paper';
+    /* a poster carries its own text — a reading estimate off an empty body would read "1 min".
+       A slide deck is measured in slides, not minutes — 27 slides is not "1 min". */
+    const badge=p.poster?'Poster':slideBlock?slideBlock.slides.length+' slides':mins+' min';
     return `<a class="card${it.big?' big':''}" href="#/paper/${it.paper}" style="animation-delay:${Math.min(i*40,320)}ms">
       <span class="pages">${badge}</span>${inner}
       <span class="read">${kind} <span class="arrow">→</span></span>
@@ -1887,6 +1917,11 @@ function blockHTML(b,heads){
         <img src="${esc(g.img)}" alt="${esc(g.cap||'Photo')}" loading="lazy">
         <figcaption>${esc(g.cap||'')}</figcaption>
       </a>`).join('')+'</div>';
+  if(b.slides) return '<div class="pslides">'+b.slides.map(g=>`
+      <a href="${esc(g.img)}" target="_blank" rel="noopener">
+        <img src="${esc(g.img)}" alt="${esc(g.cap||'Slide')}" loading="lazy">
+        <figcaption>${esc(g.cap||'')}</figcaption>
+      </a>`).join('')+'</div>';
   if(b.video) return `<figure class="pvideo">
       <video controls preload="metadata" playsinline>
         <source src="${esc(b.video)}" type="video/mp4">
@@ -1945,6 +1980,7 @@ function paintPaper(id){
   const heads=[];
   const body=(p.blocks||[]).map(b=>blockHTML(b,heads)).join('');
   const mins=Math.max(1,Math.round(wordCount(p)/220));
+  const slideBlock=(p.blocks||[]).find(b=>b.slides);
 
   pBody.innerHTML=`
     ${p.banner==='hands'?HAND_BANNER:''}
@@ -1952,7 +1988,8 @@ function paintPaper(id){
     <h1>${esc(p.title)}</h1>
     <p class="byline">${esc(p.author||'')}</p>
     ${p.meta?`<dl class="meta">${p.meta.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`:''}
-    ${(p.blocks&&p.blocks.length)?`<span class="readtime">${mins} min read</span>`:''}
+    ${slideBlock?`<span class="readtime">${slideBlock.slides.length} slides</span>`
+      :(p.blocks&&p.blocks.length)?`<span class="readtime">${mins} min read</span>`:''}
     ${p.poster?`<div class="poster-view">
         <img src="${esc(p.poster.img)}" alt="${esc(p.poster.alt||p.title)}">
         <a class="zoom" href="${esc(p.poster.img)}" target="_blank" rel="noopener">Open the poster full size ↗</a>
@@ -2015,7 +2052,11 @@ function closePaper(){
    SCRAPBOOK — flip-through reading pages
    ============================================================ */
 const flipbookEl=$('#flipbook'), sbFlipBtn=$('#sbFlip'), sbBackBtn=$('#sbBack'), sbCount=$('#sbCount');
-let sbLeaves=[], sbAt=0, sbAnimating=false;
+let sbLeaves=[], sbAt=0, sbAnimating=false, sbCurrentId=null, sbPageCount=0, sbPerLeaf=2;
+
+/* two pages to a leaf on a screen wide enough to show a real spread; one
+   page per leaf below that, matching the .flipbook mobile breakpoint exactly */
+const sbTwoUp = () => window.matchMedia('(min-width:761px)').matches;
 
 function verseHTML(page){
   /* title, kicker and verse centre on the leaf as one block — centring the
@@ -2033,8 +2074,16 @@ function imagePageHTML(page){
   return `<img class="pin-img" src="${esc(page.img)}" alt="${esc(page.alt||page.title||'')}"
       loading="lazy" onerror="this.closest('.leaf-face').innerHTML='<div style=&quot;position:relative;z-index:1;margin:auto;text-align:center;font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A7B5E&quot;>Page pending</div>'">`;
 }
+function pageBodyHTML(pg){
+  if(!pg) return '';
+  if(pg.type==='poem') return verseHTML(pg);
+  if(pg.type==='essay') return essayHTML(pg);
+  if(pg.type==='image') return imagePageHTML(pg);
+  return '';
+}
 
 function paintScrapbook(id){
+  sbCurrentId=id;
   const sb=SCRAPBOOKS[id];
   const bk=BOOKS.find(b=>b.id===sb.cat);
   const tabIdx=bk?bk.tabs.findIndex(t=>t.name===sb.tab):-1;
@@ -2055,18 +2104,22 @@ function paintScrapbook(id){
       </figure>`;
   } else heroEl.innerHTML='';
 
-  flipbookEl.innerHTML = sb.pages.map((pg,i)=>{
-    let body='';
-    if(pg.type==='poem') body=verseHTML(pg);
-    else if(pg.type==='essay') body=essayHTML(pg);
-    else if(pg.type==='image') body=imagePageHTML(pg);
-    return `<div class="leaf" style="z-index:${sb.pages.length-i}" data-i="${i}">
-        <div class="leaf-face">${body}<span class="leafnum">${i+1} / ${sb.pages.length}</span></div>
+  sbPageCount=sb.pages.length;
+  const perLeaf=sbPerLeaf=sbTwoUp()?2:1;
+  const leaves=[];
+  for(let i=0;i<sb.pages.length;i+=perLeaf) leaves.push({front:sb.pages[i], back:perLeaf===2?sb.pages[i+1]:null});
+
+  flipbookEl.innerHTML = (perLeaf===2?'<div class="sb-static-left" aria-hidden="true"></div>':'') +
+    leaves.map((lf,i)=>{
+      const frontNum=i*perLeaf+1, backNum=i*perLeaf+2;
+      return `<div class="leaf" style="z-index:${leaves.length-i}" data-basez="${leaves.length-i}" data-frontnum="${frontNum}" data-backnum="${lf.back?backNum:''}">
+        <div class="leaf-face front">${pageBodyHTML(lf.front)}<span class="leafnum r">${frontNum}</span></div>
+        ${lf.back?`<div class="leaf-face back">${pageBodyHTML(lf.back)}<span class="leafnum l">${backNum}</span></div>`:''}
       </div>`;
-  }).join('');
+    }).join('');
   sbLeaves=[...flipbookEl.querySelectorAll('.leaf')];
   sbAt=0; sbAnimating=false;
-  sbLeaves.forEach(l=>{l.classList.remove('flipped','unflipping'); l.style.transform='';});
+  sbLeaves.forEach(l=>{l.classList.remove('flipped','unflipping'); l.style.zIndex=l.dataset.basez;});
   updateSbControls();
 
   scrapPetalsInit();
@@ -2076,16 +2129,45 @@ function paintScrapbook(id){
   liveRegion.textContent='Opened scrapbook: '+sb.title;
 }
 
+/* re-pair the pages if the two-up breakpoint was crossed while open —
+   keeps roughly the same reading position rather than resetting to page one */
+let sbResizeTimer=null;
+window.addEventListener('resize',()=>{
+  if(!scrapEl.classList.contains('on') || !sbCurrentId) return;
+  clearTimeout(sbResizeTimer);
+  sbResizeTimer=setTimeout(()=>{
+    if(sbTwoUp()===(sbPerLeaf===2)) return; /* breakpoint not actually crossed */
+    const wasAtPage=sbAt*sbPerLeaf;
+    paintScrapbook(sbCurrentId);
+    sbAt=Math.min(Math.round(wasAtPage/sbPerLeaf), sbLeaves.length);
+    sbLeaves.forEach((l,i)=>{
+      if(i<sbAt){ l.classList.add('flipped'); l.style.zIndex=1000+i; }
+    });
+    updateSbControls();
+  },200);
+});
+
 function updateSbControls(){
   sbBackBtn.disabled = sbAt<=0;
   sbFlipBtn.disabled = sbAt>=sbLeaves.length;
   sbFlipBtn.textContent = sbAt>=sbLeaves.length ? 'The End' : 'Flip';
-  sbCount.textContent = sbLeaves.length ? Math.min(sbAt+1,sbLeaves.length)+' / '+sbLeaves.length : '';
+  /* read the page numbers off the leaves themselves rather than computing them.
+     The final leaf of an odd-paged book has no back, so flipping it leaves the
+     left page showing whatever the previous leaf's back was — walk backward to
+     find it, rather than assuming the most recently flipped leaf set it. */
+  let leftPage=null;
+  for(let j=sbAt-1;j>=0;j--){ if(sbLeaves[j].dataset.backnum){ leftPage=sbLeaves[j].dataset.backnum; break; } }
+  const rightPage = sbAt<sbLeaves.length ? sbLeaves[sbAt].dataset.frontnum : null;
+  sbCount.textContent = !sbPageCount ? '' :
+    (leftPage&&rightPage) ? `${leftPage}–${rightPage} / ${sbPageCount}` :
+    rightPage ? `${rightPage} / ${sbPageCount}` :
+    leftPage ? `${leftPage} / ${sbPageCount}` : '';
 }
 function sbFlipForward(){
   if(sbAnimating || sbAt>=sbLeaves.length) return;
   sbAnimating=true;
   const leaf=sbLeaves[sbAt];
+  leaf.style.zIndex=1000+sbAt;
   leaf.classList.add('flipped');
   sbAt++;
   updateSbControls();
@@ -2099,7 +2181,11 @@ function sbFlipBack(){
   leaf.classList.remove('flipped');
   leaf.classList.add('unflipping');
   updateSbControls();
-  leaf.addEventListener('animationend',()=>{ leaf.classList.remove('unflipping'); sbAnimating=false; },{once:true});
+  leaf.addEventListener('animationend',()=>{
+    leaf.classList.remove('unflipping');
+    leaf.style.zIndex=leaf.dataset.basez;
+    sbAnimating=false;
+  },{once:true});
 }
 sbFlipBtn.addEventListener('click',sbFlipForward);
 sbBackBtn.addEventListener('click',sbFlipBack);

@@ -95,6 +95,15 @@ the page is the artwork and nothing else: no contents column, no reading-time
 estimate, and the reading measure widens to give the poster the full page. Any
 paper with no headings gets that same single-column treatment.
 
+`{slides:[{img,cap},…]}` lays out a slide deck or a set of design pieces as a
+grid of full, uncropped thumbnails (`object-fit:contain`, not `cover` — a slide
+or a menu layout loses its edges if you crop it like a photo), each opening
+full size. The card badge and page both switch from a reading-time estimate to
+a slide count automatically. `usv-presentation` is the reference example: all
+27 slides of the deck, shown in the order presented. `arbitrail-branding`,
+`zencreatif-cafe` and `zencreatif-jnc` use the same block for brand and
+product-launch collateral.
+
 Set `banner:'hands'` on a paper to open it with the five-hand sign-language
 header instead of the plain kicker line — used on `signup`. The banner markup
 lives once in `index.html` as the `HAND_BANNER` constant; add a new key there
@@ -153,14 +162,35 @@ assets/
                                     carried a printer's trim mark
     cover-artofwords-full.jpg     the full wraparound, trim marks cropped off
     cover-universal-quest.jpg     front cover, as supplied
+    featured-books-designed.jpg   both covers staged together — the Artist
+                                    featured block, shown edge to edge, uncropped
+  writer/
+    arbitrail/slide-5.jpg … -8.jpg          the roll-up banner, two paid social
+                                              graphics, and the website-launch post
+    zencreatif-cafe/post-01.jpg … -06.jpg   the café's six posts — five dishes
+                                              plus the opening ambience shot
+    zencreatif-jnc/post-16.jpg, -17, -19,
+                    -20, -21.jpg            five product posts across the
+                                              Swirluxe and Silkeen lines
+  papers/
+    usv-presentation/slide-01.jpg … -27.jpg  the full 27-slide deck, converted
+                                               from the source PDF at 1600px wide
 ```
 
-Nine papers are readable in full at `#/paper/<id>`: `usv`, `attention`,
+Ten papers are readable in full at `#/paper/<id>`: `usv`, `attention`,
 `antimalarial`, `clerodendrum`, `cd8`, `coral`, `bioremediation`, `signup`,
-`cigarette`. A tenth, `cigarette-progress`, carries the build's progress
-report and the field-test video under Presentations, sharing the same title
-as the `cigarette` research paper in Research Papers — same project, two
-different documents.
+`cigarette`, and `usv-presentation`. An eleventh, `cigarette-progress`, carries
+the build's progress report and the field-test video under Presentations,
+sharing the same title as the `cigarette` research paper in Research Papers —
+same project, two different documents. `usv-presentation` is the same
+relationship for the ultrasonic-vocalization work: the full write-up lives at
+`usv` in Research Papers, and the 27-slide deck it was defended with lives
+separately in Presentations, so neither page duplicates the other's text.
+
+Three more papers carry brand and product design work rather than research:
+`arbitrail-branding`, `zencreatif-cafe` and `zencreatif-jnc`, all under Writer
+→ Brand & Corporate — each a short intro paragraph followed by a `slides` grid
+of the actual collateral.
 
 `cig-video.mp4` is committed as-is (no compression tooling was available in
 this environment). 23MB is under GitHub's warning threshold but will slow a
@@ -277,14 +307,29 @@ directory is the root. Push to deploy.
 
 ## Still to do
 
-- **Digital Illustration and Graphic Design still have no images.** Book
-  Cover Design is now strong — both covers (Universal Quest, An Art of
-  Words) are in, extracted from the source PDF and cropped to the trim box,
-  each linking to a full-size view. The other two Artist tabs are still
-  text-only.
-- Real screenshots and URLs for the website cards
-- Confirm reprint rights on the two book covers — the flag is still on both
-  cards; nothing legal has changed, only the artwork itself is now visible
+- **Five images are pending on three Artist pages, blocked on file format.**
+  They arrived as pasted images in a chat message rather than as attached
+  files, and a pasted image has no path on disk to save from — only an
+  attached file (like the zips and PDFs elsewhere in this project) does.
+  Resend the same five images as attachments and drop them in at:
+  - `assets/artist/menu-nioks-1.jpg`, `menu-nioks-2.jpg` — the two Niok's
+    Lechon Manok menu photos, for `roasted-chicken-menu` in `papers.js`
+  - `assets/artist/book-campaign-preorder.jpg` — the *An Art of Words*
+    pre-order graphic, for `book-campaign-graphics`
+  - `assets/artist/illustration-roses-rain.jpg`,
+    `illustration-swan.jpg` — the two Digital Illustration pieces, for
+    `illustrations`
+
+  Each of those three papers already has its title, kicker and intro text
+  written, and a `{note:…}` block standing in for the missing `{slides:…}` —
+  once the files exist, swap the note for a slides block the same way
+  `usv-presentation` or `arbitrail-branding` do.
+- Real screenshots for the website cards — the Marketing Team Quiz Portal now
+  has its live URL (`kayvemarketingquizportal.netlify.app`) but still shows a
+  16:9 placeholder instead of a screenshot.
+- Confirm reprint rights on the two book covers — the flag was removed from
+  both cards on request; nothing legal has changed, only the on-page caution
+  has, so revisit if that turns out to matter.
 - **`assets/writer/promo-flatlay.jpg`** — the flat-lay photo (books, printed
   shirt, mugs, pens) for the top of the *Selected Poetry and Essays*
   scrapbook. It only ever came through as an inline paste, with no file to
@@ -298,6 +343,10 @@ directory is the root. Push to deploy.
   tools line are no longer anywhere on the site. If any of that should live
   somewhere else (a note on the reel gallery, an Artist tools list), it needs
   a new home; right now it's simply gone.
-- **The Marketing Team Quiz Portal card has no link, stack, or screenshot.**
-  Currently shows "Link pending" and a 16:9 placeholder — send a URL and, if
-  worth naming, what it was built with.
+- **Three Writer tabs were removed** on request — Social & Content, Print &
+  Promotional, and Decks & Scripts. Their items either moved into the
+  restructured Brand & Corporate tab (Arbitrail Branding, the two Zencreatif
+  pages) or are simply gone (the trade-show stand copy, the internal
+  interviews, the small-business social content, the slide-deck and
+  video-script line). If any of that should surface elsewhere, it needs a new
+  home; right now it's not on the site.
