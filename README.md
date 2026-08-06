@@ -98,11 +98,34 @@ paper with no headings gets that same single-column treatment.
 `{slides:[{img,cap},…]}` lays out a slide deck or a set of design pieces as a
 grid of full, uncropped thumbnails (`object-fit:contain`, not `cover` — a slide
 or a menu layout loses its edges if you crop it like a photo), each opening
-full size. The card badge and page both switch from a reading-time estimate to
-a slide count automatically. `usv-presentation` is the reference example: all
-27 slides of the deck, shown in the order presented. `arbitrail-branding`,
-`zencreatif-cafe` and `zencreatif-jnc` use the same block for brand and
-product-launch collateral.
+full size in the lightbox (below), with a "⤢ View full size" hover cue so
+that's clear before the click. The card badge and page both switch from a
+reading-time estimate to a slide count automatically. `usv-presentation` is
+the reference example: all 27 slides of the deck, shown in the order
+presented. `arbitrail-branding`, `zencreatif-cafe`, `zencreatif-jnc`,
+`roasted-chicken-menu`, `book-campaign-graphics`, `laundry-branding` and
+`illustrations` all use the same block.
+
+### The lightbox — every full-size image opens in place
+
+Every link that points at one of this site's own image files — `{gallery:…}`,
+`{slides:…}`, a `{fig:…}` or `{poster:…}` zoom link, a Book Cover Design
+card's "View" link — opens in a full-screen in-page lightbox
+(`#lightbox` in `index.html`) rather than a new browser tab. This isn't a
+style choice: a `target="_blank"` link is silently swallowed with no visible
+error by a sandboxed preview iframe (no `allow-popups`), which is exactly
+what "I can't view it full size" turned out to be — the link worked, the new
+tab just never appeared anywhere the person testing it could see. The
+lightbox needs no new tab and works identically in a sandboxed preview, a
+real deployment, or `index.html` opened straight off disk.
+
+The mechanism is one delegated click handler, not a change to every image
+renderer: any `<a target="_blank">` whose `href` ends in an image extension
+gets intercepted automatically, so a future block type that links to an
+image gets this for free. External links — LinkedIn, the Canva/Netlify
+site links, Facebook and Instagram reels — don't match that pattern and
+still open in a new tab as normal; a social platform's own post can't be
+rendered in an overlay, so those stay genuine external navigation.
 
 Set `banner:'hands'` on a paper to open it with the five-hand sign-language
 header instead of the plain kicker line — used on `signup`. The banner markup
@@ -145,10 +168,9 @@ assets/
   sites/              ← 16:9 screenshots for the website cards
   sites/quiz-portal.jpg  ← thumbnail for the Marketing Team Quiz Portal card
   og-cover.jpg        ← 1200×630, shown when the link is shared
-  artist/illustration-roses-rain.jpg  ← Digital Illustration, piece 1
-  artist/illustration-swan.jpg        ← Digital Illustration, piece 2
-  storyteller/performance-poster.jpg  ← thumbnail for the featured video card
-  reels/open-mic-1.jpg, -2.jpg, -3.jpg ← thumbnails for the three Open Mic clips
+  reels/open-mic-1.jpg, -2.jpg, -3.jpg ← real per-clip thumbnails for the three
+                                          Open Mic reels — all three currently
+                                          share one placeholder (see below)
 ```
 
 Already in place:
@@ -184,6 +206,15 @@ assets/
     laundry-shopfront.jpg          storefront photo paired with the price list
     laundry-services.jpg           illustrated wash/dry/fold services explainer
     laundry-promo.jpg              seasonal ₱130-per-load promo flyer
+    illustration-worn-out.jpg      "Worn Out" — hands reaching into light
+    illustration-greek-god.jpg     "Greek God, Who?" — a flaming figure
+    illustration-kwek-kwek.jpg     "Kwek-Kwek" — pixel art street food
+    illustration-roses-rain.jpg    roses in the rain — also the Open Mic
+                                     reels' shared placeholder poster (below)
+    illustration-swan.jpg          a swan on still water
+  storyteller/
+    performance-poster.jpg        a frame from the performance video itself —
+                                    the Storyteller featured video's poster
   writer/
     promo-flatlay.jpg             the flat-lay photo (books, shirt, mugs, pens) —
                                     the Selected Poetry and Essays scrapbook hero
@@ -269,8 +300,11 @@ iframe. Every card is one link: click anywhere on it and the original post
 opens in a new tab. Leave `poster` unset until the thumbnail file exists and
 the card still shows a play icon on a plain background, not a broken image.
 
-`open-mic` holds three clips: a Facebook reel and two Instagram posts, all
-three still waiting on their poster thumbnails.
+`open-mic` holds three clips: a Facebook reel and two Instagram posts. All
+three currently share one placeholder poster (the "roses in the rain"
+illustration from `assets/artist/illustration-roses-rain.jpg`) so the grid
+isn't three blank play buttons — swap each clip's `poster` for its own real
+thumbnail when one exists; the link behavior doesn't change either way.
 
 This used to embed the platforms' own `<iframe>` players directly, three
 different native sizes fighting to line up in one grid, and liable to be
@@ -293,6 +327,16 @@ links are shareable, and a single paper can be sent to a supervisor directly.
 keystone framing the shelf, torchlight falling from the upper left, and a lit
 book nook standing at the end of the row — all CSS and inline SVG, no images,
 no WebGL.
+
+**A book that actually pulls off the shelf.** Hovering a book used to move it
+72px on a 3D shelf that renders at roughly 600px wide — a real transform, but
+sized so small against its surroundings that it barely registered as
+motion. It now lifts 150px forward with a matching scale-up, the cover swings
+open enough to show a hint of the page colour inside, and a beam of
+light sweeps across the spine as it moves — the one part of the animation
+that reads as motion rather than a jump cut, especially in a screenshot. The
+cover's own transform picked up a `transition` it never had, too: it used to
+snap to its open angle instantly while the rest of the book eased into place.
 
 **Three ways in.** The 3D shelf, the plain text menu at the top right, and
 arrow keys plus Enter. The shelf is a front door, not a maze — anyone who
@@ -335,25 +379,19 @@ directory is the root. Push to deploy.
 
 ## Still to do
 
-- **Four images are pending, all blocked on the same file-format issue.**
-  Every other image request this round arrived as an attached `.zip`/`.rar`
-  and is already in place; these four keep arriving as pasted images in a
-  chat message instead, which have no path on disk to save from — only an
-  attached file gives a real file to work with. Resend as attachments and
-  drop them in at:
-  - `assets/artist/illustration-roses-rain.jpg`,
-    `illustration-swan.jpg` — the two Digital Illustration pieces, for
-    `illustrations` in `papers.js` (swap its `{note:…}` block for a `slides`
-    block the same way `roasted-chicken-menu` or `laundry-branding` do)
-  - a thumbnail for the Marketing Team Quiz Portal card
-  - poster thumbnails for the Storyteller featured video and the three
-    Open Mic reel clips (`featured.video.poster` in the `storyteller` book,
-    and `poster` on each clip in `REELS['open-mic']`) — every card already
-    works and links out correctly with no poster, so this is a visual
-    upgrade, not a fix
-- Real screenshot for the Marketing Team Quiz Portal card, alongside its
-  thumbnail — it has its live URL (`kayvemarketingquizportal.netlify.app`)
-  but still shows a 16:9 placeholder.
+- **The Digital Illustration and Storyteller pieces arrived.** All five
+  illustrations (`illustration-worn-out.jpg`, `-greek-god.jpg`, `-kwek-kwek.jpg`,
+  `-roses-rain.jpg`, `-swan.jpg`) and the Storyteller featured video's poster
+  frame came through as PDF attachments and are in place — a PDF page is a
+  real file the same way a `.zip`/`.rar` is, unlike a pasted chat image, which
+  has no file on disk to save from at all.
+- **Real per-clip thumbnails for the three Open Mic reels.** All three
+  currently share one placeholder (the roses-in-rain illustration) — send
+  three real ones and swap them into `poster` on each clip in
+  `REELS['open-mic']`. Every card already opens the correct clip regardless.
+- Real screenshot **and** a thumbnail for the Marketing Team Quiz Portal card
+  — it has its live URL (`kayvemarketingquizportal.netlify.app`) but still
+  shows a 16:9 placeholder with no image at all.
 - Confirm reprint rights on the two book covers — the flag was removed from
   both cards on request; nothing legal has changed, only the on-page caution
   has, so revisit if that turns out to matter.

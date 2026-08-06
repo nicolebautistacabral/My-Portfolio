@@ -1128,8 +1128,14 @@ const PAPERS = {
   title:'Illustrations',
   author:'Nicole Bautista Cabral',
   blocks:[
-    {p:'A small, edited selection rather than a full archive — two pieces to start.'},
-    {note:'Two illustrations are on their way — sent as pasted images rather than attached files, so there is nothing yet to save at these paths. Add them at assets/artist/illustration-roses-rain.jpg and assets/artist/illustration-swan.jpg and they will appear here automatically.'}
+    {p:'A small, edited selection rather than a full archive — five pieces, digitally painted and drawn.'},
+    {slides:[
+      {img:'assets/artist/illustration-worn-out.jpg', cap:'"Worn Out" — hands reaching up out of shadow into light.'},
+      {img:'assets/artist/illustration-greek-god.jpg', cap:'"Greek God, Who?" — a figure wreathed in flame, sword drawn.'},
+      {img:'assets/artist/illustration-kwek-kwek.jpg', cap:'"Kwek-Kwek" — pixel art, the orange-battered street food and a sago\'t gulaman on the side.'},
+      {img:'assets/artist/illustration-roses-rain.jpg', cap:'A bundle of red roses laid down in the rain.'},
+      {img:'assets/artist/illustration-swan.jpg', cap:'A swan on still water, light falling through the trees above.'}
+    ]}
   ]
 },
 

@@ -284,6 +284,7 @@ a{color:inherit}
   transform-origin:left center;transform:rotateY(88deg);
   border-radius:0 3px 3px 0;
   box-shadow:inset 0 0 60px rgba(0,0,0,.4);
+  transition:transform .55s var(--ease);
 }
 .book .spine::before,.book .spine::after{
   content:'';position:absolute;left:5px;right:5px;height:1px;
@@ -292,6 +293,17 @@ a{color:inherit}
 }
 .book .spine::before{top:20px}
 .book .spine::after{bottom:20px}
+/* a beam of torchlight catching the spine as it pulls forward — the one
+   thing that reads as motion rather than just "moved" in a screenshot */
+.book .spine .glint{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.32) 48%,transparent 64%);
+  transform:translateX(-140%);
+  transition:transform .8s cubic-bezier(.2,.7,.3,1);
+}
+.book.live:hover .spine .glint,.book.live:focus-visible .spine .glint,.book.live.cursor .spine .glint{
+  transform:translateX(140%);
+}
 .book .title{
   writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);
   font-family:var(--display);font-weight:600;font-size:14px;
@@ -304,16 +316,26 @@ a{color:inherit}
   font-family:var(--display);
 }
 .book.live{cursor:pointer}
+/* pulled most of the way off the shelf and cracked open — the old version moved
+   the book 72px on a shelf that reads at ~600px wide, which registered as a
+   flicker, not a lift. This is the same gesture sized to actually be seen. */
 .book.live:hover,.book.live:focus-visible,.book.live.cursor{
-  transform:translateZ(72px) translateY(-16px) rotateY(-27deg);
-  filter:drop-shadow(0 22px 34px rgba(0,0,0,.65)) drop-shadow(0 0 26px rgba(201,162,39,.42));
+  transform:translateZ(150px) translateY(-30px) rotateY(-32deg) scale(1.045);
+  filter:brightness(1.1) drop-shadow(0 34px 46px rgba(0,0,0,.7)) drop-shadow(0 0 38px rgba(201,162,39,.55));
   outline:none;
 }
-.book.live:hover .cover,.book.live:focus-visible .cover,.book.live.cursor .cover{transform:rotateY(74deg)}
+/* the cover is a pale endpaper colour by design, meant to contrast against
+   the dark spine — opening it much past this reads as a blown-out flash
+   rather than a page peeking out, so the swing stays a hint, not a reveal */
+.book.live:hover .cover,.book.live:focus-visible .cover,.book.live.cursor .cover{transform:rotateY(69deg)}
 .book.filler{filter:brightness(.62) saturate(.5);pointer-events:none}
 
-@keyframes settle{from{opacity:0;transform:translateY(-26px) rotateZ(-3deg)}to{opacity:1;transform:none}}
-.shelf.enter .book,.shelf.enter .nook{animation:settle .7s var(--ease) backwards}
+@keyframes settle{
+  0%{opacity:0;transform:translateY(-30px) rotateZ(-4deg)}
+  62%{opacity:1;transform:translateY(3px) rotateZ(.6deg)}
+  100%{opacity:1;transform:none}
+}
+.shelf.enter .book,.shelf.enter .nook{animation:settle .8s var(--ease) backwards}
 
 .book.opening{
   transform:translateZ(340px) translateY(-30px) rotateY(-52deg) !important;
@@ -1034,6 +1056,35 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
   #petals{display:none}
   .book.live:hover,.book.live:focus-visible,.book.live.cursor{transform:none;filter:brightness(1.2)}
 }
+
+/* ============================================================
+   LIGHTBOX — full-size images open in place, never in a new tab.
+   A new tab (target="_blank") is silently swallowed inside a sandboxed
+   preview iframe with no visible error, which is exactly the bug this
+   replaces: every "view full size" link on the site now opens here.
+   ============================================================ */
+.lightbox{
+  position:fixed;inset:0;z-index:300;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(10,7,5,.93);backdrop-filter:blur(2px);
+  padding:clamp(20px,5vw,60px);cursor:zoom-out;
+}
+.lightbox.on{display:flex;animation:lbIn .25s var(--ease)}
+.lightbox img{
+  max-width:100%;max-height:100%;object-fit:contain;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);border-radius:2px;cursor:default;
+}
+.lb-close{
+  position:absolute;top:18px;right:22px;z-index:1;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);
+  color:#fff;font-size:18px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.lb-close:hover{background:rgba(255,255,255,.2)}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.lightbox.on{animation:none}}
 </style>
 </head>
 <body>
@@ -1190,6 +1241,12 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
   </div>
 </section>
 
+<!-- ============ LIGHTBOX (in-page full-size image viewer) ============ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full size image">
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <img id="lightboxImg" alt="">
+</div>
+
 <div class="sr" id="live" aria-live="polite"></div>
 
 <script src="papers.js"></script>
@@ -1342,8 +1399,8 @@ const BOOKS = [
       y:'2021–2025',
       t:'Storytelling Performance Video',
       d:'Video editing, acting and performance, act direction, and the spoken words themselves — all produced by me.',
-      /* poster: pending — a thumbnail is on its way; the card reads fine without one */
-      video:{url:'https://www.facebook.com/share/v/1cdD1KXReA/', host:'Facebook', label:'Storytelling Performance Video'}
+      video:{url:'https://www.facebook.com/share/v/1cdD1KXReA/', host:'Facebook', label:'Storytelling Performance Video',
+        poster:'assets/storyteller/performance-poster.jpg'}
     },
     tabs:[
       {name:'Storytelling Reels', items:[
@@ -1429,6 +1486,7 @@ function bookEl(bk){
   b.dataset.id=bk.id;
   b.innerHTML=`
     <div class="face spine" style="background:${bk.spine}">
+      <span class="glint" aria-hidden="true"></span>
       <span class="title">${esc(bk.title)}</span>
       <span class="count">${countWorks(bk)}</span>
     </div>
@@ -1593,6 +1651,43 @@ const ch=$('#chapter'), strip=$('#strip'), tabsEl=$('#tabs'), panelEl=$('#panel'
       featEl=$('#featured'), liveRegion=$('#live'), paperEl=$('#paper'),
       scrapEl=$('#scrapbook'), reelEl=$('#reelgallery');
 let current=null;
+
+/* ============================================================
+   LIGHTBOX — every "view full size" link opens here, in place.
+   ============================================================ */
+const lightboxEl=$('#lightbox'), lightboxImg=$('#lightboxImg');
+let lbReturnFocus=null;
+function openLightbox(src,alt,fromEl){
+  lightboxImg.src=src; lightboxImg.alt=alt||'';
+  lightboxEl.classList.add('on');
+  lbReturnFocus=fromEl||document.activeElement;
+  $('#lbClose').focus();
+}
+function closeLightbox(){
+  if(!lightboxEl.classList.contains('on')) return;
+  lightboxEl.classList.remove('on');
+  lightboxImg.src='';
+  if(lbReturnFocus && lbReturnFocus.focus) lbReturnFocus.focus();
+}
+$('#lbClose').addEventListener('click',closeLightbox);
+lightboxEl.addEventListener('click',e=>{ if(e.target===lightboxEl) closeLightbox(); });
+
+/* every link that points at our own image assets and would otherwise open
+   in a new tab — pgallery, pslides, poster/figure zoom links, book-cover
+   "View" links — opens here instead. A new tab is invisible inside a
+   sandboxed preview iframe (no allow-popups) with no error at all, which is
+   what made "view full size" look broken; nothing about the target file
+   itself changes, only how it's shown. External links (LinkedIn, Canva, the
+   quiz portal, Facebook/Instagram) never match this and behave as before. */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[target="_blank"]');
+  if(!a) return;
+  const href=a.getAttribute('href')||'';
+  if(!/^assets\/.*\.(jpe?g|png|gif|webp|avif)$/i.test(href)) return;
+  e.preventDefault();
+  const alt=a.querySelector('img')?.alt || a.getAttribute('aria-label') || '';
+  openLightbox(href,alt,a);
+});
 
 function openBook(id,el){
   const bk=BOOKS.find(b=>b.id===id);
@@ -1834,6 +1929,7 @@ function closeChapter(keepCurrent){
 $('#moreBtn').addEventListener('click',e=>{ e.preventDefault(); history.pushState(null,'','#/'); route(); });
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape') return;
+  if(lightboxEl.classList.contains('on')){ closeLightbox(); return; }
   if(paperEl.classList.contains('on')||scrapEl.classList.contains('on')||reelEl.classList.contains('on')){ history.back(); return; }
   if(ch.classList.contains('on')){ history.pushState(null,'','#/'); route(); }
 });
