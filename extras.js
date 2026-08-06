@@ -134,30 +134,26 @@ const REELS = {
   tab:'Storytelling Reels',
   title:'Open Mic Performance',
   note:'Spoken word and stage work, CAPO MNL and gallery events.',
-  /* url — where the clip lives, opened in a new tab. poster — a thumbnail
-     shown in place of a live embed; leave unset until the file exists, the
-     card still reads as "video" rather than a broken image. */
-  /* poster: a shared placeholder (the "roses in the rain" illustration) until
-     each clip has its own real thumbnail — every card already opens the
-     correct clip regardless of what image is showing */
+  /* url — where the clip lives, opened in a new tab. poster — a real
+     photo from that performance, shown in place of a live embed. */
   clips:[
     {
       label:'Open mic — spoken word set',
       host:'Facebook',
-      url:'https://www.facebook.com/share/r/1bCRrFFyje/',
-      poster:'assets/artist/illustration-roses-rain.jpg'
+      url:'https://fb.watch/IQzSjZO6qZ/',
+      poster:'assets/reels/open-mic-1.jpg'
     },
     {
       label:'Gallery event reading',
       host:'Instagram',
       url:'https://www.instagram.com/p/C-PEYSCvdo2/',
-      poster:'assets/artist/illustration-roses-rain.jpg'
+      poster:'assets/reels/open-mic-2.jpg'
     },
     {
       label:'CAPO MNL stage set',
       host:'Instagram',
       url:'https://www.instagram.com/p/Csf3HrfJ8X8/',
-      poster:'assets/artist/illustration-roses-rain.jpg'
+      poster:'assets/reels/open-mic-3.jpg'
     }
   ]
 }

@@ -165,12 +165,9 @@ that don't exist yet:
 
 ```
 assets/
-  sites/              ← 16:9 screenshots for the website cards
-  sites/quiz-portal.jpg  ← thumbnail for the Marketing Team Quiz Portal card
+  sites/              ← 16:9 screenshots for the website cards (the quiz
+                          portal now has its own thumbnail — see below)
   og-cover.jpg        ← 1200×630, shown when the link is shared
-  reels/open-mic-1.jpg, -2.jpg, -3.jpg ← real per-clip thumbnails for the three
-                                          Open Mic reels — all three currently
-                                          share one placeholder (see below)
 ```
 
 Already in place:
@@ -178,6 +175,9 @@ Already in place:
 ```
 assets/
   nicole.jpg                      the portrait, cropped 5:6 to the arched frame
+  sites/quiz-portal.jpg           the Marketing Team Quiz Portal card thumbnail
+  reels/open-mic-1.jpg, -2.jpg, -3.jpg   a real photo from each performance —
+                                           one per Open Mic clip, in order
   papers/
     antimalarial-poster.jpg       the poster, rendered from the PDF
     usv-deepsqueak.jpg            the DeepSqueak sample, the Medical hero image
@@ -300,11 +300,9 @@ iframe. Every card is one link: click anywhere on it and the original post
 opens in a new tab. Leave `poster` unset until the thumbnail file exists and
 the card still shows a play icon on a plain background, not a broken image.
 
-`open-mic` holds three clips: a Facebook reel and two Instagram posts. All
-three currently share one placeholder poster (the "roses in the rain"
-illustration from `assets/artist/illustration-roses-rain.jpg`) so the grid
-isn't three blank play buttons — swap each clip's `poster` for its own real
-thumbnail when one exists; the link behavior doesn't change either way.
+`open-mic` holds three clips: a Facebook reel and two Instagram posts, each
+with its own real photo from that performance
+(`assets/reels/open-mic-1.jpg` … `-3.jpg`).
 
 This used to embed the platforms' own `<iframe>` players directly, three
 different native sizes fighting to line up in one grid, and liable to be
@@ -379,19 +377,6 @@ directory is the root. Push to deploy.
 
 ## Still to do
 
-- **The Digital Illustration and Storyteller pieces arrived.** All five
-  illustrations (`illustration-worn-out.jpg`, `-greek-god.jpg`, `-kwek-kwek.jpg`,
-  `-roses-rain.jpg`, `-swan.jpg`) and the Storyteller featured video's poster
-  frame came through as PDF attachments and are in place — a PDF page is a
-  real file the same way a `.zip`/`.rar` is, unlike a pasted chat image, which
-  has no file on disk to save from at all.
-- **Real per-clip thumbnails for the three Open Mic reels.** All three
-  currently share one placeholder (the roses-in-rain illustration) — send
-  three real ones and swap them into `poster` on each clip in
-  `REELS['open-mic']`. Every card already opens the correct clip regardless.
-- Real screenshot **and** a thumbnail for the Marketing Team Quiz Portal card
-  — it has its live URL (`kayvemarketingquizportal.netlify.app`) but still
-  shows a 16:9 placeholder with no image at all.
 - Confirm reprint rights on the two book covers — the flag was removed from
   both cards on request; nothing legal has changed, only the on-page caution
   has, so revisit if that turns out to matter.
