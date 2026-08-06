@@ -9,8 +9,8 @@ Open `index.html` in a browser and it runs.
 - `index.html` — the hall, the shelf, the category pages, the paper reader,
   the scrapbook, the reel gallery
 - `papers.js` — the full text of each research paper and poster
-- `extras.js` — scrapbooks (flip-through reading pages) and reel galleries
-  (embedded video pages)
+- `extras.js` — scrapbooks (long-form reading pages for poems and essays)
+  and reel galleries (clickable video posters)
 
 ---
 
@@ -122,9 +122,16 @@ itself rather than showing a broken image.
 
 `covers:[{img,url,t,pub,alt},…]` instead of `img` stands two or more book
 covers side by side at a matched height, each captioned with its title and
-publisher — used on Writer. `embed` takes a literal `<iframe>`; pair it with
-`embedUrl` and `embedHost` so a viewer whose network or privacy extension
-blocks the platform still gets a link through to the original post.
+publisher — the Artist Book Cover Design cards use this pattern directly;
+Writer's featured block currently uses a plain `img` instead (the same
+"Book Designing" photo the Artist featured block uses).
+
+`video:{url,host,poster,label}` shows a video as a clickable poster rather
+than a live platform embed — no iframe to autoplay or be blocked by a privacy
+extension, just an image with a play icon that opens the original post in a
+new tab. Leave `poster` unset until the thumbnail file exists; the card still
+reads as "a video," not a broken image. Storyteller's featured block is the
+reference example.
 
 ---
 
@@ -136,7 +143,12 @@ that don't exist yet:
 ```
 assets/
   sites/              ← 16:9 screenshots for the website cards
+  sites/quiz-portal.jpg  ← thumbnail for the Marketing Team Quiz Portal card
   og-cover.jpg        ← 1200×630, shown when the link is shared
+  artist/illustration-roses-rain.jpg  ← Digital Illustration, piece 1
+  artist/illustration-swan.jpg        ← Digital Illustration, piece 2
+  storyteller/performance-poster.jpg  ← thumbnail for the featured video card
+  reels/open-mic-1.jpg, -2.jpg, -3.jpg ← thumbnails for the three Open Mic clips
 ```
 
 Already in place:
@@ -162,9 +174,19 @@ assets/
                                     carried a printer's trim mark
     cover-artofwords-full.jpg     the full wraparound, trim marks cropped off
     cover-universal-quest.jpg     front cover, as supplied
-    featured-books-designed.jpg   both covers staged together — the Artist
-                                    featured block, shown edge to edge, uncropped
+    featured-books-designed.jpg   both covers staged together — the Artist and
+                                    Writer featured blocks both use this photo
+    menu-nioks-1.jpg, -2.jpg      Niok's Lechon Manok promo graphic and the
+                                    two-page menu spread itself
+    book-campaign-preorder.jpg    An Art of Words pre-order announcement graphic
+    book-campaign-quote.jpg       cover reveal with the book's own description
+    laundry-logo.jpg               Banlaw & Beyond's circular logo mark
+    laundry-shopfront.jpg          storefront photo paired with the price list
+    laundry-services.jpg           illustrated wash/dry/fold services explainer
+    laundry-promo.jpg              seasonal ₱130-per-load promo flyer
   writer/
+    promo-flatlay.jpg             the flat-lay photo (books, shirt, mugs, pens) —
+                                    the Selected Poetry and Essays scrapbook hero
     arbitrail/slide-5.jpg … -8.jpg          the roll-up banner, two paid social
                                               graphics, and the website-launch post
     zencreatif-cafe/post-01.jpg … -06.jpg   the café's six posts — five dishes
@@ -187,10 +209,13 @@ relationship for the ultrasonic-vocalization work: the full write-up lives at
 `usv` in Research Papers, and the 27-slide deck it was defended with lives
 separately in Presentations, so neither page duplicates the other's text.
 
-Three more papers carry brand and product design work rather than research:
-`arbitrail-branding`, `zencreatif-cafe` and `zencreatif-jnc`, all under Writer
-→ Brand & Corporate — each a short intro paragraph followed by a `slides` grid
-of the actual collateral.
+Seven more papers carry brand and product design work rather than research.
+`arbitrail-branding`, `zencreatif-cafe` and `zencreatif-jnc` live under Writer
+→ Creative or Corporate (renamed from "Brand & Corporate"). `roasted-chicken-menu`,
+`book-campaign-graphics`, `laundry-branding` and `illustrations` live under
+Artist → Graphic Design and Digital Illustration. Each is a short intro
+paragraph followed by a `slides` grid of the actual collateral — `illustrations`
+is the one exception still waiting on its two image files (see "Still to do").
 
 `cig-video.mp4` is committed as-is (no compression tooling was available in
 this environment). 23MB is under GitHub's warning threshold but will slow a
@@ -201,54 +226,57 @@ monogram rather than a broken image. The warm overlay that blends the studio
 green into the hall lives in `.portrait::after` — lower those opacities to
 leave the photo as shot.
 
-### Scrapbooks — flip-through reading pages
+### Scrapbooks — long-form reading pages
 
 `extras.js` defines `SCRAPBOOKS[id]`: a title, an optional `hero` image shown
-above the book, and a `pages` array — one leaf per page, each a `poem` (an
+above the book, and a `pages` array — one card per piece, each a `poem` (an
 array of stanzas, each line with an indent step 0–3, for staggered verse;
 add `align:'center'` to center the stanza instead, ignoring indent), an
-`essay` (a title plus verbatim paragraphs, scrolls internally if it runs
-long), or an `image` (a designed page, shown as a photo). A poem can also
+`essay` (a title plus verbatim paragraphs, no length limit — the page just
+grows), or an `image` (a designed page, shown at full width). A poem can also
 carry a small `kicker` line under its title (used for "Universal Quest,
 p. 88"). Give any item a `scrapbook:'<id>'` key and the whole card opens it
-at `#/scrapbook/<id>` — falling petals, a vintage-paper flip-book with a
-3D page-turn, a **Flip** button and a **‹ Back** button to page back.
+at `#/scrapbook/<id>` — falling petals, a warm paper card per piece, read by
+scrolling.
 
-On a poem page the title, kicker and verse centre on the leaf **as one block**.
-Centring the verse on its own stranded the title at the top of the page with a
-hand's width of blank paper between them.
+This used to be a page-flipping book, one small leaf at a time — it looked
+the part but packed real poems into a box too cramped to read comfortably.
+It's a plain scrolling page now: full-width text at a real reading size, one
+card per piece, nothing to click through. The vintage-paper texture and warm
+card background carried over; the flip mechanics, the page-pairing logic and
+the two-up/one-up breakpoint did not.
 
 `writing-samples` (linked from Writer → Books & Literary → *Selected poetry
 and essays*) holds seven pages: four poems (two transcribed from the images
 supplied, one from a scanned book page, one from a quote card), the essay
 *Taguig Calls for Art to Action*, and the essay *"Mag-ingay Ka Nga, Ang
-Tahimik Mo!"* — written in Filipino, kept exactly as submitted. The `hero`
-key is commented out: the flat-lay photo of the books, shirt and merchandise
-never arrived as a file, and an empty placeholder frame at the top pushed the
-book itself below the fold. Uncomment it when the photo exists. More sample
-pages were promised for a follow-up message; append them to the `pages` array
-in the order they should be read.
+Tahimik Mo!"* — written in Filipino, kept exactly as submitted. Its `hero` is
+the flat-lay photo of the books, shirt and merchandise, at
+`assets/writer/promo-flatlay.jpg`. More sample pages were promised for a
+follow-up message; append them to the `pages` array in the order they should
+be read.
 
 Poem lines wrap on narrow screens rather than clipping — a couple of the
 newer poems have lines much longer than the first two, and forcing them onto
 one line ran text off the edge of the page on small phones.
 
-### Reel galleries — embedded video pages
+### Reel galleries — clickable video posters
 
 `extras.js` defines `REELS[id]`: a title, a note, and a `clips` array of
-`{embed, label, url, host}`, where `embed` is a literal `<iframe>` string
-(Facebook's `/plugins/video.php` embed, or Instagram's `/embed` path — neither
-needs their JS SDK loaded). Give any item a `reels:'<id>'` key and the card
-opens `#/reels/<id>`, a grid of the embedded clips. Every frame is forced to
-the same height whatever the platform's own iframe dimensions, so one card
-doesn't pillarbox in black next to the others.
+`{label, url, host, poster}`. Give any item a `reels:'<id>'` key and the card
+opens `#/reels/<id>`, a grid of poster cards — no live platform embed, no
+iframe. Every card is one link: click anywhere on it and the original post
+opens in a new tab. Leave `poster` unset until the thumbnail file exists and
+the card still shows a play icon on a plain background, not a broken image.
 
-`open-mic` holds three clips: a Facebook reel and two Instagram posts.
+`open-mic` holds three clips: a Facebook reel and two Instagram posts, all
+three still waiting on their poster thumbnails.
 
-Facebook and Instagram embeds can be blocked by a privacy extension, a
-locked-down network, or a sandboxed preview — which is why every clip carries
-`url` and `host`, printed under the frame as "Open on Instagram ↗". The piece
-stays reachable even when the embed shows nothing.
+This used to embed the platforms' own `<iframe>` players directly, three
+different native sizes fighting to line up in one grid, and liable to be
+blocked by a privacy extension or a locked-down network with nothing to show
+in their place. A clickable poster fixes both: every card is the same shape,
+and there's no iframe left to block.
 
 There is no Download CV button. The work itself is the portfolio; add one back
 in the left panel if you later want the PDFs offered alongside it.
@@ -258,7 +286,7 @@ in the left panel if you later want the PDFs offered alongside it.
 ## What's built in
 
 **Navigation.** Every view has its own URL — `#/medical`,
-`#/writer/brand-and-corporate`, `#/paper/usv`. The browser back button works,
+`#/writer/creative-or-corporate`, `#/paper/usv`. The browser back button works,
 links are shareable, and a single paper can be sent to a supervisor directly.
 
 **The hall.** A stone masonry wall in running bond, a voussoired arch with a
@@ -282,12 +310,12 @@ tracks your position, a reading-progress bar, figures with their captions, real
 HTML tables, and a numbered reference list.
 
 **The scrapbook.** A dedicated reading page for poems and short prose: falling
-petals, a vintage-paper flip-book with a real 3D page-turn (CSS animation, no
-library), and a Flip button rather than swipe gestures a viewer has to discover.
+petals, warm paper-textured cards, and full-width type at a real reading
+size — a plain scroll, not a book to flip through.
 
-**The reel gallery.** A clean grid for embedded video — Facebook and Instagram
-posts play in place via their standalone iframe embeds, no platform SDK
-required.
+**The reel gallery.** A clean grid of clickable video posters — Facebook and
+Instagram clips open in a new tab on their own platform, no embedded iframe
+to load or be blocked.
 
 **Print.** Ctrl+P on a category page produces a clean document with every tab
 flattened into it, not a screenshot of a dark room. Papers print as papers.
@@ -307,34 +335,28 @@ directory is the root. Push to deploy.
 
 ## Still to do
 
-- **Five images are pending on three Artist pages, blocked on file format.**
-  They arrived as pasted images in a chat message rather than as attached
-  files, and a pasted image has no path on disk to save from — only an
-  attached file (like the zips and PDFs elsewhere in this project) does.
-  Resend the same five images as attachments and drop them in at:
-  - `assets/artist/menu-nioks-1.jpg`, `menu-nioks-2.jpg` — the two Niok's
-    Lechon Manok menu photos, for `roasted-chicken-menu` in `papers.js`
-  - `assets/artist/book-campaign-preorder.jpg` — the *An Art of Words*
-    pre-order graphic, for `book-campaign-graphics`
+- **Four images are pending, all blocked on the same file-format issue.**
+  Every other image request this round arrived as an attached `.zip`/`.rar`
+  and is already in place; these four keep arriving as pasted images in a
+  chat message instead, which have no path on disk to save from — only an
+  attached file gives a real file to work with. Resend as attachments and
+  drop them in at:
   - `assets/artist/illustration-roses-rain.jpg`,
     `illustration-swan.jpg` — the two Digital Illustration pieces, for
-    `illustrations`
-
-  Each of those three papers already has its title, kicker and intro text
-  written, and a `{note:…}` block standing in for the missing `{slides:…}` —
-  once the files exist, swap the note for a slides block the same way
-  `usv-presentation` or `arbitrail-branding` do.
-- Real screenshots for the website cards — the Marketing Team Quiz Portal now
-  has its live URL (`kayvemarketingquizportal.netlify.app`) but still shows a
-  16:9 placeholder instead of a screenshot.
+    `illustrations` in `papers.js` (swap its `{note:…}` block for a `slides`
+    block the same way `roasted-chicken-menu` or `laundry-branding` do)
+  - a thumbnail for the Marketing Team Quiz Portal card
+  - poster thumbnails for the Storyteller featured video and the three
+    Open Mic reel clips (`featured.video.poster` in the `storyteller` book,
+    and `poster` on each clip in `REELS['open-mic']`) — every card already
+    works and links out correctly with no poster, so this is a visual
+    upgrade, not a fix
+- Real screenshot for the Marketing Team Quiz Portal card, alongside its
+  thumbnail — it has its live URL (`kayvemarketingquizportal.netlify.app`)
+  but still shows a 16:9 placeholder.
 - Confirm reprint rights on the two book covers — the flag was removed from
   both cards on request; nothing legal has changed, only the on-page caution
   has, so revisit if that turns out to matter.
-- **`assets/writer/promo-flatlay.jpg`** — the flat-lay photo (books, printed
-  shirt, mugs, pens) for the top of the *Selected Poetry and Essays*
-  scrapbook. It only ever came through as an inline paste, with no file to
-  save, so the `hero` key in `extras.js` is commented out. Drop the file in
-  and uncomment it.
 - **More scrapbook pages.** Seven pages exist now; more samples were promised
   for a follow-up message — append them to `SCRAPBOOKS['writing-samples'].pages`
   in `extras.js`.
@@ -345,7 +367,7 @@ directory is the root. Push to deploy.
   a new home; right now it's simply gone.
 - **Three Writer tabs were removed** on request — Social & Content, Print &
   Promotional, and Decks & Scripts. Their items either moved into the
-  restructured Brand & Corporate tab (Arbitrail Branding, the two Zencreatif
+  renamed Creative or Corporate tab (Arbitrail Branding, the two Zencreatif
   pages) or are simply gone (the trade-show stand copy, the internal
   interviews, the small-business social content, the slide-deck and
   video-script line). If any of that should surface elsewhere, it needs a new

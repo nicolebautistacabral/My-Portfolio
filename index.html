@@ -734,7 +734,17 @@ figure.pfig figcaption{
 .pslides{margin:22px 0 34px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
 .pslides a{display:block;text-decoration:none;border-radius:2px;overflow:hidden;border:1px solid var(--pp-line);background:#fff;transition:box-shadow .3s}
 .pslides a:hover{box-shadow:0 10px 24px rgba(0,0,0,.14)}
+.pslides .thumb{position:relative;display:block}
 .pslides img{width:100%;aspect-ratio:16/9;object-fit:contain;display:block;background:#fff}
+/* a hover cue that the slide opens full size — otherwise a click-to-zoom
+   gallery reads as just a static grid of pictures */
+.pslides .zoom-hint{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:7px;
+  background:rgba(20,14,8,0);opacity:0;transition:opacity .25s,background .25s;
+  color:#fff;font-family:var(--display);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  text-shadow:0 1px 3px rgba(0,0,0,.5);pointer-events:none;
+}
+.pslides a:hover .zoom-hint{opacity:1;background:rgba(20,14,8,.4)}
 .pslides figcaption{padding:7px 9px;font-size:12.5px;line-height:1.4;color:var(--pp-muted);border-top:1px solid var(--pp-line)}
 
 /* an embedded video, played in place — never a download link */
@@ -826,116 +836,42 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 /* no placeholder frame if the hero image is missing — the book is the point,
    and an empty box at the top pushes it below the fold */
 
-/* the book — an open spread, two pages at once, the way a book is actually read */
-.flipbook-wrap{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}
-.flipbook{
-  /* the width is capped by the height left over after the header and the
-     controls, so the Flip button never lands below the fold */
-  position:relative;width:100%;
-  max-width:min(1040px, calc((100dvh - 320px) * 1.515));
-  aspect-ratio:10/6.6;
-  perspective:3000px;
-  margin:0 auto;
-}
-.flipbook::before{
-  /* the binding — a soft shadow down the center gutter */
-  content:'';position:absolute;left:50%;top:1%;bottom:1%;width:30px;z-index:6;
-  transform:translateX(-50%);
-  background:linear-gradient(90deg,transparent,rgba(60,38,20,.22),transparent);
-  pointer-events:none;
-}
-.sb-static-left{
-  /* the left page before anything has been flipped — an inside cover, not a void */
-  position:absolute;left:0;top:0;width:50%;height:100%;z-index:0;
-  border-radius:3px 0 0 3px;overflow:hidden;
+/* the pieces — read top to bottom like any other page. The book-page flip
+   design looked the part but packed each poem into a leaf too small to read
+   comfortably; this keeps the vintage-paper feel (the grain, the warm card)
+   without making the reader fight a shrunken page for it. */
+.sb-pieces{display:flex;flex-direction:column;gap:46px;width:100%}
+.sb-piece{
+  position:relative;max-width:760px;margin:0 auto;width:100%;
+  border-radius:10px;overflow:hidden;
   background:
-    repeating-linear-gradient(90deg, rgba(139,109,76,.035) 0 1px, transparent 1px 3px),
-    radial-gradient(140% 100% at 100% 0%, rgba(255,255,255,.45), transparent 55%),
-    linear-gradient(205deg,#F2E6CE,#E9D8B8 60%,#E3CFA8);
-  box-shadow:0 10px 26px rgba(80,55,30,.24), inset 0 0 0 1px rgba(139,109,76,.18);
-}
-.leaf{
-  position:absolute;right:0;top:0;width:50%;height:100%;
-  transform-style:preserve-3d;transform-origin:left center;
-  transform:rotateY(0deg);
-  will-change:transform;
-}
-.leaf.flipped{animation:pageFlip .95s cubic-bezier(.4,.1,.2,1) forwards}
-.leaf.unflipping{animation:pageUnflip .95s cubic-bezier(.4,.1,.2,1) forwards}
-@keyframes pageFlip{
-  0%{transform:rotateY(0deg) translateZ(0)}
-  45%{transform:rotateY(-92deg) translateZ(70px)}
-  100%{transform:rotateY(-180deg) translateZ(0)}
-}
-@keyframes pageUnflip{
-  0%{transform:rotateY(-180deg) translateZ(0)}
-  55%{transform:rotateY(-92deg) translateZ(70px)}
-  100%{transform:rotateY(0deg) translateZ(0)}
-}
-.leaf-face{
-  position:absolute;inset:0;backface-visibility:hidden;
-  overflow:hidden;
-  background:
-    repeating-linear-gradient(90deg, rgba(139,109,76,.035) 0 1px, transparent 1px 3px),
     radial-gradient(140% 100% at 0% 0%, rgba(255,255,255,.5), transparent 55%),
     linear-gradient(155deg,#F2E6CE,#E9D8B8 60%,#E3CFA8);
-  box-shadow:0 10px 26px rgba(80,55,30,.28), inset 0 0 0 1px rgba(139,109,76,.18);
-  padding:clamp(20px,3.6vw,40px) clamp(20px,3.4vw,36px);
-  display:flex;flex-direction:column;
+  box-shadow:0 14px 34px rgba(90,60,30,.18), inset 0 0 0 1px rgba(139,109,76,.18);
+  padding:clamp(30px,5vw,58px) clamp(24px,5.5vw,66px);
 }
-/* the back face is pre-mirrored so that once its parent leaf finishes its own
-   -180deg turn, the double mirroring cancels out and the page reads normally —
-   sitting on the left, exactly where a turned leaf's other side belongs */
-.leaf-face.back{transform:rotateY(180deg);border-radius:3px 0 0 3px}
-.leaf-face.front{border-radius:0 3px 3px 0}
-.leaf-face.front::after{
-  /* gutter shadow at the spine, on the leaf's bound edge */
-  content:'';position:absolute;left:0;top:0;bottom:0;width:34px;
-  background:linear-gradient(90deg,rgba(90,60,30,.16),transparent);
-  pointer-events:none;
-}
-.leaf-face.back::after{
-  content:'';position:absolute;right:0;top:0;bottom:0;width:34px;
-  background:linear-gradient(270deg,rgba(90,60,30,.16),transparent);
-  pointer-events:none;
-}
-.leaf-face::before{
-  /* subtle grain */
+.sb-piece::before{
+  /* the same subtle grain the leaf used to carry */
   content:'';position:absolute;inset:0;opacity:.5;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
 }
-.leafnum{
-  position:absolute;bottom:14px;z-index:1;
-  font-family:var(--display);font-size:10.5px;letter-spacing:.1em;color:#9A7B5E;
+.sb-piece .pnum{
+  position:relative;z-index:1;
+  font-family:var(--display);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:#9A7B5E;margin:0 0 16px;
 }
-.leafnum.r{right:20px}
-.leafnum.l{left:20px}
-.leaf-scroll{position:relative;z-index:1;overflow-y:auto;flex:1;padding-right:4px}
-@media(max-width:760px){
-  /* too narrow for two pages side by side — the JS pairs one page per leaf
-     instead of two, so this is purely a re-shaping of the same structure,
-     not a content cutoff */
-  .flipbook{max-width:520px;aspect-ratio:5/6.6;perspective:2200px}
-  .flipbook::before{display:none}
-  .sb-static-left{display:none}
-  .leaf{left:0;width:100%}
-}
-
-.leaf .ptitle{
+.sb-piece .ptitle{
   position:relative;z-index:1;
   font-family:var(--display);font-weight:700;text-transform:uppercase;
-  letter-spacing:.06em;font-size:clamp(19px,2.6vw,25px);color:#8A4B3E;
-  margin:0 0 8px;text-align:center;
+  letter-spacing:.06em;font-size:clamp(21px,2.8vw,28px);color:#8A4B3E;
+  margin:0 0 10px;text-align:center;
 }
 .pkicker{
-  position:relative;z-index:1;text-align:center;margin:0 0 22px;
+  position:relative;z-index:1;text-align:center;margin:0 0 26px;
   font-family:var(--display);font-size:10.5px;letter-spacing:.14em;
   text-transform:uppercase;color:#9A7B5E;
 }
-.poem-group{position:relative;z-index:1;margin:auto 0;width:100%;max-height:100%;overflow-y:auto}
-.poem-group .ptitle{margin-bottom:22px}
-.poem-group .pkicker{margin-top:-14px}
-.verse{position:relative;z-index:1;font-style:italic;font-size:clamp(16px,2.1vw,19px);line-height:1.95;color:#4A3A2E}
+.verse{position:relative;z-index:1;font-style:italic;font-size:clamp(17px,2.1vw,21px);line-height:2;color:#4A3A2E}
 .verse .stanza{margin-bottom:1.5em}
 .verse .stanza:last-child{margin-bottom:0}
 .verse .ln{display:block}
@@ -945,26 +881,10 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 .verse .i3{margin-left:6.8em}
 .verse.center{text-align:center}
 .verse.center .ln{margin-left:0 !important;white-space:normal}
-.essay p{position:relative;z-index:1;font-size:15px;line-height:1.75;margin:0 0 14px;color:#4A3A2E;text-align:justify;hyphens:auto}
+.essay p{position:relative;z-index:1;font-size:16.5px;line-height:1.85;margin:0 0 16px;color:#4A3A2E;text-align:justify;hyphens:auto}
+.essay p:last-child{margin-bottom:0}
 
-.pin-img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:2px}
-
-.flip-controls{display:flex;align-items:center;gap:16px}
-.flip-controls button{
-  font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;
-  cursor:pointer;transition:transform .2s,opacity .2s;
-}
-.flip-controls button:disabled{opacity:.35;cursor:default}
-#sbBack{
-  font-size:11px;color:#7C5636;border:1px solid rgba(122,96,70,.35);padding:9px 14px;background:transparent;
-}
-#sbBack:not(:disabled):hover{background:rgba(122,96,70,.08)}
-#sbFlip{
-  font-size:13px;color:#fff;background:linear-gradient(160deg,#A8456B,#7C5636);
-  padding:13px 30px;border-radius:30px;box-shadow:0 10px 22px rgba(122,70,80,.35);
-}
-#sbFlip:not(:disabled):hover{transform:translateY(-2px)}
-.sb-count{font-family:var(--display);font-size:11px;letter-spacing:.1em;color:#9A7B5E;min-width:56px;text-align:center}
+.pin-img{position:relative;z-index:1;width:100%;height:auto;display:block;border-radius:6px}
 
 /* ============================================================
    REEL GALLERY — embedded video/reel pages
@@ -989,41 +909,74 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
 .rg-inner{max-width:1080px;margin:0 auto;padding:clamp(26px,4vw,54px) clamp(16px,4vw,32px) 80px;width:100%;background:var(--pg-bg,#F9EFF1);flex:1}
 .rg-inner h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.6vw,38px);color:var(--pg-ink,#3D262A);margin:0 0 12px}
 .rg-note{font-size:16.5px;color:var(--pg-muted,#7B5C62);max-width:62ch;margin:0 0 34px}
-.rg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
-.rg-clip{background:var(--pg-card,#fff);border:1px solid var(--pg-line,#DEC0C6);border-radius:6px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.08)}
-/* every frame the same size, whatever the platform's own iframe dimensions —
-   otherwise one card pillarboxes in black next to the others */
-.rg-clip .frame{position:relative;height:480px;background:var(--pg-bar,#F0DDE1);overflow:hidden}
-.rg-clip .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
-.rg-clip .label{
-  padding:11px 14px 13px;display:flex;flex-direction:column;gap:5px;
-  border-top:1px solid var(--pg-line,#DEC0C6);
+.rg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+/* a reel is shown as a clickable poster — a real iframe embed autoplays or
+   pillarboxes unpredictably depending on the platform's own dimensions, and
+   three of those side by side never quite line up. The whole card is one
+   link, opening the original post in a new tab. */
+.rg-clip{
+  display:block;background:var(--pg-card,#fff);border:1px solid var(--pg-line,#DEC0C6);
+  border-radius:6px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.08);
+  text-decoration:none;color:inherit;transition:box-shadow .3s,transform .3s;
 }
-.rg-clip .label b{font-size:14.5px;font-weight:600;color:var(--pg-ink,#3D262A)}
-.rg-clip .label a{
-  font-family:var(--display);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--pg-accent,#A65D6B);text-decoration:none;
+.rg-clip:hover{box-shadow:0 16px 34px rgba(0,0,0,.16);transform:translateY(-3px)}
+.rg-clip .frame{display:block;position:relative;aspect-ratio:9/16;background:#20161A;overflow:hidden}
+.rg-clip .frame img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
+.rg-clip:hover .frame img{transform:scale(1.045)}
+.rg-clip .frame .play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(20,12,14,.22);transition:background .3s;
 }
-.rg-clip .label a:hover{text-decoration:underline}
+.rg-clip:hover .frame .play{background:rgba(20,12,14,.4)}
+.rg-clip .frame .play::after{
+  content:'';width:0;height:0;margin-left:4px;
+  border-style:solid;border-width:12px 0 12px 19px;
+  border-color:transparent transparent transparent #fff;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));
+}
+/* no poster yet — a plain card that still reads as "video", not a broken image */
+.rg-clip .frame.pending{background:var(--pg-bar,#F0DDE1)}
+.rg-clip .frame.pending .play{background:transparent}
+.rg-clip .frame.pending .play::after{border-color:transparent transparent transparent var(--pg-accent,#A65D6B)}
+.rg-clip .label{padding:11px 14px 13px;border-top:1px solid var(--pg-line,#DEC0C6)}
+.rg-clip .label b{display:block;font-size:14.5px;font-weight:600;color:var(--pg-ink,#3D262A);margin-bottom:3px}
+.rg-clip .label span{
+  display:block;font-family:var(--display);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--pg-accent,#A65D6B);
+}
 
-/* the embedded video in a featured panel */
-.fb-embed-wrap{
-  margin:18px -28px -26px;border-top:1px solid var(--pg-line);
-  position:relative;width:calc(100% + 56px);
-  padding-bottom:56.1%;height:0;overflow:hidden;background:#000;
+/* a video shown as a clickable poster rather than a live platform embed — no
+   iframe to be blocked by a privacy extension or a locked-down network, and
+   no autoplaying frame competing for attention on a page that isn't about it.
+   Always opens the original post in a new tab. */
+.video-card{
+  display:block;margin:18px -28px -26px;border-top:1px solid var(--pg-line);
+  position:relative;width:calc(100% + 56px);aspect-ratio:16/9;
+  overflow:hidden;background:#20161A;text-decoration:none;
 }
-.fb-embed-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-@media(max-width:640px){.fb-embed-wrap{margin:16px -20px -18px;width:calc(100% + 40px)}}
-/* a platform embed can be blocked by a privacy extension or a locked-down
-   network — always leave a way through to the original post */
-.embed-out{
-  display:block;margin:0 -28px -26px;padding:11px 28px 13px;
-  border-top:1px solid var(--pg-line);background:var(--pg-bar);
-  font-family:var(--display);font-size:10.5px;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--pg-accent);text-decoration:none;
+.video-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
+.video-card:hover img{transform:scale(1.045)}
+.video-card .play{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(20,12,14,.22);transition:background .3s;
 }
-.embed-out:hover{background:var(--pg-bar-2)}
-@media(max-width:640px){.embed-out{margin:0 -20px -18px;padding:10px 20px 12px}}
+.video-card:hover .play{background:rgba(20,12,14,.4)}
+.video-card .play::after{
+  content:'';width:0;height:0;margin-left:5px;
+  border-style:solid;border-width:14px 0 14px 22px;
+  border-color:transparent transparent transparent #fff;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));
+}
+.video-card .video-hint{
+  position:absolute;left:0;right:0;bottom:0;padding:12px 28px 13px;
+  background:linear-gradient(0deg,rgba(15,8,10,.85),transparent);
+  color:#fff;font-family:var(--display);font-size:10.5px;letter-spacing:.15em;
+  text-transform:uppercase;
+}
+/* no poster yet — a plain card that still reads as "video", not a broken image */
+.video-card.pending{background:var(--pg-bar,#2A1D20)}
+.video-card.pending .play{background:transparent}
+@media(max-width:640px){.video-card{margin:16px -20px -18px;width:calc(100% + 40px)}}
 
 /* ============================================================
    RESPONSIVE
@@ -1112,8 +1065,8 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
     <p class="bio">
       <strong>Certified author, illustrator and designer</strong> under the National Book
       Development Board of the Philippines. Biomedical researcher — BSc in Medical Biology,
-      MSc in Biomedicine in progress at Universidade do Minho. Content specialist for brands
-      across healthcare, travel and finance.
+      MSc in Biomedicine in progress at Universidade do Minho. Content Specialist across
+      healthcare, travel, and finance industries.
     </p>
     <p class="bio tagline">Five books on the shelf. Pick one.</p>
 
@@ -1220,14 +1173,7 @@ ol.refs li{margin-bottom:11px;color:var(--pp-muted)}
     <h1 id="sbTitle"></h1>
     <p class="sb-intro" id="sbIntro"></p>
     <div id="sbHero"></div>
-    <div class="flipbook-wrap">
-      <div class="flipbook" id="flipbook"></div>
-      <div class="flip-controls">
-        <button id="sbBack" aria-label="Previous page">‹ Back</button>
-        <span class="sb-count" id="sbCount"></span>
-        <button id="sbFlip">Flip</button>
-      </div>
-    </div>
+    <div class="sb-pieces" id="sbPieces"></div>
   </div>
 </section>
 
@@ -1326,13 +1272,11 @@ const BOOKS = [
     bio:'Two published books, a national authorship certification, and commercial copy for startups and agencies. I write across registers — peer-reviewed, literary, and brand.',
     featured:{
       y:'Published books',
-      d:'Two collections of poetry and prose — written, and with the covers illustrated and designed by me.',
-      covers:[
-        {img:'assets/artist/cover-artofwords-front.jpg', url:'assets/artist/cover-artofwords-full.jpg',
-         t:'An Art of Words', pub:'KM and H Black Paper Forest, Philippines', alt:'Front cover of An Art of Words'},
-        {img:'assets/artist/cover-universal-quest.jpg',
-         t:'Universal Quest', pub:'Ukiyoto Publishing, Canada', alt:'Front cover of Universal Quest'}
-      ]
+      t:'Book Designing',
+      d:'Manuscript writing, editing and proofreading, and the cover — written and illustrated end to end for both titles.',
+      img:'assets/artist/featured-books-designed.jpg',
+      alt:'Both books, An Art of Words and Universal Quest, staged together — book designing, manuscript writing, editing and proofreading, written and illustrated by Nicole B. Cabral',
+      cap:'An Art of Words & Universal Quest — written, illustrated and designed cover to cover.'
     },
     tabs:[
       {name:'Books & Literary', items:[
@@ -1344,7 +1288,7 @@ const BOOKS = [
         {y:'2024',t:'Thesis and coursework papers',d:'Papers across genetics, immunology, environmental biology and parasitology.',flag:'Lives in Medical →'},
         {y:'—',t:'Citation systems',d:'AMA, CSE and APA. Mendeley and EndNote Basic. PubMed MeSH search.'}
       ]},
-      {name:'Brand & Corporate', items:[
+      {name:'Creative or Corporate', items:[
         {y:'2025',t:'Arbitrail Branding',d:'Honed and shaped the written voice of a startup BPO — brand tone, service catalog and social copy — in coordination with the Manager, COO and CEO.',paper:'arbitrail-branding',big:true},
         {y:'2025',t:'Arbitrail — onboarding handbook',d:'Full internal handbook for new staff.',flag:'Confidential — not shown'},
         {y:'2025',t:'Zencreatif — Ten Twenty Five Cafe',d:'Food and beverage promotional copy.',paper:'zencreatif-cafe'},
@@ -1375,11 +1319,11 @@ const BOOKS = [
         {y:'2021',t:'KM and H Black Paper Forest cover',d:'Full wraparound cover — back, spine and front — for An Art of Words.',img:'assets/artist/cover-artofwords-front.jpg',url:'assets/artist/cover-artofwords-full.jpg'}
       ]},
       {name:'Digital Illustration', items:[
-        {y:'—',t:'Illustrations',d:'Procreate and IbisPaint. Eight to twelve strongest pieces, not everything — a portfolio is an edit, not an archive.',paper:'illustrations',big:true}
+        {y:'—',t:'Illustrations',d:'Procreate and IbisPaint.',paper:'illustrations',big:true}
       ]},
       {name:'Graphic Design', items:[
         {y:'2022',t:'Book campaign graphics',d:'Promotional materials and excerpt cards for Facebook and Instagram.',paper:'book-campaign-graphics'},
-        {y:'2024',t:'Laundry service branding',d:'Service graphics across three platforms.'},
+        {y:'2024',t:'Laundry service branding',d:'Service graphics across three platforms.',paper:'laundry-branding'},
         {y:'2024',t:'Roasted chicken menu design',d:'Food menu and content design.',paper:'roasted-chicken-menu'},
         {y:'—',t:'Tools',d:'Adobe Acrobat, Canva, Procreate, IbisPaint, CapCut, Filmora.'}
       ]},
@@ -1398,9 +1342,8 @@ const BOOKS = [
       y:'2021–2025',
       t:'Storytelling Performance Video',
       d:'Video editing, acting and performance, act direction, and the spoken words themselves — all produced by me.',
-      embed:'<iframe src="https://www.facebook.com/plugins/video.php?height=314&href='+encodeURIComponent('https://www.facebook.com/share/v/1cdD1KXReA/')+'&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>',
-      embedUrl:'https://www.facebook.com/share/v/1cdD1KXReA/',
-      embedHost:'Facebook'
+      /* poster: pending — a thumbnail is on its way; the card reads fine without one */
+      video:{url:'https://www.facebook.com/share/v/1cdD1KXReA/', host:'Facebook', label:'Storytelling Performance Video'}
     },
     tabs:[
       {name:'Storytelling Reels', items:[
@@ -1745,8 +1688,7 @@ function paint(bk,tabIndex){
                  onerror="this.closest('a').remove()">
             <span class="cap"><b>${esc(c.t||'')}</b>${esc(c.pub||'')}</span>
           </a>`).join('')}</span>`:''}
-      ${f.embed?`<div class="fb-embed-wrap">${f.embed}</div>
-        ${f.embedUrl?`<a class="embed-out" href="${esc(f.embedUrl)}" target="_blank" rel="noopener">Watch it on ${esc(f.embedHost||'the original post')} ↗</a>`:''}`:''}
+      ${f.video?videoCardHTML(f.video):''}
     </section>` : '';
 
   tabsEl.innerHTML=bk.tabs.map((tb,i)=>{
@@ -1785,6 +1727,17 @@ function wordCount(p){
     if(b.ol) b.ol.forEach(x=>n+=x.split(/\s+/).length);
   });
   return n;
+}
+
+/* a video as a clickable poster — never a live embed. v = {poster, url, host, label}.
+   With no poster yet, still reads as an intentional "video" card, not a broken image. */
+function videoCardHTML(v){
+  const hint=`Watch on ${esc(v.host||'the original post')} ↗`;
+  return `<a class="video-card${v.poster?'':' pending'}" href="${esc(v.url)}" target="_blank" rel="noopener" aria-label="${hint}">
+      ${v.poster?`<img src="${esc(v.poster)}" alt="${esc(v.label||'')}" loading="lazy" onerror="this.remove();this.closest('.video-card').classList.add('pending')">`:''}
+      <span class="play" aria-hidden="true"></span>
+      <span class="video-hint">${hint}</span>
+    </a>`;
 }
 
 function cardHTML(it,i){
@@ -1919,7 +1872,10 @@ function blockHTML(b,heads){
       </a>`).join('')+'</div>';
   if(b.slides) return '<div class="pslides">'+b.slides.map(g=>`
       <a href="${esc(g.img)}" target="_blank" rel="noopener">
-        <img src="${esc(g.img)}" alt="${esc(g.cap||'Slide')}" loading="lazy">
+        <span class="thumb">
+          <img src="${esc(g.img)}" alt="${esc(g.cap||'Slide')}" loading="lazy">
+          <span class="zoom-hint" aria-hidden="true">⤢ View full size</span>
+        </span>
         <figcaption>${esc(g.cap||'')}</figcaption>
       </a>`).join('')+'</div>';
   if(b.video) return `<figure class="pvideo">
@@ -2051,31 +2007,25 @@ function closePaper(){
 /* ============================================================
    SCRAPBOOK — flip-through reading pages
    ============================================================ */
-const flipbookEl=$('#flipbook'), sbFlipBtn=$('#sbFlip'), sbBackBtn=$('#sbBack'), sbCount=$('#sbCount');
-let sbLeaves=[], sbAt=0, sbAnimating=false, sbCurrentId=null, sbPageCount=0, sbPerLeaf=2;
-
-/* two pages to a leaf on a screen wide enough to show a real spread; one
-   page per leaf below that, matching the .flipbook mobile breakpoint exactly */
-const sbTwoUp = () => window.matchMedia('(min-width:761px)').matches;
+const sbPiecesEl=$('#sbPieces');
 
 function verseHTML(page){
-  /* title, kicker and verse centre on the leaf as one block — centring the
-     verse alone strands the title at the top of the page */
-  return `<div class="poem-group"><h2 class="ptitle">${esc(page.title)}</h2>
+  /* title, kicker and verse together as one block — kept from the old book
+     layout, it centres a short poem nicely without extra markup */
+  return `<h2 class="ptitle">${esc(page.title)}</h2>
     ${page.kicker?`<p class="pkicker">${esc(page.kicker)}</p>`:''}
     <div class="verse${page.align==='center'?' center':''}">${page.stanzas.map(st=>'<p class="stanza">'+
-      st.map(ln=>`<span class="ln i${ln.i}">${esc(ln.t)}</span>`).join('')+'</p>').join('')}</div></div>`;
+      st.map(ln=>`<span class="ln i${ln.i}">${esc(ln.t)}</span>`).join('')+'</p>').join('')}</div>`;
 }
 function essayHTML(page){
-  return `<div class="leaf-scroll"><h2 class="ptitle">${esc(page.title)}</h2>
-    <div class="essay">${page.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>`;
+  return `<h2 class="ptitle">${esc(page.title)}</h2>
+    <div class="essay">${page.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div>`;
 }
 function imagePageHTML(page){
   return `<img class="pin-img" src="${esc(page.img)}" alt="${esc(page.alt||page.title||'')}"
-      loading="lazy" onerror="this.closest('.leaf-face').innerHTML='<div style=&quot;position:relative;z-index:1;margin:auto;text-align:center;font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9A7B5E&quot;>Page pending</div>'">`;
+      loading="lazy" onerror="this.closest('.sb-piece').style.display='none'">`;
 }
 function pageBodyHTML(pg){
-  if(!pg) return '';
   if(pg.type==='poem') return verseHTML(pg);
   if(pg.type==='essay') return essayHTML(pg);
   if(pg.type==='image') return imagePageHTML(pg);
@@ -2083,7 +2033,6 @@ function pageBodyHTML(pg){
 }
 
 function paintScrapbook(id){
-  sbCurrentId=id;
   const sb=SCRAPBOOKS[id];
   const bk=BOOKS.find(b=>b.id===sb.cat);
   const tabIdx=bk?bk.tabs.findIndex(t=>t.name===sb.tab):-1;
@@ -2104,23 +2053,12 @@ function paintScrapbook(id){
       </figure>`;
   } else heroEl.innerHTML='';
 
-  sbPageCount=sb.pages.length;
-  const perLeaf=sbPerLeaf=sbTwoUp()?2:1;
-  const leaves=[];
-  for(let i=0;i<sb.pages.length;i+=perLeaf) leaves.push({front:sb.pages[i], back:perLeaf===2?sb.pages[i+1]:null});
-
-  flipbookEl.innerHTML = (perLeaf===2?'<div class="sb-static-left" aria-hidden="true"></div>':'') +
-    leaves.map((lf,i)=>{
-      const frontNum=i*perLeaf+1, backNum=i*perLeaf+2;
-      return `<div class="leaf" style="z-index:${leaves.length-i}" data-basez="${leaves.length-i}" data-frontnum="${frontNum}" data-backnum="${lf.back?backNum:''}">
-        <div class="leaf-face front">${pageBodyHTML(lf.front)}<span class="leafnum r">${frontNum}</span></div>
-        ${lf.back?`<div class="leaf-face back">${pageBodyHTML(lf.back)}<span class="leafnum l">${backNum}</span></div>`:''}
-      </div>`;
-    }).join('');
-  sbLeaves=[...flipbookEl.querySelectorAll('.leaf')];
-  sbAt=0; sbAnimating=false;
-  sbLeaves.forEach(l=>{l.classList.remove('flipped','unflipping'); l.style.zIndex=l.dataset.basez;});
-  updateSbControls();
+  const kind={poem:'Poem',essay:'Essay',image:'Page'};
+  sbPiecesEl.innerHTML = sb.pages.map((pg,i)=>`
+    <article class="sb-piece">
+      <p class="pnum">${i+1} of ${sb.pages.length} — ${kind[pg.type]||'Page'}</p>
+      ${pageBodyHTML(pg)}
+    </article>`).join('');
 
   scrapPetalsInit();
   scrapEl.classList.add('on');
@@ -2128,67 +2066,6 @@ function paintScrapbook(id){
   scrapEl.focus();
   liveRegion.textContent='Opened scrapbook: '+sb.title;
 }
-
-/* re-pair the pages if the two-up breakpoint was crossed while open —
-   keeps roughly the same reading position rather than resetting to page one */
-let sbResizeTimer=null;
-window.addEventListener('resize',()=>{
-  if(!scrapEl.classList.contains('on') || !sbCurrentId) return;
-  clearTimeout(sbResizeTimer);
-  sbResizeTimer=setTimeout(()=>{
-    if(sbTwoUp()===(sbPerLeaf===2)) return; /* breakpoint not actually crossed */
-    const wasAtPage=sbAt*sbPerLeaf;
-    paintScrapbook(sbCurrentId);
-    sbAt=Math.min(Math.round(wasAtPage/sbPerLeaf), sbLeaves.length);
-    sbLeaves.forEach((l,i)=>{
-      if(i<sbAt){ l.classList.add('flipped'); l.style.zIndex=1000+i; }
-    });
-    updateSbControls();
-  },200);
-});
-
-function updateSbControls(){
-  sbBackBtn.disabled = sbAt<=0;
-  sbFlipBtn.disabled = sbAt>=sbLeaves.length;
-  sbFlipBtn.textContent = sbAt>=sbLeaves.length ? 'The End' : 'Flip';
-  /* read the page numbers off the leaves themselves rather than computing them.
-     The final leaf of an odd-paged book has no back, so flipping it leaves the
-     left page showing whatever the previous leaf's back was — walk backward to
-     find it, rather than assuming the most recently flipped leaf set it. */
-  let leftPage=null;
-  for(let j=sbAt-1;j>=0;j--){ if(sbLeaves[j].dataset.backnum){ leftPage=sbLeaves[j].dataset.backnum; break; } }
-  const rightPage = sbAt<sbLeaves.length ? sbLeaves[sbAt].dataset.frontnum : null;
-  sbCount.textContent = !sbPageCount ? '' :
-    (leftPage&&rightPage) ? `${leftPage}–${rightPage} / ${sbPageCount}` :
-    rightPage ? `${rightPage} / ${sbPageCount}` :
-    leftPage ? `${leftPage} / ${sbPageCount}` : '';
-}
-function sbFlipForward(){
-  if(sbAnimating || sbAt>=sbLeaves.length) return;
-  sbAnimating=true;
-  const leaf=sbLeaves[sbAt];
-  leaf.style.zIndex=1000+sbAt;
-  leaf.classList.add('flipped');
-  sbAt++;
-  updateSbControls();
-  leaf.addEventListener('animationend',()=>{ sbAnimating=false; },{once:true});
-}
-function sbFlipBack(){
-  if(sbAnimating || sbAt<=0) return;
-  sbAnimating=true;
-  sbAt--;
-  const leaf=sbLeaves[sbAt];
-  leaf.classList.remove('flipped');
-  leaf.classList.add('unflipping');
-  updateSbControls();
-  leaf.addEventListener('animationend',()=>{
-    leaf.classList.remove('unflipping');
-    leaf.style.zIndex=leaf.dataset.basez;
-    sbAnimating=false;
-  },{once:true});
-}
-sbFlipBtn.addEventListener('click',sbFlipForward);
-sbBackBtn.addEventListener('click',sbFlipBack);
 
 /* falling petals inside the scrapbook — spawned once, reused each visit */
 let scrapPetalsBuilt=false;
@@ -2237,13 +2114,16 @@ function paintReels(id){
   document.title = rg.title+' — '+ME.name;
 
   $('#rgGrid').innerHTML = rg.clips.map(c=>`
-    <div class="rg-clip">
-      <div class="frame">${c.embed}</div>
-      <div class="label">
+    <a class="rg-clip" href="${esc(c.url)}" target="_blank" rel="noopener">
+      <span class="frame${c.poster?'':' pending'}">
+        ${c.poster?`<img src="${esc(c.poster)}" alt="${esc(c.label||'')}" loading="lazy" onerror="this.remove();this.closest('.frame').classList.add('pending')">`:''}
+        <span class="play" aria-hidden="true"></span>
+      </span>
+      <span class="label">
         <b>${esc(c.label||'')}</b>
-        ${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener">Open on ${esc(c.host||'the original post')} ↗</a>`:''}
-      </div>
-    </div>`).join('');
+        <span>Watch on ${esc(c.host||'the original post')} ↗</span>
+      </span>
+    </a>`).join('');
 
   reelEl.classList.add('on');
   reelEl.scrollTop=0;

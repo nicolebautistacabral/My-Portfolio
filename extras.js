@@ -30,8 +30,11 @@ const SCRAPBOOKS = {
   tab:'Books & Literary',
   title:'Selected Poetry and Essays',
   intro:'A few pieces, read here as they were written — not photographed. More samples are on their way.',
-  /* hero:{img,alt,cap} — the flat-lay photo never arrived as a file. Add it
-     back here when it does; the book starts straight after the intro until then. */
+  hero:{
+    img:'assets/writer/promo-flatlay.jpg',
+    alt:'An Art of Words — paperbacks, a printed shirt, pens and mugs laid out together',
+    cap:'An Art of Words — ₱290 + shipping'
+  },
   pages:[
     {type:'poem', title:'That’s Not Love',
       stanzas:[
@@ -130,27 +133,25 @@ const REELS = {
   cat:'storyteller',
   tab:'Storytelling Reels',
   title:'Open Mic Performance',
-  note:'Spoken word and stage work, CAPO MNL and gallery events. Watched, not read.',
-  /* url — where the clip lives. Shown as a link under each frame, so the piece
-     is still reachable when a platform embed is blocked. */
+  note:'Spoken word and stage work, CAPO MNL and gallery events.',
+  /* url — where the clip lives, opened in a new tab. poster — a thumbnail
+     shown in place of a live embed; leave unset until the file exists, the
+     card still reads as "video" rather than a broken image. */
   clips:[
     {
-      label:'Open mic \u2014 spoken word set',
+      label:'Open mic — spoken word set',
       host:'Facebook',
-      url:'https://www.facebook.com/share/r/1bCRrFFyje/',
-      embed:'<iframe src="https://www.facebook.com/plugins/video.php?height=476&href='+encodeURIComponent('https://www.facebook.com/share/r/1bCRrFFyje/')+'&show_text=false&width=267&t=0" width="267" height="476" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>'
+      url:'https://www.facebook.com/share/r/1bCRrFFyje/'
     },
     {
       label:'Gallery event reading',
       host:'Instagram',
-      url:'https://www.instagram.com/p/C-PEYSCvdo2/',
-      embed:'<iframe src="https://www.instagram.com/p/C-PEYSCvdo2/embed" width="340" height="480" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'
+      url:'https://www.instagram.com/p/C-PEYSCvdo2/'
     },
     {
       label:'CAPO MNL stage set',
       host:'Instagram',
-      url:'https://www.instagram.com/p/Csf3HrfJ8X8/',
-      embed:'<iframe src="https://www.instagram.com/p/Csf3HrfJ8X8/embed" width="340" height="480" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'
+      url:'https://www.instagram.com/p/Csf3HrfJ8X8/'
     }
   ]
 }

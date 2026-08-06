@@ -1015,7 +1015,7 @@ const PAPERS = {
 /* ══════════════════════════════════════════════════════════ */
 'arbitrail-branding': {
   cat:'writer',
-  tab:'Brand & Corporate',
+  tab:'Creative or Corporate',
   kicker:'Brand Copy & Design · Arbitrail · 2025',
   title:'Arbitrail Branding',
   author:'Nicole Bautista Cabral',
@@ -1037,7 +1037,7 @@ const PAPERS = {
 /* ══════════════════════════════════════════════════════════ */
 'zencreatif-cafe': {
   cat:'writer',
-  tab:'Brand & Corporate',
+  tab:'Creative or Corporate',
   kicker:'Food & Beverage Copy · Ten Twenty-Five Café · 2025',
   title:'Zencreatif — Ten Twenty Five Cafe',
   author:'Nicole Bautista Cabral',
@@ -1062,7 +1062,7 @@ const PAPERS = {
 'roasted-chicken-menu': {
   cat:'artist',
   tab:'Graphic Design',
-  kicker:'Menu & Food Content Design · 2024',
+  kicker:'Niok’s Lechon Manok · 2024',
   title:'Roasted Chicken Menu Design',
   author:'Nicole Bautista Cabral',
   meta:[
@@ -1071,7 +1071,10 @@ const PAPERS = {
   ],
   blocks:[
     {p:'Two-page menu design for Niok’s Lechon Manok — whole and half roasted chicken, grilled liempo, crispy bagnet and bagnet sisig — plus a delivery promo panel, built around the client’s existing food photography.'},
-    {note:'The two menu photos are on their way — sent as a pasted image rather than an attached file, so there is nothing yet to save at this path. Add them at assets/artist/menu-nioks-1.jpg and assets/artist/menu-nioks-2.jpg and they will appear here automatically.'}
+    {slides:[
+      {img:'assets/artist/menu-nioks-1.jpg', cap:'Promotional graphic — whole roasted chicken as the centerpiece, with delivery contact and social details.'},
+      {img:'assets/artist/menu-nioks-2.jpg', cap:'The two-page menu spread itself — full pricing set in text, from whole chicken down to extra rice.'}
+    ]}
   ]
 },
 
@@ -1079,7 +1082,7 @@ const PAPERS = {
 'book-campaign-graphics': {
   cat:'artist',
   tab:'Graphic Design',
-  kicker:'Promotional Design · 2022',
+  kicker:'2022',
   title:'Book Campaign Graphics',
   author:'Nicole Bautista Cabral',
   meta:[
@@ -1087,8 +1090,33 @@ const PAPERS = {
     ['Role','Promotional graphic and layout for Facebook and Instagram']
   ],
   blocks:[
-    {p:'Pre-order announcement graphic for An Art of Words — the cover art, author photo and pricing laid out for a single social post.'},
-    {note:'The pre-order graphic is on its way — sent as a pasted image rather than an attached file, so there is nothing yet to save at this path. Add it at assets/artist/book-campaign-preorder.jpg and it will appear here automatically.'}
+    {p:'Pre-order announcement graphics for An Art of Words — the cover art, author photo and pricing laid out for social posts, plus a quote card pulled from the book itself.'},
+    {slides:[
+      {img:'assets/artist/book-campaign-preorder.jpg', cap:'Pre-order announcement — cover art, author photo and pricing for Facebook and Instagram.'},
+      {img:'assets/artist/book-campaign-quote.jpg', cap:'Cover reveal with the book’s own description, run as a second post in the campaign.'}
+    ]}
+  ]
+},
+
+/* ══════════════════════════════════════════════════════════ */
+'laundry-branding': {
+  cat:'artist',
+  tab:'Graphic Design',
+  kicker:'Banlaw & Beyond · 2024',
+  title:'Laundry Service Branding',
+  author:'Nicole Bautista Cabral',
+  meta:[
+    ['Client','Banlaw & Beyond Laundry Services, Ususan, Taguig'],
+    ['Role','Logo, service-menu graphics and a seasonal promo across three platforms']
+  ],
+  blocks:[
+    {p:'Brand and service graphics for a neighborhood laundromat — the circular logo, a shopfront-and-services post pairing the storefront photo with the price list, an illustrated services explainer, and a seasonal promo flyer.'},
+    {slides:[
+      {img:'assets/artist/laundry-logo.jpg', cap:'The Banlaw & Beyond logo — a circular mark built around their name and a wash-cycle swirl.'},
+      {img:'assets/artist/laundry-shopfront.jpg', cap:'Shopfront and services post — the storefront on General Luna St. paired with the price list.'},
+      {img:'assets/artist/laundry-services.jpg', cap:'Services explainer, illustrated for a quick read: wash, dry and fold, priced separately or together.'},
+      {img:'assets/artist/laundry-promo.jpg', cap:'Summer promo flyer — ₱130 per load, full service, valid March 6 to May 6.'}
+    ]}
   ]
 },
 
@@ -1096,7 +1124,7 @@ const PAPERS = {
 'illustrations': {
   cat:'artist',
   tab:'Digital Illustration',
-  kicker:'Digital Illustration · Procreate & IbisPaint',
+  kicker:'Procreate & IbisPaint',
   title:'Illustrations',
   author:'Nicole Bautista Cabral',
   blocks:[
@@ -1108,7 +1136,7 @@ const PAPERS = {
 /* ══════════════════════════════════════════════════════════ */
 'zencreatif-jnc': {
   cat:'writer',
-  tab:'Brand & Corporate',
+  tab:'Creative or Corporate',
   kicker:'E-Commerce Copy · JNC Corporation · 2025',
   title:'Zencreatif — JNC Corporation',
   author:'Nicole Bautista Cabral',
