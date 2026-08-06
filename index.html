@@ -1683,7 +1683,13 @@ document.addEventListener('click',e=>{
   const a=e.target.closest('a[target="_blank"]');
   if(!a) return;
   const href=a.getAttribute('href')||'';
-  if(!/^assets\/.*\.(jpe?g|png|gif|webp|avif)$/i.test(href)) return;
+  /* every real external link (LinkedIn, Canva, Netlify, Facebook, Instagram)
+     starts with http(s); every link to one of our own images is either a
+     relative "assets/…" path or — inside a preview build that inlines
+     images as data URIs for a sandboxed viewer — a "data:image/…" string.
+     Excluding http(s) catches both without needing to know which build
+     this is. */
+  if(/^https?:/i.test(href)) return;
   e.preventDefault();
   const alt=a.querySelector('img')?.alt || a.getAttribute('aria-label') || '';
   openLightbox(href,alt,a);
